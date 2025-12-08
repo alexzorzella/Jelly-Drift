@@ -25,10 +25,10 @@ public class CarStats : MonoBehaviour {
     }
 
     public void SetStats(int car) {
-        var component = PrefabManager.Instance.cars[car].GetComponent<Car>();
-        var engineForce = component.engineForce;
-        var driftMultiplier = component.driftMultiplier;
-        var num = component.stability;
+        Car carComponent = PrefabManager.Instance.cars[car].GetComponent<Car>();
+        var engineForce = carComponent.GetCarData().GetEngineForce();
+        var driftMultiplier = carComponent.GetCarData().GetDriftMultiplier();
+        var num = carComponent.GetCarData().GetStability();
         dSpeed = (engineForce - minSpeed) / (maxSpeed - minSpeed);
         dDrift = (driftMultiplier - minDrift) / (maxDrift - minDrift);
         dStability = (num - minStab) / (maxStab - minStab);

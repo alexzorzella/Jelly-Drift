@@ -31,7 +31,7 @@ public class CarAI : MonoBehaviour {
     void Start() {
         difficulty = (int)GameState.Instance.difficulty;
         print(string.Concat("d: ", GameState.Instance.difficulty, ", a: ", difficulty));
-        car.engineForce = difficultyConfig[difficulty];
+        // car.GetCarData().GetEngineForce() = difficultyConfig[difficulty]; // TODO: Fix
         InvokeRepeating("AdjustSpeed", 0.5f, 0.5f);
         if (GameController.Instance.finalCheckpoint != 0) {
             GetComponent<CheckpointUser>().ForceCheckpoint(0);
@@ -162,7 +162,7 @@ public class CarAI : MonoBehaviour {
 
         var num4 = difficultyConfig[difficulty] - Mathf.Clamp(num3 * 1000f * speedAdjustMultiplier, -8000f, 4000f);
         num4 = Mathf.Clamp(num4, 1000f, 8000f);
-        car.engineForce = num4;
+        // car.GetCarData().GetEngineForce() = num4; TODO: Fix
     }
 
     int FindClosestNode(int maxLook, Transform target) {

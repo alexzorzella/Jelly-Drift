@@ -3,55 +3,38 @@ using UnityEngine;
 
 public class Car : MonoBehaviour {
     [Header("Misc")] public Transform centerOfMass;
-
+    
     public Suspension[] wheelPositions;
     public GameObject wheel;
     public TextMeshProUGUI text;
 
-    [Header("Suspension Variables")] public bool autoValues;
+    bool autoValues;
 
-    public float suspensionLength;
-    public float restHeight;
-    public float suspensionForce;
-    public float suspensionDamping;
-
-    [Header("Car specs")] public float engineForce = 5000f;
-
-    public float steerForce = 1f;
-    public float antiRoll = 5000f;
-    public float stability;
-
-    [Header("Drift specs")] public float driftMultiplier = 1f;
-
-    public float driftThreshold = 0.5f;
-
-    [Header("Audio Sources")] public AudioSource accelerate;
+    [Header("Audio Sources")] 
+    public AudioSource accelerate;
 
     public AudioSource deaccelerate;
     public bool yes;
-    readonly float C_breaking = 3000f;
-    readonly float C_drag = 3.5f;
-    readonly float C_rollFriction = 105f;
-    readonly float yawGripMultiplier = 0.15f;
-    readonly float yawGripThreshold = 0.6f;
-    float axleWeightRatioFront = 0.5f;
-    float axleWeightRatioRear = 0.5f;
+
+    CarData carData;
+    
+    public CarData GetCarData() {
+        return carData;
+    }
+    
     Collider c;
     Vector3 CG;
     float cgHeight;
     float cgToFrontAxle;
     float cgToRearAxle;
-    float cornerStiffnessFront = 5f;
-    float cornerStiffnessRear = 5.2f;
     float dir;
     bool grounded;
     Vector3 lastVelocity;
-    float lockGrip = 0.7f;
-    float tireGrip = 2f;
-    float weightTransfer = 0.2f;
+
     float wheelBase;
     float wheelRadius;
     float yawRate;
+    
     public Rigidbody rb { get; set; }
     public float steering { get; set; }
     public float throttle { get; set; }
@@ -62,15 +45,16 @@ public class Car : MonoBehaviour {
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
-        if (autoValues) {
-            suspensionLength = 0.3f;
-            suspensionForce = 10f * rb.mass;
-            suspensionDamping = 4f * rb.mass;
-        }
+        
+        // if (autoValues) {
+        //     suspensionLength = 0.3f;
+        //     suspensionForce = 10f * rb.mass;
+        //     suspensionDamping = 4f * rb.mass;
+        // }
 
         var componentsInChildren = gameObject.GetComponentsInChildren<AntiRoll>();
         for (var i = 0; i < componentsInChildren.Length; i++) {
-            componentsInChildren[i].antiRoll = antiRoll;
+            componentsInChildren[i].antiRoll = carData.GetAntiRoll();
         }
 
         if (centerOfMass) {
@@ -80,7 +64,7 @@ public class Car : MonoBehaviour {
         c = GetComponentInChildren<Collider>();
         wheelBase = Vector3.Distance(wheelPositions[0].transform.position, wheelPositions[2].transform.position);
         CG = c.bounds.center;
-        cgHeight = c.bounds.extents.y + suspensionLength;
+        cgHeight = c.bounds.extents.y + carData.GetSuspensionLength();
         cgToFrontAxle =
             Vector3.Distance(
                 wheelPositions[0].transform.position +
@@ -89,7 +73,7 @@ public class Car : MonoBehaviour {
             Vector3.Distance(
                 wheelPositions[2].transform.position +
                 (wheelPositions[3].transform.position - wheelPositions[2].transform.position) * 0.5f, CG);
-        wheelRadius = suspensionLength / 2f;
+        wheelRadius = carData.GetSuspensionLength() / 2f;
         InitWheels();
     }
 
@@ -141,7 +125,7 @@ public class Car : MonoBehaviour {
                     num2 -= 0.6f;
                 }
 
-                var num3 = driftThreshold;
+                var num3 = carData.GetDriftThreshold();
                 if (num > 1f) {
                     num3 -= 0.2f;
                 }
@@ -156,9 +140,9 @@ public class Car : MonoBehaviour {
                         num2 += (8f - magnitude) / 8f;
                     }
 
-                    if (num < yawGripThreshold) {
-                        var num5 = (yawGripThreshold - num) / yawGripThreshold;
-                        num2 += num5 * yawGripMultiplier;
+                    if (num < CarData.yawGripThreshold) {
+                        var num5 = (CarData.yawGripThreshold - num) / CarData.yawGripThreshold;
+                        num2 += num5 * CarData.yawGripMultiplier;
                     }
 
                     if (Mathf.Abs(throttle) < 0.3f) {
@@ -170,15 +154,15 @@ public class Car : MonoBehaviour {
 
                 var d2 = 1f;
                 if (flag) {
-                    d2 = driftMultiplier;
+                    d2 = carData.GetDriftMultiplier();
                 }
 
                 if (breaking) {
-                    rb.AddForceAtPosition(suspension.transform.forward * C_breaking * Mathf.Sign(-speed) * d,
+                    rb.AddForceAtPosition(suspension.transform.forward * CarData.brakeForce * Mathf.Sign(-speed) * d,
                         suspension.hitPos);
                 }
 
-                rb.AddForceAtPosition(suspension.transform.forward * throttle * engineForce * d2 * d,
+                rb.AddForceAtPosition(suspension.transform.forward * throttle * carData.GetEngineForce() * d2 * d,
                     suspension.hitPos);
                 var a2 = a * rb.mass * d * num2;
                 rb.AddForceAtPosition(-a2, suspension.hitPos);
@@ -189,9 +173,9 @@ public class Car : MonoBehaviour {
                 }
 
                 suspension.traction = num6;
-                var force = -C_drag * vector;
+                var force = -CarData.dragForce * vector;
                 rb.AddForce(force);
-                var force2 = -C_rollFriction * vector;
+                var force2 = -CarData.rollFriction * vector;
                 rb.AddForce(force2);
             }
         }
@@ -242,17 +226,17 @@ public class Car : MonoBehaviour {
             suspension.wheelObject.parent = suspension.transform;
             suspension.wheelObject.transform.localPosition = Vector3.zero;
             suspension.wheelObject.transform.localRotation = Quaternion.identity;
-            suspension.wheelObject.localScale = Vector3.one * suspensionLength * 2f;
+            suspension.wheelObject.localScale = Vector3.one * carData.GetSuspensionLength() * 2f;
         }
     }
 
     void MoveWheels() {
         foreach (var suspension in wheelPositions) {
-            var num = suspensionLength;
+            var num = carData.GetSuspensionLength();
             var hitHeight = suspension.hitHeight;
             var y = Mathf.Lerp(suspension.wheelObject.transform.localPosition.y, -hitHeight + num,
                 Time.deltaTime * 20f);
-            var num2 = 0.2f * suspensionLength * 2f;
+            var num2 = 0.2f * carData.GetSuspensionLength() * 2f;
             if (suspension.transform.localPosition.x < 0f) {
                 num2 = -num2;
             }
@@ -260,7 +244,7 @@ public class Car : MonoBehaviour {
             num2 = 0f;
             suspension.wheelObject.transform.localPosition = new Vector3(num2, y, 0f);
             suspension.wheelObject.Rotate(Vector3.right, XZVector(rb.linearVelocity).magnitude * 1f * dir);
-            suspension.wheelObject.localScale = Vector3.one * (suspensionLength * 2f);
+            suspension.wheelObject.localScale = Vector3.one * (carData.GetSuspensionLength() * 2f);
             suspension.transform.localScale = Vector3.one / transform.localScale.x;
         }
     }

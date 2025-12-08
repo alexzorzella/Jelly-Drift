@@ -48,7 +48,7 @@ public class Suspension : MonoBehaviour {
     void Start() {
         car = transform.parent.GetComponent<Car>();
         bodyRb = car.GetComponent<Rigidbody>();
-        raycastOffset = car.suspensionLength * 0.5f;
+        raycastOffset = car.GetCarData().GetSuspensionLength() * 0.5f;
         smokeEmitting = smokeFx.emission;
         spinEmitting = spinFx.emission;
     }
@@ -113,7 +113,7 @@ public class Suspension : MonoBehaviour {
     void NewSuspension() {
         minLength = restLength - springTravel;
         maxLength = restLength + springTravel;
-        var suspensionLength = car.suspensionLength;
+        var suspensionLength = car.GetCarData().GetSuspensionLength();
         RaycastHit raycastHit;
         if (Physics.Raycast(transform.position, -transform.up, out raycastHit, maxLength + suspensionLength)) {
             lastLength = springLength;
@@ -133,6 +133,6 @@ public class Suspension : MonoBehaviour {
         }
 
         grounded = false;
-        hitHeight = car.suspensionLength + car.restHeight;
+        hitHeight = car.GetCarData().GetSuspensionLength() + car.GetCarData().GetRestHeight();
     }
 }
