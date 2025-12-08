@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 9004544102909305562}
   - component: {fileID: 8953424906378598999}
   m_Layer: 10
-  m_Name: nissanskyline
+  m_Name: skyline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

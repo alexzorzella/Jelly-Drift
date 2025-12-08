@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 8071206990010320599}
   - component: {fileID: 8121470535730683441}
   m_Layer: 10
-  m_Name: hondaintegra
+  m_Name: integra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

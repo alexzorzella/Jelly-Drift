@@ -24,21 +24,21 @@ public static class CarCatalogue {
             WithCarSpecs(stability: 0).
             WithDriftSpecs(1.2F).
             WithMaterials("Midnight").Build(),
-        new CarData.Builder("FD8", "hondaintegra").
+        new CarData.Builder("FD8", "integra").
             WithCarSpecs(3030, stability: 0.7F).
             WithDriftSpecs(1.4F).
             WithMaterials("Gray", "Midnight", "Crimson", "Yellow", "OJ").Build(),
-        new CarData.Builder("FD8 Grand Turismo", "hondaintegra").
+        new CarData.Builder("FD8 Grand Turismo", "integra").
             WithPhysicsSpecs(1400).
             WithSuspensionSpecs(0.3F, 0.25F, 20000, 1600).
             WithCarSpecs(3030, antiRoll: 8000).
             WithDriftSpecs(1.4F, 1F).
             WithMaterials("Gray", "Midnight", "Crimson", "Yellow", "OJ").Build(),
-        new CarData.Builder("T54", "nissanskyline").
+        new CarData.Builder("T54", "skyline").
             WithCarSpecs(2850, stability: 0.9F).
             WithDriftSpecs(1, 0.45F).
             WithMaterials("Gray", "Midnight", "Crimson", "Sakura", "Shadow").Build(),
-        new CarData.Builder("T54 Grand Turismo", "nissanskyline").
+        new CarData.Builder("T54 Grand Turismo", "skyline").
             WithPhysicsSpecs(1400).
             WithCarSpecs(2850, stability: 0).
             WithDriftSpecs(1, 1).
