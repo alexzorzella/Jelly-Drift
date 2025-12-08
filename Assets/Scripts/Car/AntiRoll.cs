@@ -6,7 +6,7 @@ public class AntiRoll : MonoBehaviour {
     float antiRoll = 5000f;
     Rigidbody bodyRb;
     
-    List<Tuple<Suspension, Suspension>> suspensionPairs;
+    List<Tuple<Suspension, Suspension>> suspensionPairs = new();
 
     public void Initialize(float antiRoll, params Suspension[] suspensions) {
         bodyRb = GetComponent<Rigidbody>();
