@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 4185518144428569}
   - component: {fileID: 114203786117370525}
   - component: {fileID: 54948587504178017}
-  - component: {fileID: 114495780266503840}
-  - component: {fileID: 114702978357285271}
   - component: {fileID: 114346090269800326}
-  - component: {fileID: 114699714945928178}
   m_Layer: 10
   m_Name: Car
   m_TagString: Untagged
@@ -49,13 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f53b154d5c290db439ebfbf14de9079e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centerOfMass: {fileID: 0}
-  wheelPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  wheel: {fileID: 1711393349114561, guid: 3815ac3b2c8ef7c439f0db379a8b064c, type: 3}
   text: {fileID: 0}
 --- !u!54 &54948587504178017
 Rigidbody:
@@ -84,32 +74,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114495780266503840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995085249843820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7440d58bb39cf9847b094711c7c94851, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  antiRoll: 5000
---- !u!114 &114702978357285271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995085249843820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7440d58bb39cf9847b094711c7c94851, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  antiRoll: 5000
 --- !u!114 &114346090269800326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,30 +87,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 114203786117370525}
---- !u!114 &114699714945928178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995085249843820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1abdabff91bcaf946b516fee1b1f4a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 0}
-  - {fileID: 0}
-  materials:
-  - {fileID: 2100000, guid: d53193ff203ca494b8292013e6731174, type: 2}
-  - {fileID: 2100000, guid: e65c20d8a9dfa1548a5f2af1ca7d5848, type: 2}
-  - {fileID: 2100000, guid: f7516387c11ce0849ba34b90feba7eb1, type: 2}
-  - {fileID: 2100000, guid: 452d6bc58914fc944920427f69db8ba6, type: 2}
-  - {fileID: 2100000, guid: f1b98fcd57ec1b64e8ff18a6096049d8, type: 2}
-  skinsToChange:
-  - myArray: 000000000000000000000000010000000000000000000000
-  - myArray: 000000000000000001000000010000000000000001000000
-  - myArray: 000000000000000002000000010000000000000002000000
-  - myArray: 000000000000000003000000010000000000000000000000
-  - myArray: 000000000000000004000000010000000000000000000000

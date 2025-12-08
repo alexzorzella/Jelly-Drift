@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Resources;
+using UnityEngine;
 
 public class Suspension : MonoBehaviour {
     public Transform wheelObject;
@@ -58,6 +59,8 @@ public class Suspension : MonoBehaviour {
         wheelObject.transform.localPosition = Vector3.zero;
         wheelObject.transform.localRotation = Quaternion.identity;
         wheelObject.localScale = Vector3.one * car.GetCarData().GetSuspensionLength() * 2f;
+        
+        Debug.Log($"Initialized {gameObject.name} suspension");
     }
 
     void Update() {

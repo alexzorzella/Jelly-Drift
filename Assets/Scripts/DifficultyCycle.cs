@@ -13,12 +13,12 @@ public class DifficultyCycle : ItemCycle {
     void Awake() {
         max = 3;
         selected = SaveManager.Instance.state.lastDifficulty;
-        print("loaded selected: " + selected);
+        // print("loaded selected: " + selected);
     }
 
     void Start() {
         UpdateText();
-        print("in start method: " + selected);
+        // print("in start method: " + selected);
     }
 
     public override void Cycle(int n) {
@@ -36,7 +36,7 @@ public class DifficultyCycle : ItemCycle {
         GameState.Instance.difficulty = selected;
         SaveManager.Instance.state.lastDifficulty = this.selected;
         SaveManager.Instance.Save();
-        print("saved last difficulty as:  " + this.selected);
+        // print("saved last difficulty as:  " + this.selected);
     }
 
     public void UpdateTextOnly() {
