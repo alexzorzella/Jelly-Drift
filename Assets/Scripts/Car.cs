@@ -10,12 +10,6 @@ public class Car : MonoBehaviour {
 
     bool autoValues;
 
-    [Header("Audio Sources")] 
-    public AudioSource accelerate;
-
-    public AudioSource deaccelerate;
-    public bool yes;
-
     CarData carData;
     
     public CarData GetCarData() {
@@ -45,6 +39,10 @@ public class Car : MonoBehaviour {
 
     void Awake() {
         rb = GetComponent<Rigidbody>();
+
+        rb.mass = carData.GetMass();
+        rb.linearDamping = carData.GetLinearDamping();
+        rb.angularDamping = carData.GetAngularDamping();
         
         // if (autoValues) {
         //     suspensionLength = 0.3f;
@@ -89,16 +87,16 @@ public class Car : MonoBehaviour {
     }
 
     void Audio() {
-        accelerate.volume = Mathf.Lerp(accelerate.volume, Mathf.Abs(throttle) + Mathf.Abs(speed / 80f),
-            Time.deltaTime * 6f);
-        deaccelerate.volume = Mathf.Lerp(deaccelerate.volume, speed / 40f - throttle * 0.5f, Time.deltaTime * 4f);
-        accelerate.pitch = Mathf.Lerp(accelerate.pitch, 0.65f + Mathf.Clamp(Mathf.Abs(speed / 160f), 0f, 1f),
-            Time.deltaTime * 5f);
-        if (!grounded) {
-            accelerate.pitch = Mathf.Lerp(accelerate.pitch, 1.5f, Time.deltaTime * 8f);
-        }
-
-        deaccelerate.pitch = Mathf.Lerp(deaccelerate.pitch, 0.5f + speed / 40f, Time.deltaTime * 2f);
+        // accelerate.volume = Mathf.Lerp(accelerate.volume, Mathf.Abs(throttle) + Mathf.Abs(speed / 80f),
+        //     Time.deltaTime * 6f);
+        // deaccelerate.volume = Mathf.Lerp(deaccelerate.volume, speed / 40f - throttle * 0.5f, Time.deltaTime * 4f);
+        // accelerate.pitch = Mathf.Lerp(accelerate.pitch, 0.65f + Mathf.Clamp(Mathf.Abs(speed / 160f), 0f, 1f),
+        //     Time.deltaTime * 5f);
+        // if (!grounded) {
+        //     accelerate.pitch = Mathf.Lerp(accelerate.pitch, 1.5f, Time.deltaTime * 8f);
+        // }
+        //
+        // deaccelerate.pitch = Mathf.Lerp(deaccelerate.pitch, 0.5f + speed / 40f, Time.deltaTime * 2f);
     }
 
     void Movement() {
