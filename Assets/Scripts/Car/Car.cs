@@ -61,6 +61,11 @@ public class Car : MonoBehaviour {
         Suspension rearLeft = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
         Suspension rearRight = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
         
+        frontLeft.Initialize(this);
+        frontRight.Initialize(this);
+        rearLeft.Initialize(this);
+        rearRight.Initialize(this);
+        
         gameObject.AddComponent<AntiRoll>().Initialize(
             carData.GetAntiRoll(), 
             frontLeft, 

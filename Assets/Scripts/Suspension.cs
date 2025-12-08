@@ -45,8 +45,8 @@ public class Suspension : MonoBehaviour {
     float wheelAngleVelocity;
     public bool terrain { get; set; }
 
-    void Start() {
-        car = transform.root.GetComponent<Car>();
+    public void Initialize(Car car) {
+        this.car = car;
         bodyRb = car.GetComponent<Rigidbody>();
         raycastOffset = car.GetCarData().GetSuspensionLength() * 0.5f;
         smokeEmitting = smokeFx.emission;
@@ -54,6 +54,10 @@ public class Suspension : MonoBehaviour {
     }
 
     void Update() {
+        if (car == null) {
+            return;
+        }
+        
         DebugTraction();
         if (rearWheel) {
             return;
