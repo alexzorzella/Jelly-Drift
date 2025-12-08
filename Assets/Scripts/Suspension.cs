@@ -68,6 +68,10 @@ public class Suspension : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if (car == null) {
+            return;
+        }
+        
         NewSuspension();
     }
 
