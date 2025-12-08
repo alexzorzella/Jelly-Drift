@@ -34,7 +34,12 @@ public class ResourceLoader : MonoBehaviour {
 		return result;
 	}
 
-	public static GameObject InstantiateObject(string objectName, Vector2 position, Quaternion rotation) {
+	public static GameObject InstantiateObject(string objectName) {
+		GameObject result = InstantiateObject(objectName, Vector3.zero, Quaternion.identity);
+		return result;
+	}
+
+	public static GameObject InstantiateObject(string objectName, Vector3 position, Quaternion rotation) {
 		GameObject loadedObject = LoadObject(objectName);
 
 		if (loadedObject == null) {

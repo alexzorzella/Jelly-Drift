@@ -1,11 +1,12 @@
-﻿using TMPro;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Car : MonoBehaviour {
     Transform centerOfMass;
     
-    public Suspension[] wheelPositions;
-    public GameObject wheel;
+    readonly List<Suspension> wheelPositions;
     public TextMeshProUGUI text;
 
     bool autoValues;
@@ -60,11 +61,15 @@ public class Car : MonoBehaviour {
         Suspension frontRight = carModel.transform.Find("FrontRight").GetComponent<Suspension>();
         Suspension rearLeft = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
         Suspension rearRight = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
-        
-        frontLeft.Initialize(this);
-        frontRight.Initialize(this);
-        rearLeft.Initialize(this);
-        rearRight.Initialize(this);
+
+        wheelPositions.Add(frontLeft);
+        wheelPositions.Add(frontRight);
+        wheelPositions.Add(rearLeft);
+        wheelPositions.Add(rearRight);
+
+        foreach (var suspension in wheelPositions) {
+            suspension.Initialize(this);
+        }
         
         gameObject.AddComponent<AntiRoll>().Initialize(
             carData.GetAntiRoll(), 
@@ -223,7 +228,7 @@ public class Car : MonoBehaviour {
 
         var flag = true;
         var array = wheelPositions;
-        for (var i = 0; i < array.Length; i++) {
+        for (var i = 0; i < array.Count; i++) {
             if (Vector3.Angle(array[i].hitNormal, Vector3.up) > 1f) {
                 flag = false;
                 break;
@@ -253,7 +258,7 @@ public class Car : MonoBehaviour {
 
     void InitWheels() {
         foreach (var suspension in wheelPositions) {
-            suspension.wheelObject = Instantiate(wheel).transform;
+            suspension.wheelObject = ResourceLoader.InstantiateObject("Wheel").transform;
             suspension.wheelObject.parent = suspension.transform;
             suspension.wheelObject.transform.localPosition = Vector3.zero;
             suspension.wheelObject.transform.localRotation = Quaternion.identity;
@@ -283,10 +288,14 @@ public class Car : MonoBehaviour {
     void CheckGrounded() {
         grounded = false;
         var array = wheelPositions;
-        for (var i = 0; i < array.Length; i++) {
+        for (var i = 0; i < array.Count; i++) {
             if (array[i].grounded) {
                 grounded = true;
             }
         }
+    }
+
+    public List<Suspension> GetWheelPositions() {
+        return wheelPositions;
     }
 }

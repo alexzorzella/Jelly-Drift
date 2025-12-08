@@ -26,7 +26,7 @@ public class ShakeController : MonoBehaviour {
 
         var magnitude = car.acceleration.magnitude;
         var num = 0f;
-        foreach (var suspension in car.wheelPositions) {
+        foreach (var suspension in car.GetWheelPositions()) {
             if (suspension.traction > num) {
                 num = suspension.traction;
             }
