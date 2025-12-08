@@ -32,8 +32,9 @@ public class CarData {
     readonly string accelerateSoundName;
     readonly string decelerateSoundName;
     
-    // Materials
+    // Model and Materials
 
+    readonly GameObject model;
     readonly List<Material> materials = new();
     
     CarData(
@@ -53,6 +54,7 @@ public class CarData {
         float driftThreshold,
         string accelerateSoundName,
         string decelerateSoundName,
+        GameObject model,
         List<Material> materials) {
         this.name = name;
         
@@ -75,7 +77,8 @@ public class CarData {
         
         this.accelerateSoundName = accelerateSoundName;
         this.decelerateSoundName = decelerateSoundName;
-        
+
+        this.model = model;
         this.materials = materials;
     }
 
@@ -110,12 +113,25 @@ public class CarData {
         string accelerateSoundName;
         string decelerateSoundName;
         
-        // Materials
-        
+        // Model and Materials
+
+        GameObject model;
         List<Material> materials = new();
         
-        public Builder(string name) {
+        public Builder(string name, string modelName = "") {
             this.name = name;
+
+            if (string.IsNullOrWhiteSpace(modelName)) {
+                modelName = name.ToLower().Replace(" ", "");
+            }
+            
+            GameObject loadedModel = Resources.Load<GameObject>(modelName);
+
+            if (loadedModel == null) {
+                Debug.LogError($"Couldn't find model named {modelName} in Resources.");
+            } else {
+                model = loadedModel;
+            }
         }
         
         public Builder WithPhysicsSpecs(
@@ -198,6 +214,7 @@ public class CarData {
                 driftThreshold,
                 accelerateSoundName,
                 decelerateSoundName,
+                model,
                 materials);
         }
     }
@@ -211,19 +228,27 @@ public class CarData {
     public const float yawGripThreshold = 0.6f;
     
     public string GetName() { return name; }
+    
     public float GetMass() { return mass; }
     public float GetLinearDamping() { return linearDamping; }
     public float GetAngularDamping() { return angularDamping; }
+    
     public float GetSuspensionLength() { return suspensionLength; }
     public float GetRestHeight() { return restHeight; }
     public float GetSuspensionForce() { return suspensionForce; }
     public float GetSuspensionDamping() { return suspensionDamping; }
+    
     public float GetEngineForce() { return engineForce; }
     public float GetSteerForce() { return steerForce; }
     public float GetAntiRoll() { return antiRoll; }
     public float GetStability() { return stability; }
+    
     public float GetDriftMultiplier() { return driftMultiplier; }
     public float GetDriftThreshold() { return driftThreshold; }
+    
     public string GetAccelerateSoundName() { return accelerateSoundName; }
     public string GetDecelerateSoundName() { return decelerateSoundName; }
+    
+    public GameObject GetModel() { return model; }
+    public List<Material> GetMaterials() { return materials; }
 }
