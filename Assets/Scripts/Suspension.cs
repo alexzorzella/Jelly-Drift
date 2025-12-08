@@ -76,6 +76,10 @@ public class Suspension : MonoBehaviour {
     }
 
     void LateUpdate() {
+        if (car == null) {
+            return;
+        }
+        
         if (!showFx) {
             return;
         }
