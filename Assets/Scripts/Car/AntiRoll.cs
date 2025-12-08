@@ -13,7 +13,7 @@ public class AntiRoll : MonoBehaviour {
 
         this.antiRoll = antiRoll;
         
-        for (int i = 0; i < suspensions.Length; i) {
+        for (int i = 0; i < suspensions.Length; i += 2) {
             if (i > suspensions.Length - 1) {
                 break;
             }

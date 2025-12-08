@@ -44,7 +44,7 @@ public class Car : MonoBehaviour {
 
         gameObject.name = carData.GetName();
 
-        Instantiate(carData.GetModel(), Vector3.zero, Quaternion.identity, transform);
+        GameObject carModel = Instantiate(carData.GetModel(), Vector3.zero, Quaternion.identity, transform);
         
         // Materials are set here
         
@@ -54,10 +54,10 @@ public class Car : MonoBehaviour {
         rb.linearDamping = carData.GetLinearDamping();
         rb.angularDamping = carData.GetAngularDamping();
 
-        Suspension frontLeft = null;
-        Suspension frontRight = null;
-        Suspension rearLeft = null;
-        Suspension rearRight = null;
+        Suspension frontLeft = carModel.transform.Find("FrontLeft").GetComponent<Suspension>();
+        Suspension frontRight = carModel.transform.Find("FrontRight").GetComponent<Suspension>();
+        Suspension rearLeft = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
+        Suspension rearRight = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
         
         gameObject.AddComponent<AntiRoll>().Initialize(
             carData.GetAntiRoll(), 
