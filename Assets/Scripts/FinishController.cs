@@ -3,17 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-// Token: 0x02000018 RID: 24
 public class FinishController : MonoBehaviour
 {
-	// Token: 0x06000081 RID: 129 RVA: 0x00004AF3 File Offset: 0x00002CF3
 	private void Awake()
 	{
 		FinishController.Instance = this;
 	}
-
-	// Token: 0x06000082 RID: 130 RVA: 0x00004AFC File Offset: 0x00002CFC
 	public void Open(bool victory)
 	{
 		if (GameState.Instance.gamemode == Gamemode.TimeTrial)
@@ -75,8 +70,6 @@ public class FinishController : MonoBehaviour
 			this.unlockManager.gameObject.SetActive(true);
 		}
 	}
-
-	// Token: 0x06000083 RID: 131 RVA: 0x00004DB0 File Offset: 0x00002FB0
 	private void CheckUnlocks(bool victory)
 	{
 		int map = GameState.Instance.map;
@@ -166,54 +159,26 @@ public class FinishController : MonoBehaviour
 			}
 		}
 	}
-
-	// Token: 0x06000084 RID: 132 RVA: 0x000051C9 File Offset: 0x000033C9
 	public void Restart()
 	{
 		GameController.Instance.RestartGame();
 		Time.timeScale = 1f;
 	}
-
-	// Token: 0x06000085 RID: 133 RVA: 0x000051DF File Offset: 0x000033DF
 	public void Menu()
 	{
 		SceneManager.LoadScene("Menu");
 		Time.timeScale = 1f;
 	}
-
-	// Token: 0x040000B3 RID: 179
 	public TextMeshProUGUI timer;
-
-	// Token: 0x040000B4 RID: 180
 	public TextMeshProUGUI pbTimer;
-
-	// Token: 0x040000B5 RID: 181
 	public TextMeshProUGUI mapName;
-
-	// Token: 0x040000B6 RID: 182
 	public TextMeshProUGUI newBest;
-
-	// Token: 0x040000B7 RID: 183
 	public TextMeshProUGUI victoryText;
-
-	// Token: 0x040000B8 RID: 184
 	public GameObject timePanel;
-
-	// Token: 0x040000B9 RID: 185
 	public GameObject racePanel;
-
-	// Token: 0x040000BA RID: 186
 	public ProgressController progressTime;
-
-	// Token: 0x040000BB RID: 187
 	public ProgressController progressRace;
-
-	// Token: 0x040000BC RID: 188
 	public UnlockManager unlockManager;
-
-	// Token: 0x040000BD RID: 189
 	public Image[] stars;
-
-	// Token: 0x040000BE RID: 190
 	public static FinishController Instance;
 }

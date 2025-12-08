@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-// Token: 0x02000015 RID: 21
 public class CycleMenu : MonoBehaviour
 {
-	// Token: 0x06000070 RID: 112 RVA: 0x000045D4 File Offset: 0x000027D4
 	private void Awake()
 	{
 		this.selected = this.startSelect;
@@ -25,14 +22,10 @@ public class CycleMenu : MonoBehaviour
 		}
 		this.cycleText[this.selected].color = Color.black;
 	}
-
-	// Token: 0x06000071 RID: 113 RVA: 0x00004678 File Offset: 0x00002878
 	private void Start()
 	{
 		SaveManager.Instance.state.skins[5][1] = true;
 	}
-
-	// Token: 0x06000072 RID: 114 RVA: 0x00004690 File Offset: 0x00002890
 	private void UpdateSelected()
 	{
 		foreach (TextMeshProUGUI textMeshProUGUI in this.cycleText)
@@ -49,8 +42,6 @@ public class CycleMenu : MonoBehaviour
 			this.correspondingText[this.selected].color = Color.black;
 		}
 	}
-
-	// Token: 0x06000073 RID: 115 RVA: 0x0000477C File Offset: 0x0000297C
 	private void OnEnable()
 	{
 		this.selected = this.startSelect;
@@ -58,14 +49,10 @@ public class CycleMenu : MonoBehaviour
 		this.verticalDone = true;
 		this.UpdateSelected();
 	}
-
-	// Token: 0x06000074 RID: 116 RVA: 0x0000479E File Offset: 0x0000299E
 	private void Update()
 	{
 		this.PlayerInput();
 	}
-
-	// Token: 0x06000075 RID: 117 RVA: 0x000047A8 File Offset: 0x000029A8
 	private void PlayerInput()
 	{
 		if (UnlockManager.Instance && UnlockManager.Instance.gameObject.activeInHierarchy)
@@ -119,28 +106,12 @@ public class CycleMenu : MonoBehaviour
 		this.horizontalDone = (num != 0);
 		this.verticalDone = (num2 != 0);
 	}
-
-	// Token: 0x040000A7 RID: 167
 	private List<ItemCycle> cycles;
-
-	// Token: 0x040000A8 RID: 168
 	private List<TextMeshProUGUI> cycleText;
-
-	// Token: 0x040000A9 RID: 169
 	public TextMeshProUGUI[] correspondingText;
-
-	// Token: 0x040000AA RID: 170
 	private int selected;
-
-	// Token: 0x040000AB RID: 171
 	public int startSelect;
-
-	// Token: 0x040000AC RID: 172
 	public int backBtn;
-
-	// Token: 0x040000AD RID: 173
 	private bool horizontalDone;
-
-	// Token: 0x040000AE RID: 174
 	private bool verticalDone;
 }

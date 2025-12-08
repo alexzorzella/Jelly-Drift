@@ -1,10 +1,7 @@
 ﻿using System;
 using UnityEngine;
-
-// Token: 0x0200001C RID: 28
 public class Ghost : MonoBehaviour
 {
-	// Token: 0x060000A6 RID: 166 RVA: 0x000055C8 File Offset: 0x000037C8
 	private void Start()
 	{
 		this.ghost = PrefabManager.Instance.ghostMat;
@@ -23,10 +20,6 @@ public class Ghost : MonoBehaviour
 			renderer.materials = materials;
 		}
 	}
-
-	// Token: 0x040000D2 RID: 210
 	private Renderer[] renderers;
-
-	// Token: 0x040000D3 RID: 211
 	public Material ghost;
 }

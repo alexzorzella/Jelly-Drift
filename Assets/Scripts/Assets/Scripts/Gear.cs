@@ -2,10 +2,8 @@
 
 namespace Assets.Scripts
 {
-	// Token: 0x02000055 RID: 85
 	public class Gear
 	{
-		// Token: 0x060001D7 RID: 471 RVA: 0x00009CC4 File Offset: 0x00007EC4
 		public static int LookupTorqueCurve(int rpm)
 		{
 			if (rpm > 6000)
@@ -30,32 +28,14 @@ namespace Assets.Scripts
 			}
 			return 290;
 		}
-
-		// Token: 0x040001FD RID: 509
 		public static float g1 = 2.66f;
-
-		// Token: 0x040001FE RID: 510
 		public static float g2 = 1.78f;
-
-		// Token: 0x040001FF RID: 511
 		public static float g3 = 1.3f;
-
-		// Token: 0x04000200 RID: 512
 		public static float g4 = 1f;
-
-		// Token: 0x04000201 RID: 513
 		public static float g5 = 0.74f;
-
-		// Token: 0x04000202 RID: 514
 		public static float g6 = 0.5f;
-
-		// Token: 0x04000203 RID: 515
 		public static float gR = 2.9f;
-
-		// Token: 0x04000204 RID: 516
 		public static float x_d = 3.42f;
-
-		// Token: 0x04000205 RID: 517
 		public static ValueTuple<int, int>[] rpmTorque = new ValueTuple<int, int>[]
 		{
 			new ValueTuple<int, int>(1000, 290),

@@ -2,17 +2,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
-// Token: 0x0200000E RID: 14
 public class CarCycle : ItemCycle
 {
-	// Token: 0x06000050 RID: 80 RVA: 0x00003DF9 File Offset: 0x00001FF9
 	private void Start()
 	{
 		base.max = CarDisplay.Instance.nCars;
 	}
-
-	// Token: 0x06000051 RID: 81 RVA: 0x00003E0C File Offset: 0x0000200C
 	private void OnEnable()
 	{
 		if (CarDisplay.Instance)
@@ -26,8 +21,6 @@ public class CarCycle : ItemCycle
 			this.skinCycle.selected = SaveManager.Instance.state.lastSkin[lastCar];
 		}
 	}
-
-	// Token: 0x06000052 RID: 82 RVA: 0x00003EB8 File Offset: 0x000020B8
 	public override void Cycle(int n)
 	{
 		base.Cycle(n);
@@ -65,13 +58,9 @@ public class CarCycle : ItemCycle
 		}
 		this.carStats.SetStats(base.selected);
 	}
-
-	// Token: 0x06000053 RID: 83 RVA: 0x000020AB File Offset: 0x000002AB
 	public void BuyCar()
 	{
 	}
-
-	// Token: 0x06000054 RID: 84 RVA: 0x00004043 File Offset: 0x00002243
 	public void SaveCar()
 	{
 		SaveManager.Instance.state.lastCar = base.selected;
@@ -79,16 +68,8 @@ public class CarCycle : ItemCycle
 		GameState.Instance.car = base.selected;
 		GameState.Instance.LoadMap();
 	}
-
-	// Token: 0x04000086 RID: 134
 	public SkinCycle skinCycle;
-
-	// Token: 0x04000087 RID: 135
 	public new TextMeshProUGUI name;
-
-	// Token: 0x04000088 RID: 136
 	public Button nextBtn;
-
-	// Token: 0x04000089 RID: 137
 	public CarStats carStats;
 }

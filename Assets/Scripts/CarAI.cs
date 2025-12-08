@@ -1,10 +1,7 @@
 ﻿using System;
 using UnityEngine;
-
-// Token: 0x0200000C RID: 12
 public class CarAI : MonoBehaviour
 {
-	// Token: 0x06000041 RID: 65 RVA: 0x00003654 File Offset: 0x00001854
 	private void Start()
 	{
 		this.difficulty = (int)GameState.Instance.difficulty;
@@ -22,8 +19,6 @@ public class CarAI : MonoBehaviour
 			base.GetComponent<CheckpointUser>().ForceCheckpoint(0);
 		}
 	}
-
-	// Token: 0x06000042 RID: 66 RVA: 0x000036F8 File Offset: 0x000018F8
 	public void Recover()
 	{
 		this.car.rb.linearVelocity = Vector3.zero;
@@ -33,8 +28,6 @@ public class CarAI : MonoBehaviour
 		Vector3 normalized = (this.nodes[num2].position - this.nodes[num].position).normalized;
 		base.transform.rotation = Quaternion.LookRotation(normalized);
 	}
-
-	// Token: 0x06000043 RID: 67 RVA: 0x00003794 File Offset: 0x00001994
 	private void CheckRecover()
 	{
 		if (!GameController.Instance.playing)
@@ -60,8 +53,6 @@ public class CarAI : MonoBehaviour
 		}
 		base.CancelInvoke("Recover");
 	}
-
-	// Token: 0x06000044 RID: 68 RVA: 0x00003827 File Offset: 0x00001A27
 	private void Update()
 	{
 		if (!GameController.Instance.playing || !this.path)
@@ -71,8 +62,6 @@ public class CarAI : MonoBehaviour
 		this.NewAI();
 		this.CheckRecover();
 	}
-
-	// Token: 0x06000045 RID: 69 RVA: 0x0000384F File Offset: 0x00001A4F
 	public void SetPath(Transform p)
 	{
 		this.path = p;
@@ -80,8 +69,6 @@ public class CarAI : MonoBehaviour
 		this.car = base.GetComponent<Car>();
 		this.currentNode = this.FindClosestNode(this.nodes.Length, base.transform);
 	}
-
-	// Token: 0x06000046 RID: 70 RVA: 0x00003890 File Offset: 0x00001A90
 	private int FindNextTurn()
 	{
 		for (int i = this.currentNode; i < this.currentNode + this.turnLookAhead; i++)
@@ -101,8 +88,6 @@ public class CarAI : MonoBehaviour
 		}
 		return -1;
 	}
-
-	// Token: 0x06000047 RID: 71 RVA: 0x00003970 File Offset: 0x00001B70
 	private int FindNextStraight(int startNode)
 	{
 		for (int i = startNode; i < startNode + this.turnLookAhead; i++)
@@ -119,8 +104,6 @@ public class CarAI : MonoBehaviour
 		}
 		return 3;
 	}
-
-	// Token: 0x06000048 RID: 72 RVA: 0x00003A18 File Offset: 0x00001C18
 	private void NewAI()
 	{
 		int num = this.FindClosestNode(this.maxLookAhead, base.transform);
@@ -150,8 +133,6 @@ public class CarAI : MonoBehaviour
 		this.car.throttle = 1f;
 		this.car.throttle = 1f - Mathf.Abs(this.car.steering * Mathf.Clamp(this.car.speed - (float)this.maxTurnSpeed, 0f, 100f) * 0.06f);
 	}
-
-	// Token: 0x06000049 RID: 73 RVA: 0x00003BE0 File Offset: 0x00001DE0
 	private void AdjustSpeed()
 	{
 		float num = (float)this.FindClosestNode(this.nodes.Length, base.transform) / (float)this.nodes.Length;
@@ -169,8 +150,6 @@ public class CarAI : MonoBehaviour
 		num4 = Mathf.Clamp(num4, 1000f, 8000f);
 		this.car.engineForce = num4;
 	}
-
-	// Token: 0x0600004A RID: 74 RVA: 0x00003CA4 File Offset: 0x00001EA4
 	private int FindClosestNode(int maxLook, Transform target)
 	{
 		float num = float.PositiveInfinity;
@@ -187,80 +166,30 @@ public class CarAI : MonoBehaviour
 		}
 		return result;
 	}
-
-	// Token: 0x04000069 RID: 105
 	[ExecuteInEditMode]
 	public Transform path;
-
-	// Token: 0x0400006A RID: 106
 	public Transform[] nodes;
-
-	// Token: 0x0400006B RID: 107
 	private Car car;
-
-	// Token: 0x0400006C RID: 108
 	private LineRenderer line;
-
-	// Token: 0x0400006D RID: 109
 	private float roadWidth = 0.4f;
-
-	// Token: 0x0400006E RID: 110
 	private float maxOffset = 0.36f;
-
-	// Token: 0x0400006F RID: 111
 	private int lookAhead = 4;
-
-	// Token: 0x04000070 RID: 112
 	private int maxLookAhead = 6;
-
-	// Token: 0x04000071 RID: 113
 	private int currentDriftNode;
-
-	// Token: 0x04000072 RID: 114
 	public int respawnHeight;
-
-	// Token: 0x04000073 RID: 115
 	private int difficulty;
-
-	// Token: 0x04000074 RID: 116
 	public int[] difficultyConfig;
-
-	// Token: 0x04000075 RID: 117
 	private float recoverTime = 1.5f;
-
-	// Token: 0x04000076 RID: 118
 	private int turnLookAhead = 6;
-
-	// Token: 0x04000077 RID: 119
 	private int turnDir;
-
-	// Token: 0x04000078 RID: 120
 	private int nextTurnStart;
-
-	// Token: 0x04000079 RID: 121
 	private int nextTurnLength;
-
-	// Token: 0x0400007A RID: 122
 	public float xOffset;
-
-	// Token: 0x0400007B RID: 123
 	public float speedSteerMultiplier = 1f;
-
-	// Token: 0x0400007C RID: 124
 	public float steerMultiplier = 1f;
-
-	// Token: 0x0400007D RID: 125
 	public int maxTurnSpeed = 50;
-
-	// Token: 0x0400007E RID: 126
 	private float speedAdjustMultiplier = 5f;
-
-	// Token: 0x0400007F RID: 127
 	private float speedupM = 15f;
-
-	// Token: 0x04000080 RID: 128
 	private float slowdownM = 5f;
-
-	// Token: 0x04000081 RID: 129
 	private int currentNode;
 }

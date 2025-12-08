@@ -1,16 +1,11 @@
 ﻿using System;
 using UnityEngine;
-
-// Token: 0x0200003B RID: 59
 public class CheckpointUser : MonoBehaviour
 {
-	// Token: 0x0600013A RID: 314 RVA: 0x0000751A File Offset: 0x0000571A
 	private void Awake()
 	{
 		this.checkedPoints = new bool[GameController.Instance.checkPoints.childCount];
 	}
-
-	// Token: 0x0600013B RID: 315 RVA: 0x00007538 File Offset: 0x00005738
 	public int GetCurrentCheckpoint(bool loopMap)
 	{
 		int num = 0;
@@ -31,8 +26,6 @@ public class CheckpointUser : MonoBehaviour
 		}
 		return num;
 	}
-
-	// Token: 0x0600013C RID: 316 RVA: 0x00007578 File Offset: 0x00005778
 	public bool CheckPoint(CheckPoint p)
 	{
 		if (p.nr != GameController.Instance.finalCheckpoint)
@@ -48,8 +41,6 @@ public class CheckpointUser : MonoBehaviour
 		}
 		return false;
 	}
-
-	// Token: 0x0600013D RID: 317 RVA: 0x000075D4 File Offset: 0x000057D4
 	private void ClearCheckpoint(int n)
 	{
 		if (this.checkedPoints[n])
@@ -71,14 +62,10 @@ public class CheckpointUser : MonoBehaviour
 		component.transform.localPosition = Vector3.zero;
 		component.SetSplit(Timer.GetFormattedTime(Timer.Instance.GetTimer()));
 	}
-
-	// Token: 0x0600013E RID: 318 RVA: 0x00007665 File Offset: 0x00005865
 	public void ForceCheckpoint(int n)
 	{
 		this.checkedPoints[n] = true;
 	}
-
-	// Token: 0x0600013F RID: 319 RVA: 0x00007670 File Offset: 0x00005870
 	private bool ReadyToFinish()
 	{
 		int num = 0;
@@ -91,10 +78,6 @@ public class CheckpointUser : MonoBehaviour
 		}
 		return num >= this.checkedPoints.Length - 1;
 	}
-
-	// Token: 0x04000148 RID: 328
 	private bool[] checkedPoints;
-
-	// Token: 0x04000149 RID: 329
 	public bool player = true;
 }
