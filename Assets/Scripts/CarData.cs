@@ -72,28 +72,28 @@ public class CarData {
     public class Builder {
         readonly string name;
         
-        float mass;
+        float mass = 1000F;
         float linearDamping;
         float angularDamping;
         
         // Suspension Variables
 
-        float suspensionLength;
-        float restHeight;
-        float suspensionForce;
-        float suspensionDamping;
+        float suspensionLength = 0.35F;
+        float restHeight = 0.17F;
+        float suspensionForce = 17000;
+        float suspensionDamping = 1000;
 
         // Car Specs
-    
-        float engineForce = 5000f;
-        float steerForce = 1f;
-        float antiRoll = 5000f;
-        float stability;
+
+        float engineForce = 3000;
+        float steerForce = 1;
+        float antiRoll = 5000;
+        float stability = 0.6F;
 
         // Drift Specs
-    
-        float driftMultiplier = 1f;
-        float driftThreshold = 0.5f;
+
+        float driftMultiplier = 1.33F;
+        float driftThreshold = 0.4F;
 
         // Audio
 
@@ -103,8 +103,11 @@ public class CarData {
         public Builder(string name) {
             this.name = name;
         }
-
-        public Builder WithPhysicsSpecs(float mass, float linearDamping, float angularDamping) {
+        
+        public Builder WithPhysicsSpecs(
+            float mass = 1000, 
+            float linearDamping = 0, 
+            float angularDamping = 0) {
             this.mass = mass;
             this.linearDamping = linearDamping;
             this.angularDamping = angularDamping;
@@ -112,10 +115,10 @@ public class CarData {
         }
         
         public Builder WithSuspensionSpecs(
-            float suspensionLength,
-            float restHeight,
-            float suspensionForce,
-            float suspensionDamping) {
+            float suspensionLength = 0.35F,
+            float restHeight = 0.17F,
+            float suspensionForce = 17000,
+            float suspensionDamping = 1000) {
             this.suspensionLength = suspensionLength;
             this.restHeight = restHeight;
             this.suspensionForce = suspensionForce;
@@ -125,10 +128,10 @@ public class CarData {
         }
 
         public Builder WithCarSpecs(
-            float engineForce,
-            float steerForce,
-            float antiRoll,
-            float stability) {
+            float engineForce = 3000,
+            float steerForce = 1,
+            float antiRoll = 5000,
+            float stability = 0.6F) {
             this.engineForce = engineForce;
             this.steerForce = steerForce;
             this.antiRoll = antiRoll;
@@ -138,8 +141,8 @@ public class CarData {
         }
 
         public Builder WithDriftSpecs(
-            float driftMultiplier,
-            float driftThreshold) {
+            float driftMultiplier = 1.33F,
+            float driftThreshold = 0.4F) {
             this.driftMultiplier = driftMultiplier;
             this.driftThreshold = driftThreshold;
 
