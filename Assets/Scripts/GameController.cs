@@ -87,7 +87,7 @@ public class GameController : MonoBehaviour
 		}
 		MonoBehaviour.print("cur check: " + component.GetCurrentCheckpoint(this.finalCheckpoint == 0));
 		Transform child = this.checkPoints.GetChild(component.GetCurrentCheckpoint(this.finalCheckpoint == 0));
-		this.currentCar.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		this.currentCar.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
 		this.currentCar.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 		this.currentCar.transform.rotation = child.rotation;
 		this.currentCar.transform.position = child.position;

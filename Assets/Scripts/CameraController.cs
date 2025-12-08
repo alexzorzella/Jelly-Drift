@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour
 			return;
 		}
 		Vector3 normalized = new Vector3(this.target.forward.x, 0f, this.target.forward.z).normalized;
-		Vector3 a = new Vector3(this.targetRb.velocity.x, 0f, this.targetRb.velocity.z).normalized;
+		Vector3 a = new Vector3(this.targetRb.linearVelocity.x, 0f, this.targetRb.linearVelocity.z).normalized;
 		if ((this.targetCar.speed < 5f && this.targetCar.speed > -15f) || SaveState.Instance.cameraMode == 1)
 		{
 			a = Vector3.zero;
@@ -41,11 +41,11 @@ public class CameraController : MonoBehaviour
 		a2.Normalize();
 		this.desiredPosition = this.target.position + -a2 * this.distFromTarget + Vector3.up * this.camHeight + this.offset;
 		base.transform.position = Vector3.Lerp(base.transform.position, this.desiredPosition, Time.deltaTime * this.moveSpeed);
-		float d = this.targetRb.velocity.magnitude * 0.25f;
+		float d = this.targetRb.linearVelocity.magnitude * 0.25f;
 		Vector3 forward = this.target.position - this.desiredPosition + d * a2 + d * Vector3.down * 0.3f;
 		this.desiredLook = Quaternion.LookRotation(forward);
 		base.transform.rotation = Quaternion.Lerp(base.transform.rotation, this.desiredLook, Time.deltaTime * this.rotationSpeed);
-		float b = (float)Mathf.Clamp(70 + (int)(this.targetRb.velocity.magnitude * 0.35f), 70, 85);
+		float b = (float)Mathf.Clamp(70 + (int)(this.targetRb.linearVelocity.magnitude * 0.35f), 70, 85);
 		this.fov = Mathf.Lerp(this.fov, b, Time.deltaTime * 5f);
 		this.mainCam.fieldOfView = this.fov;
 		this.offset = Vector3.Lerp(this.offset, Vector3.zero, Time.deltaTime * this.offsetSpeed);

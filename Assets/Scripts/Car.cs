@@ -100,8 +100,8 @@ public class Car : MonoBehaviour
 	// Token: 0x06000039 RID: 57 RVA: 0x00002E34 File Offset: 0x00001034
 	private void Movement()
 	{
-		Vector3 vector = this.XZVector(this.rb.velocity);
-		Vector3 vector2 = base.transform.InverseTransformDirection(this.XZVector(this.rb.velocity));
+		Vector3 vector = this.XZVector(this.rb.linearVelocity);
+		Vector3 vector2 = base.transform.InverseTransformDirection(this.XZVector(this.rb.linearVelocity));
 		this.acceleration = (this.lastVelocity - vector2) / Time.fixedDeltaTime;
 		this.dir = Mathf.Sign(base.transform.InverseTransformDirection(vector).z);
 		this.speed = vector.magnitude * 3.6f * this.dir;
@@ -135,7 +135,7 @@ public class Car : MonoBehaviour
 				{
 					float num4 = Mathf.Clamp(Mathf.Abs(f) * 2.4f - num3, 0f, 1f);
 					num2 = Mathf.Clamp(1f - num4, 0.05f, 1f);
-					float magnitude = this.rb.velocity.magnitude;
+					float magnitude = this.rb.linearVelocity.magnitude;
 					flag = true;
 					if (magnitude < 8f)
 					{
@@ -186,7 +186,7 @@ public class Car : MonoBehaviour
 	{
 		if (Mathf.Abs(this.speed) >= 1f || !this.grounded || this.throttle != 0f)
 		{
-			this.rb.drag = 0f;
+			this.rb.linearDamping = 0f;
 			return;
 		}
 		bool flag = true;
@@ -201,10 +201,10 @@ public class Car : MonoBehaviour
 		}
 		if (flag)
 		{
-			this.rb.drag = (1f - Mathf.Abs(this.speed)) * 30f;
+			this.rb.linearDamping = (1f - Mathf.Abs(this.speed)) * 30f;
 			return;
 		}
-		this.rb.drag = 0f;
+		this.rb.linearDamping = 0f;
 	}
 
 	// Token: 0x0600003B RID: 59 RVA: 0x000032E8 File Offset: 0x000014E8
@@ -254,7 +254,7 @@ public class Car : MonoBehaviour
 			}
 			num2 = 0f;
 			suspension.wheelObject.transform.localPosition = new Vector3(num2, y, 0f);
-			suspension.wheelObject.Rotate(Vector3.right, this.XZVector(this.rb.velocity).magnitude * 1f * this.dir);
+			suspension.wheelObject.Rotate(Vector3.right, this.XZVector(this.rb.linearVelocity).magnitude * 1f * this.dir);
 			suspension.wheelObject.localScale = Vector3.one * (this.suspensionLength * 2f);
 			suspension.transform.localScale = Vector3.one / base.transform.localScale.x;
 		}

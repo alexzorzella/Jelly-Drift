@@ -26,16 +26,16 @@ public class WheelSkid : MonoBehaviour
 			this.lastSkid = -1;
 			return;
 		}
-		float num = Mathf.Abs(base.transform.InverseTransformDirection(this.rb.velocity).x);
+		float num = Mathf.Abs(base.transform.InverseTransformDirection(this.rb.linearVelocity).x);
 		float num2 = this.wheelCollider.radius * (6.2831855f * this.wheelCollider.rpm / 60f);
-		float num3 = Vector3.Dot(this.rb.velocity, base.transform.forward);
+		float num3 = Vector3.Dot(this.rb.linearVelocity, base.transform.forward);
 		float num4 = Mathf.Abs(num3 - num2) * 10f;
 		num4 = Mathf.Max(0f, num4 * (10f - Mathf.Abs(num3)));
 		num += num4;
 		if (num >= 0.5f)
 		{
 			float opacity = Mathf.Clamp01(num / 20f);
-			Vector3 pos = this.wheelHitInfo.point + this.rb.velocity * (Time.time - this.lastFixedUpdateTime);
+			Vector3 pos = this.wheelHitInfo.point + this.rb.linearVelocity * (Time.time - this.lastFixedUpdateTime);
 			this.lastSkid = this.skidmarksController.AddSkidMark(pos, this.wheelHitInfo.normal, opacity, this.lastSkid);
 			return;
 		}

@@ -26,7 +26,7 @@ public class CarAI : MonoBehaviour
 	// Token: 0x06000042 RID: 66 RVA: 0x000036F8 File Offset: 0x000018F8
 	public void Recover()
 	{
-		this.car.rb.velocity = Vector3.zero;
+		this.car.rb.linearVelocity = Vector3.zero;
 		base.transform.position = this.nodes[this.FindClosestNode(3, base.transform)].position;
 		int num = this.currentNode % this.nodes.Length;
 		int num2 = (num + 1) % this.nodes.Length;

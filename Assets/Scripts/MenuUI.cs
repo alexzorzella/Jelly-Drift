@@ -10,11 +10,11 @@ public class MenuUI : MonoBehaviour
 	{
 		Application.targetFrameRate = 144;
 		QualitySettings.vSyncCount = 0;
-		MonoBehaviour.print("counting");
-		if (InitializeAds.Instance)
-		{
-			InitializeAds.Instance.MenuCount();
-		}
+		// MonoBehaviour.print("counting");
+		// if (InitializeAds.Instance)
+		// {
+		// 	InitializeAds.Instance.MenuCount();
+		// }
 	}
 
 	// Token: 0x060000DF RID: 223 RVA: 0x000061EC File Offset: 0x000043EC

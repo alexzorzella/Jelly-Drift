@@ -82,7 +82,7 @@ public class Suspension : MonoBehaviour
 			this.smokeEmitting.enabled = true;
 			if (Skidmarks.Instance)
 			{
-				this.lastSkid = Skidmarks.Instance.AddSkidMark(this.hitPos + this.bodyRb.velocity * Time.fixedDeltaTime, this.hitNormal, this.traction * 0.9f, this.lastSkid);
+				this.lastSkid = Skidmarks.Instance.AddSkidMark(this.hitPos + this.bodyRb.linearVelocity * Time.fixedDeltaTime, this.hitNormal, this.traction * 0.9f, this.lastSkid);
 			}
 		}
 		else
@@ -93,7 +93,7 @@ public class Suspension : MonoBehaviour
 		if (this.skidSfx)
 		{
 			float num = 1f;
-			if (this.bodyRb.velocity.magnitude < 2f)
+			if (this.bodyRb.linearVelocity.magnitude < 2f)
 			{
 				num = 0f;
 			}
