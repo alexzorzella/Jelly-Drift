@@ -1,49 +1,48 @@
-﻿using System;
-using TMPro;
-public class GhostCycle : ItemCycle
-{
-	private void Awake()
-	{
-		base.max = 3;
-	}
-	private void Start()
-	{
-		this.UpdateText();
-	}
-	public override void Cycle(int n)
-	{
-		if (this.mapCycle.lockUi.activeInHierarchy)
-		{
-			return;
-		}
-		base.Cycle(n);
-		this.UpdateText();
-	}
-	public void UpdateText()
-	{
-		GhostCycle.Ghost selected = (GhostCycle.Ghost)base.selected;
-		this.ghost = selected;
-		this.ghostText.text = " (" + selected + ")";
-		string str = " (" + selected + ")";
-		string str2 = "| ";
-		if (selected == GhostCycle.Ghost.Dani)
-		{
-			str2 += Timer.GetFormattedTime(SaveManager.Instance.state.daniTimes[this.mapCycle.selected]);
-		}
-		else if (selected == GhostCycle.Ghost.PB)
-		{
-			str2 += Timer.GetFormattedTime(SaveManager.Instance.state.times[this.mapCycle.selected]);
-		}
-		this.ghostText.text = str2 + str;
-		GameState.Instance.ghost = this.ghost;
-	}
-	private GhostCycle.Ghost ghost;
-	public TextMeshProUGUI ghostText;
-	public MapCycle mapCycle;
-	public enum Ghost
-	{
-		PB,
-		Dani,
-		Off
-	}
+﻿using TMPro;
+
+public class GhostCycle : ItemCycle {
+    public enum Ghost {
+        PB,
+        Dani,
+        Off
+    }
+
+    public TextMeshProUGUI ghostText;
+    public MapCycle mapCycle;
+
+    Ghost ghost;
+
+    void Awake() {
+        max = 3;
+    }
+
+    void Start() {
+        UpdateText();
+    }
+
+    public override void Cycle(int n) {
+        if (mapCycle.lockUi.activeInHierarchy) {
+            return;
+        }
+
+        base.Cycle(n);
+        UpdateText();
+    }
+
+    public void UpdateText() {
+        var selected = (Ghost)this.selected;
+        ghost = selected;
+        ghostText.text = " (" + selected + ")";
+        var str = " (" + selected + ")";
+        var str2 = "| ";
+        if (selected == Ghost.Dani) {
+            str2 += Timer.GetFormattedTime(SaveManager.Instance.state.daniTimes[mapCycle.selected]);
+        }
+        else if (selected == Ghost.PB) {
+            str2 += Timer.GetFormattedTime(SaveManager.Instance.state.times[mapCycle.selected]);
+        }
+
+        ghostText.text = str2 + str;
+        GameState.Instance.ghost = ghost;
+    }
 }

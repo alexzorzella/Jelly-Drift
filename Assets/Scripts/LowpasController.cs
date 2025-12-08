@@ -1,28 +1,26 @@
-﻿using System;
-using UnityEngine;
-public class LowpasController : MonoBehaviour
-{
-	private void Awake()
-	{
-		this.lowpass = base.GetComponent<AudioLowPassFilter>();
-		MonoBehaviour.print("got lowpass: " + this.lowpass);
-	}
-	private void Update()
-	{
-		if (Pause.Instance.paused)
-		{
-			this.desiredFreq = 200f;
-		}
-		else if (Time.timeScale < 1f)
-		{
-			this.desiredFreq = 500f;
-		}
-		else
-		{
-			this.desiredFreq = 22000f;
-		}
-		this.lowpass.cutoffFrequency = Mathf.Lerp(this.lowpass.cutoffFrequency, this.desiredFreq, Time.fixedDeltaTime * 4f);
-	}
-	private AudioLowPassFilter lowpass;
-	private float desiredFreq;
+﻿using UnityEngine;
+
+public class LowpasController : MonoBehaviour {
+    float desiredFreq;
+
+    AudioLowPassFilter lowpass;
+
+    void Awake() {
+        lowpass = GetComponent<AudioLowPassFilter>();
+        print("got lowpass: " + lowpass);
+    }
+
+    void Update() {
+        if (Pause.Instance.paused) {
+            desiredFreq = 200f;
+        }
+        else if (Time.timeScale < 1f) {
+            desiredFreq = 500f;
+        }
+        else {
+            desiredFreq = 22000f;
+        }
+
+        lowpass.cutoffFrequency = Mathf.Lerp(lowpass.cutoffFrequency, desiredFreq, Time.fixedDeltaTime * 4f);
+    }
 }

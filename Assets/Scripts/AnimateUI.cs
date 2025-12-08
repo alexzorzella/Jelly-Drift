@@ -1,32 +1,32 @@
-﻿using System;
-using UnityEngine;
-public class AnimateUI : MonoBehaviour
-{
-	private void Awake()
-	{
-		this.defaultScale = base.transform.localScale;
-		this.defaultRot = 0f;
-		this.desiredScale = this.defaultScale;
-	}
-	private void Update()
-	{
-		float d = 1f + (Mathf.PingPong(Time.time * this.scaleSpeed, this.scaleStrength) - this.scaleStrength / 2f);
-		float target = Mathf.PingPong(Time.time * this.rotSpeed, this.rotStrength) - this.rotStrength / 2f;
-		this.desiredScale = this.defaultScale * d;
-		base.transform.localScale = Vector3.SmoothDamp(base.transform.localScale, this.desiredScale, ref this.scaleVel, this.scaleSmooth);
-		this.rot = Mathf.SmoothDamp(this.rot, target, ref this.rotVel, this.rotSmooth);
-		base.transform.localRotation = Quaternion.Euler(0f, 0f, this.rot);
-	}
-	private Vector3 defaultScale;
-	private float defaultRot;
-	private float rotVel;
-	public float rotSpeed;
-	public float rotStrength;
-	public float rotSmooth;
-	private Vector3 desiredScale;
-	private Vector3 scaleVel;
-	public float scaleSpeed;
-	public float scaleStrength;
-	public float scaleSmooth;
-	private float rot;
+﻿using UnityEngine;
+
+public class AnimateUI : MonoBehaviour {
+    public float rotSpeed;
+    public float rotStrength;
+    public float rotSmooth;
+    public float scaleSpeed;
+    public float scaleStrength;
+    public float scaleSmooth;
+    float defaultRot;
+
+    Vector3 defaultScale;
+    Vector3 desiredScale;
+    float rot;
+    float rotVel;
+    Vector3 scaleVel;
+
+    void Awake() {
+        defaultScale = transform.localScale;
+        defaultRot = 0f;
+        desiredScale = defaultScale;
+    }
+
+    void Update() {
+        var d = 1f + (Mathf.PingPong(Time.time * scaleSpeed, scaleStrength) - scaleStrength / 2f);
+        var target = Mathf.PingPong(Time.time * rotSpeed, rotStrength) - rotStrength / 2f;
+        desiredScale = defaultScale * d;
+        transform.localScale = Vector3.SmoothDamp(transform.localScale, desiredScale, ref scaleVel, scaleSmooth);
+        rot = Mathf.SmoothDamp(rot, target, ref rotVel, rotSmooth);
+        transform.localRotation = Quaternion.Euler(0f, 0f, rot);
+    }
 }

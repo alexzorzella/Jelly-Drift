@@ -1,10 +1,6 @@
-﻿using System;
-
-namespace MilkShake
-{
-	public enum ShakeType
-	{
-		OneShot,
-		Sustained
-	}
+﻿namespace MilkShake {
+    public enum ShakeType {
+        OneShot,
+        Sustained
+    }
 }

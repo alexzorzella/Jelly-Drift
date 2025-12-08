@@ -1,7 +1,5 @@
-﻿using System;
-public enum Gamemode
-{
-	Race,
-	TimeTrial,
-	FreeRoam
+﻿public enum Gamemode {
+    Race,
+    TimeTrial,
+    FreeRoam
 }

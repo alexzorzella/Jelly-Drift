@@ -1,13 +1,11 @@
-﻿using System;
-using UnityEngine;
-public class Water : MonoBehaviour
-{
-	private void Start()
-	{
-		if (SystemInfo.deviceType == DeviceType.Handheld)
-		{
-			base.GetComponent<MeshRenderer>().material = this.bad;
-		}
-	}
-	public Material bad;
+﻿using UnityEngine;
+
+public class Water : MonoBehaviour {
+    public Material bad;
+
+    void Start() {
+        if (SystemInfo.deviceType == DeviceType.Handheld) {
+            GetComponent<MeshRenderer>().material = bad;
+        }
+    }
 }

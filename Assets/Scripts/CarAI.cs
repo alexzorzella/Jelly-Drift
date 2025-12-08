@@ -1,195 +1,182 @@
-﻿using System;
-using UnityEngine;
-public class CarAI : MonoBehaviour
-{
-	private void Start()
-	{
-		this.difficulty = (int)GameState.Instance.difficulty;
-		MonoBehaviour.print(string.Concat(new object[]
-		{
-			"d: ",
-			GameState.Instance.difficulty,
-			", a: ",
-			this.difficulty
-		}));
-		this.car.engineForce = (float)this.difficultyConfig[this.difficulty];
-		base.InvokeRepeating("AdjustSpeed", 0.5f, 0.5f);
-		if (GameController.Instance.finalCheckpoint != 0)
-		{
-			base.GetComponent<CheckpointUser>().ForceCheckpoint(0);
-		}
-	}
-	public void Recover()
-	{
-		this.car.rb.linearVelocity = Vector3.zero;
-		base.transform.position = this.nodes[this.FindClosestNode(3, base.transform)].position;
-		int num = this.currentNode % this.nodes.Length;
-		int num2 = (num + 1) % this.nodes.Length;
-		Vector3 normalized = (this.nodes[num2].position - this.nodes[num].position).normalized;
-		base.transform.rotation = Quaternion.LookRotation(normalized);
-	}
-	private void CheckRecover()
-	{
-		if (!GameController.Instance.playing)
-		{
-			return;
-		}
-		if (base.transform.position.y < (float)this.respawnHeight)
-		{
-			this.Recover();
-		}
-		if (base.IsInvoking("Recover"))
-		{
-			if (this.car.speed > 3f)
-			{
-				base.CancelInvoke("Recover");
-			}
-			return;
-		}
-		if (this.car.speed < 3f)
-		{
-			base.Invoke("Recover", this.recoverTime);
-			return;
-		}
-		base.CancelInvoke("Recover");
-	}
-	private void Update()
-	{
-		if (!GameController.Instance.playing || !this.path)
-		{
-			return;
-		}
-		this.NewAI();
-		this.CheckRecover();
-	}
-	public void SetPath(Transform p)
-	{
-		this.path = p;
-		this.nodes = this.path.GetComponentsInChildren<Transform>();
-		this.car = base.GetComponent<Car>();
-		this.currentNode = this.FindClosestNode(this.nodes.Length, base.transform);
-	}
-	private int FindNextTurn()
-	{
-		for (int i = this.currentNode; i < this.currentNode + this.turnLookAhead; i++)
-		{
-			int num = i % this.nodes.Length;
-			int num2 = (num + 1) % this.nodes.Length;
-			int num3 = (num2 + 1) % this.nodes.Length;
-			Vector3 vector = this.nodes[num2].position - this.nodes[num].position;
-			Vector3 vector2 = this.nodes[num3].position - this.nodes[num2].position;
-			float f = Vector3.SignedAngle(vector.normalized, vector2.normalized, Vector3.up);
-			if (Mathf.Abs(f) > 20f)
-			{
-				this.turnDir = (int)Mathf.Sign(f);
-				this.nextTurnLength = this.FindNextStraight(num2);
-				return num2;
-			}
-		}
-		return -1;
-	}
-	private int FindNextStraight(int startNode)
-	{
-		for (int i = startNode; i < startNode + this.turnLookAhead; i++)
-		{
-			int num = i % this.nodes.Length;
-			int num2 = (num + 1) % this.nodes.Length;
-			int num3 = (num2 + 1) % this.nodes.Length;
-			Vector3 from = this.nodes[num2].position - this.nodes[num].position;
-			Vector3 to = this.nodes[num3].position - this.nodes[num2].position;
-			if (Mathf.Abs(Vector3.SignedAngle(from, to, Vector3.up)) < 15f)
-			{
-				return num2 - startNode;
-			}
-		}
-		return 3;
-	}
-	private void NewAI()
-	{
-		int num = this.FindClosestNode(this.maxLookAhead, base.transform);
-		this.currentNode = num;
-		int num2 = (num + 1) % this.nodes.Length;
-		if (this.currentNode > this.nextTurnStart + this.nextTurnLength)
-		{
-			this.nextTurnStart = this.FindNextTurn();
-		}
-		if (num2 < this.nextTurnStart)
-		{
-			this.xOffset = 0.13f * (float)this.turnDir;
-		}
-		else if (num2 >= this.nextTurnStart && num2 < this.nextTurnStart + this.nextTurnLength)
-		{
-			this.xOffset = -0.13f * (float)this.turnDir;
-		}
-		else
-		{
-			this.xOffset = 0f;
-		}
-		Vector3 b = Vector3.Cross(this.nodes[num2].position - this.nodes[num].position, Vector3.up) * this.xOffset;
-		Vector3 vector = this.nodes[num2].position + b - base.transform.position;
-		vector = base.transform.InverseTransformDirection(vector);
-		float num3 = 1f + Mathf.Clamp(this.car.speed * 0.01f * this.speedSteerMultiplier, 0f, 1f);
-		this.car.steering = Mathf.Clamp(vector.x * 0.05f * num3, -1f, 1f) * num3;
-		this.car.throttle = 1f;
-		this.car.throttle = 1f - Mathf.Abs(this.car.steering * Mathf.Clamp(this.car.speed - (float)this.maxTurnSpeed, 0f, 100f) * 0.06f);
-	}
-	private void AdjustSpeed()
-	{
-		float num = (float)this.FindClosestNode(this.nodes.Length, base.transform) / (float)this.nodes.Length;
-		float num2 = (float)this.FindClosestNode(this.nodes.Length, GameController.Instance.currentCar.transform) / (float)this.nodes.Length;
-		float num3 = num - num2;
-		if (num3 < 0f)
-		{
-			num3 *= this.speedupM;
-		}
-		if (num3 > 0f)
-		{
-			num3 *= this.slowdownM;
-		}
-		float num4 = (float)this.difficultyConfig[this.difficulty] - Mathf.Clamp(num3 * 1000f * this.speedAdjustMultiplier, -8000f, 4000f);
-		num4 = Mathf.Clamp(num4, 1000f, 8000f);
-		this.car.engineForce = num4;
-	}
-	private int FindClosestNode(int maxLook, Transform target)
-	{
-		float num = float.PositiveInfinity;
-		int result = 0;
-		for (int i = 0; i < maxLook; i++)
-		{
-			int num2 = (this.currentNode + i) % this.nodes.Length;
-			float num3 = Vector3.Distance(target.position, this.nodes[num2].position);
-			if (num3 < num)
-			{
-				num = num3;
-				result = num2;
-			}
-		}
-		return result;
-	}
-	[ExecuteInEditMode]
-	public Transform path;
-	public Transform[] nodes;
-	private Car car;
-	private LineRenderer line;
-	private float roadWidth = 0.4f;
-	private float maxOffset = 0.36f;
-	private int lookAhead = 4;
-	private int maxLookAhead = 6;
-	private int currentDriftNode;
-	public int respawnHeight;
-	private int difficulty;
-	public int[] difficultyConfig;
-	private float recoverTime = 1.5f;
-	private int turnLookAhead = 6;
-	private int turnDir;
-	private int nextTurnStart;
-	private int nextTurnLength;
-	public float xOffset;
-	public float speedSteerMultiplier = 1f;
-	public float steerMultiplier = 1f;
-	public int maxTurnSpeed = 50;
-	private float speedAdjustMultiplier = 5f;
-	private float speedupM = 15f;
-	private float slowdownM = 5f;
-	private int currentNode;
+﻿using UnityEngine;
+
+public class CarAI : MonoBehaviour {
+    public Transform path;
+
+    public Transform[] nodes;
+    public int respawnHeight;
+    public int[] difficultyConfig;
+    public float xOffset;
+    public float speedSteerMultiplier = 1f;
+    public float steerMultiplier = 1f;
+    public int maxTurnSpeed = 50;
+    readonly int maxLookAhead = 6;
+    readonly float recoverTime = 1.5f;
+    readonly float slowdownM = 5f;
+    readonly float speedAdjustMultiplier = 5f;
+    readonly float speedupM = 15f;
+    readonly int turnLookAhead = 6;
+    Car car;
+    int currentDriftNode;
+    int currentNode;
+    int difficulty;
+    LineRenderer line;
+    int lookAhead = 4;
+    float maxOffset = 0.36f;
+    int nextTurnLength;
+    int nextTurnStart;
+    float roadWidth = 0.4f;
+    int turnDir;
+
+    void Start() {
+        difficulty = (int)GameState.Instance.difficulty;
+        print(string.Concat("d: ", GameState.Instance.difficulty, ", a: ", difficulty));
+        car.engineForce = difficultyConfig[difficulty];
+        InvokeRepeating("AdjustSpeed", 0.5f, 0.5f);
+        if (GameController.Instance.finalCheckpoint != 0) {
+            GetComponent<CheckpointUser>().ForceCheckpoint(0);
+        }
+    }
+
+    void Update() {
+        if (!GameController.Instance.playing || !path) {
+            return;
+        }
+
+        NewAI();
+        CheckRecover();
+    }
+
+    public void Recover() {
+        car.rb.linearVelocity = Vector3.zero;
+        transform.position = nodes[FindClosestNode(3, transform)].position;
+        var num = currentNode % nodes.Length;
+        var num2 = (num + 1) % nodes.Length;
+        var normalized = (nodes[num2].position - nodes[num].position).normalized;
+        transform.rotation = Quaternion.LookRotation(normalized);
+    }
+
+    void CheckRecover() {
+        if (!GameController.Instance.playing) {
+            return;
+        }
+
+        if (transform.position.y < respawnHeight) {
+            Recover();
+        }
+
+        if (IsInvoking("Recover")) {
+            if (car.speed > 3f) {
+                CancelInvoke("Recover");
+            }
+
+            return;
+        }
+
+        if (car.speed < 3f) {
+            Invoke("Recover", recoverTime);
+            return;
+        }
+
+        CancelInvoke("Recover");
+    }
+
+    public void SetPath(Transform p) {
+        path = p;
+        nodes = path.GetComponentsInChildren<Transform>();
+        car = GetComponent<Car>();
+        currentNode = FindClosestNode(nodes.Length, transform);
+    }
+
+    int FindNextTurn() {
+        for (var i = currentNode; i < currentNode + turnLookAhead; i++) {
+            var num = i % nodes.Length;
+            var num2 = (num + 1) % nodes.Length;
+            var num3 = (num2 + 1) % nodes.Length;
+            var vector = nodes[num2].position - nodes[num].position;
+            var vector2 = nodes[num3].position - nodes[num2].position;
+            var f = Vector3.SignedAngle(vector.normalized, vector2.normalized, Vector3.up);
+            if (Mathf.Abs(f) > 20f) {
+                turnDir = (int)Mathf.Sign(f);
+                nextTurnLength = FindNextStraight(num2);
+                return num2;
+            }
+        }
+
+        return -1;
+    }
+
+    int FindNextStraight(int startNode) {
+        for (var i = startNode; i < startNode + turnLookAhead; i++) {
+            var num = i % nodes.Length;
+            var num2 = (num + 1) % nodes.Length;
+            var num3 = (num2 + 1) % nodes.Length;
+            var from = nodes[num2].position - nodes[num].position;
+            var to = nodes[num3].position - nodes[num2].position;
+            if (Mathf.Abs(Vector3.SignedAngle(from, to, Vector3.up)) < 15f) {
+                return num2 - startNode;
+            }
+        }
+
+        return 3;
+    }
+
+    void NewAI() {
+        var num = FindClosestNode(maxLookAhead, transform);
+        currentNode = num;
+        var num2 = (num + 1) % nodes.Length;
+        if (currentNode > nextTurnStart + nextTurnLength) {
+            nextTurnStart = FindNextTurn();
+        }
+
+        if (num2 < nextTurnStart) {
+            xOffset = 0.13f * turnDir;
+        }
+        else if (num2 >= nextTurnStart && num2 < nextTurnStart + nextTurnLength) {
+            xOffset = -0.13f * turnDir;
+        }
+        else {
+            xOffset = 0f;
+        }
+
+        var b = Vector3.Cross(nodes[num2].position - nodes[num].position, Vector3.up) * xOffset;
+        var vector = nodes[num2].position + b - transform.position;
+        vector = transform.InverseTransformDirection(vector);
+        var num3 = 1f + Mathf.Clamp(car.speed * 0.01f * speedSteerMultiplier, 0f, 1f);
+        car.steering = Mathf.Clamp(vector.x * 0.05f * num3, -1f, 1f) * num3;
+        car.throttle = 1f;
+        car.throttle = 1f - Mathf.Abs(car.steering * Mathf.Clamp(car.speed - maxTurnSpeed, 0f, 100f) * 0.06f);
+    }
+
+    void AdjustSpeed() {
+        var num = FindClosestNode(nodes.Length, transform) / (float)nodes.Length;
+        var num2 = FindClosestNode(nodes.Length, GameController.Instance.currentCar.transform) / (float)nodes.Length;
+        var num3 = num - num2;
+        if (num3 < 0f) {
+            num3 *= speedupM;
+        }
+
+        if (num3 > 0f) {
+            num3 *= slowdownM;
+        }
+
+        var num4 = difficultyConfig[difficulty] - Mathf.Clamp(num3 * 1000f * speedAdjustMultiplier, -8000f, 4000f);
+        num4 = Mathf.Clamp(num4, 1000f, 8000f);
+        car.engineForce = num4;
+    }
+
+    int FindClosestNode(int maxLook, Transform target) {
+        var num = float.PositiveInfinity;
+        var result = 0;
+        for (var i = 0; i < maxLook; i++) {
+            var num2 = (currentNode + i) % nodes.Length;
+            var num3 = Vector3.Distance(target.position, nodes[num2].position);
+            if (num3 < num) {
+                num = num3;
+                result = num2;
+            }
+        }
+
+        return result;
+    }
 }

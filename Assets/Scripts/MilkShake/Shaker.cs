@@ -1,127 +1,114 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace MilkShake
-{
-	[AddComponentMenu("MilkShake/Shaker")]
-	public class Shaker : MonoBehaviour
-	{
-		public static ShakeInstance ShakeAll(IShakeParameters shakeData, int? seed = null)
-		{
-			ShakeInstance shakeInstance = new ShakeInstance(shakeData, seed);
-			Shaker.AddShakeAll(shakeInstance);
-			return shakeInstance;
-		}
-		public static void ShakeAllSeparate(IShakeParameters shakeData, List<ShakeInstance> shakeInstances = null, int? seed = null)
-		{
-			if (shakeInstances != null)
-			{
-				shakeInstances.Clear();
-			}
-			for (int i = 0; i < Shaker.GlobalShakers.Count; i++)
-			{
-				if (Shaker.GlobalShakers[i].gameObject.activeInHierarchy)
-				{
-					ShakeInstance shakeInstance = Shaker.GlobalShakers[i].Shake(shakeData, seed);
-					if (shakeInstances != null && shakeInstance != null)
-					{
-						shakeInstances.Add(shakeInstance);
-					}
-				}
-			}
-		}
-		public static void ShakeAllFromPoint(Vector3 point, float maxDistance, IShakeParameters shakeData, List<ShakeInstance> shakeInstances = null, int? seed = null)
-		{
-			if (shakeInstances != null)
-			{
-				shakeInstances.Clear();
-			}
-			for (int i = 0; i < Shaker.GlobalShakers.Count; i++)
-			{
-				if (Shaker.GlobalShakers[i].gameObject.activeInHierarchy)
-				{
-					ShakeInstance shakeInstance = Shaker.GlobalShakers[i].ShakeFromPoint(point, maxDistance, shakeData, seed);
-					if (shakeInstances != null && shakeInstance != null)
-					{
-						shakeInstances.Add(shakeInstance);
-					}
-				}
-			}
-		}
-		public static void AddShakeAll(ShakeInstance shakeInstance)
-		{
-			for (int i = 0; i < Shaker.GlobalShakers.Count; i++)
-			{
-				if (Shaker.GlobalShakers[i].gameObject.activeInHierarchy)
-				{
-					Shaker.GlobalShakers[i].AddShake(shakeInstance);
-				}
-			}
-		}
-		private void Awake()
-		{
-			if (this.addToGlobalShakers)
-			{
-				Shaker.GlobalShakers.Add(this);
-			}
-		}
-		private void OnDestroy()
-		{
-			if (this.addToGlobalShakers)
-			{
-				Shaker.GlobalShakers.Remove(this);
-			}
-		}
-		private void Update()
-		{
-			if (SaveState.Instance.cameraShake == 0)
-			{
-				return;
-			}
-			ShakeResult shakeResult = default(ShakeResult);
-			for (int i = 0; i < this.activeShakes.Count; i++)
-			{
-				if (this.activeShakes[i].IsFinished)
-				{
-					this.activeShakes.RemoveAt(i);
-					i--;
-				}
-				else
-				{
-					shakeResult += this.activeShakes[i].UpdateShake(Time.deltaTime);
-				}
-			}
-			base.transform.localPosition = shakeResult.PositionShake;
-			base.transform.localEulerAngles = shakeResult.RotationShake;
-		}
-		public ShakeInstance Shake(IShakeParameters shakeData, int? seed = null)
-		{
-			ShakeInstance shakeInstance = new ShakeInstance(shakeData, seed);
-			this.AddShake(shakeInstance);
-			return shakeInstance;
-		}
-		public ShakeInstance ShakeFromPoint(Vector3 point, float maxDistance, IShakeParameters shakeData, int? seed = null)
-		{
-			float num = Vector3.Distance(base.transform.position, point);
-			if (num < maxDistance)
-			{
-				ShakeInstance shakeInstance = new ShakeInstance(shakeData, seed);
-				float num2 = 1f - Mathf.Clamp01(num / maxDistance);
-				shakeInstance.StrengthScale = num2;
-				shakeInstance.RoughnessScale = num2;
-				this.AddShake(shakeInstance);
-				return shakeInstance;
-			}
-			return null;
-		}
-		public void AddShake(ShakeInstance shakeInstance)
-		{
-			this.activeShakes.Add(shakeInstance);
-		}
-		public static List<Shaker> GlobalShakers = new List<Shaker>();
-		[SerializeField]
-		private bool addToGlobalShakers;
-		private List<ShakeInstance> activeShakes = new List<ShakeInstance>();
-	}
+namespace MilkShake {
+    [AddComponentMenu("MilkShake/Shaker")]
+    public class Shaker : MonoBehaviour {
+        public static List<Shaker> GlobalShakers = new();
+        [SerializeField] bool addToGlobalShakers;
+        readonly List<ShakeInstance> activeShakes = new();
+
+        void Awake() {
+            if (addToGlobalShakers) {
+                GlobalShakers.Add(this);
+            }
+        }
+
+        void Update() {
+            if (SaveState.Instance.cameraShake == 0) {
+                return;
+            }
+
+            var shakeResult = default(ShakeResult);
+            for (var i = 0; i < activeShakes.Count; i++) {
+                if (activeShakes[i].IsFinished) {
+                    activeShakes.RemoveAt(i);
+                    i--;
+                }
+                else {
+                    shakeResult += activeShakes[i].UpdateShake(Time.deltaTime);
+                }
+            }
+
+            transform.localPosition = shakeResult.PositionShake;
+            transform.localEulerAngles = shakeResult.RotationShake;
+        }
+
+        void OnDestroy() {
+            if (addToGlobalShakers) {
+                GlobalShakers.Remove(this);
+            }
+        }
+
+        public static ShakeInstance ShakeAll(IShakeParameters shakeData, int? seed = null) {
+            var shakeInstance = new ShakeInstance(shakeData, seed);
+            AddShakeAll(shakeInstance);
+            return shakeInstance;
+        }
+
+        public static void ShakeAllSeparate(IShakeParameters shakeData, List<ShakeInstance> shakeInstances = null,
+            int? seed = null) {
+            if (shakeInstances != null) {
+                shakeInstances.Clear();
+            }
+
+            for (var i = 0; i < GlobalShakers.Count; i++) {
+                if (GlobalShakers[i].gameObject.activeInHierarchy) {
+                    var shakeInstance = GlobalShakers[i].Shake(shakeData, seed);
+                    if (shakeInstances != null && shakeInstance != null) {
+                        shakeInstances.Add(shakeInstance);
+                    }
+                }
+            }
+        }
+
+        public static void ShakeAllFromPoint(Vector3 point, float maxDistance, IShakeParameters shakeData,
+            List<ShakeInstance> shakeInstances = null, int? seed = null) {
+            if (shakeInstances != null) {
+                shakeInstances.Clear();
+            }
+
+            for (var i = 0; i < GlobalShakers.Count; i++) {
+                if (GlobalShakers[i].gameObject.activeInHierarchy) {
+                    var shakeInstance = GlobalShakers[i].ShakeFromPoint(point, maxDistance, shakeData, seed);
+                    if (shakeInstances != null && shakeInstance != null) {
+                        shakeInstances.Add(shakeInstance);
+                    }
+                }
+            }
+        }
+
+        public static void AddShakeAll(ShakeInstance shakeInstance) {
+            for (var i = 0; i < GlobalShakers.Count; i++) {
+                if (GlobalShakers[i].gameObject.activeInHierarchy) {
+                    GlobalShakers[i].AddShake(shakeInstance);
+                }
+            }
+        }
+
+        public ShakeInstance Shake(IShakeParameters shakeData, int? seed = null) {
+            var shakeInstance = new ShakeInstance(shakeData, seed);
+            AddShake(shakeInstance);
+            return shakeInstance;
+        }
+
+        public ShakeInstance ShakeFromPoint(Vector3 point, float maxDistance, IShakeParameters shakeData,
+            int? seed = null) {
+            var num = Vector3.Distance(transform.position, point);
+            if (num < maxDistance) {
+                var shakeInstance = new ShakeInstance(shakeData, seed);
+                var num2 = 1f - Mathf.Clamp01(num / maxDistance);
+                shakeInstance.StrengthScale = num2;
+                shakeInstance.RoughnessScale = num2;
+                AddShake(shakeInstance);
+                return shakeInstance;
+            }
+
+            return null;
+        }
+
+        public void AddShake(ShakeInstance shakeInstance) {
+            activeShakes.Add(shakeInstance);
+        }
+    }
 }

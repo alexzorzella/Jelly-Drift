@@ -1,19 +1,18 @@
-﻿using System;
-using UnityEngine;
-public class PrefabManager : MonoBehaviour
-{
-	private void Awake()
-	{
-		if (PrefabManager.Instance != null && PrefabManager.Instance != this)
-		{
-			UnityEngine.Object.Destroy(base.gameObject);
-			return;
-		}
-		PrefabManager.Instance = this;
-	}
-	public static PrefabManager Instance;
-	public GameObject[] cars;
-	public GameObject splitUi;
-	public GameObject crashParticles;
-	public Material ghostMat;
+﻿using UnityEngine;
+
+public class PrefabManager : MonoBehaviour {
+    public static PrefabManager Instance;
+    public GameObject[] cars;
+    public GameObject splitUi;
+    public GameObject crashParticles;
+    public Material ghostMat;
+
+    void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 }

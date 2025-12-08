@@ -1,16 +1,15 @@
-﻿using System;
-using UnityEngine;
-public class StaticManagers : MonoBehaviour
-{
-	private void Awake()
-	{
-		if (StaticManagers.Instance != null && StaticManagers.Instance != this)
-		{
-			UnityEngine.Object.Destroy(base.gameObject);
-			return;
-		}
-		StaticManagers.Instance = this;
-		UnityEngine.Object.DontDestroyOnLoad(base.gameObject);
-	}
-	public static StaticManagers Instance;
+﻿using UnityEngine;
+
+public class StaticManagers : MonoBehaviour {
+    public static StaticManagers Instance;
+
+    void Awake() {
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 }

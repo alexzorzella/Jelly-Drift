@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
-public class UIManager : MonoBehaviour
-{
-	private void Awake()
-	{
-		UIManager.Instance = this;
-	}
-	public Transform splitPos;
-	public static UIManager Instance;
+﻿using UnityEngine;
+
+public class UIManager : MonoBehaviour {
+    public static UIManager Instance;
+    public Transform splitPos;
+
+    void Awake() {
+        Instance = this;
+    }
 }

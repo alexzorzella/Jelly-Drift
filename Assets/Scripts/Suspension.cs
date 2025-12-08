@@ -1,138 +1,138 @@
-﻿using System;
-using UnityEngine;
-public class Suspension : MonoBehaviour
-{
-	private void Start()
-	{
-		this.car = base.transform.parent.GetComponent<Car>();
-		this.bodyRb = this.car.GetComponent<Rigidbody>();
-		this.raycastOffset = this.car.suspensionLength * 0.5f;
-		this.smokeEmitting = this.smokeFx.emission;
-		this.spinEmitting = this.spinFx.emission;
-	}
-	private void FixedUpdate()
-	{
-		this.NewSuspension();
-	}
-	private void Update()
-	{
-		this.DebugTraction();
-		if (this.rearWheel)
-		{
-			return;
-		}
-		this.wheelAngleVelocity = Mathf.Lerp(this.wheelAngleVelocity, this.steeringAngle, this.steerTime * Time.deltaTime);
-		base.transform.localRotation = Quaternion.Euler(Vector3.up * this.wheelAngleVelocity);
-	}
-	private void DebugTraction()
-	{
-	}
-	public bool terrain { get; set; }
-	private void NewSuspension()
-	{
-		this.minLength = this.restLength - this.springTravel;
-		this.maxLength = this.restLength + this.springTravel;
-		float suspensionLength = this.car.suspensionLength;
-		RaycastHit raycastHit;
-		if (Physics.Raycast(base.transform.position, -base.transform.up, out raycastHit, this.maxLength + suspensionLength))
-		{
-			this.lastLength = this.springLength;
-			this.springLength = raycastHit.distance - suspensionLength;
-			this.springLength = Mathf.Clamp(this.springLength, this.minLength, this.maxLength);
-			this.springVelocity = (this.lastLength - this.springLength) / Time.fixedDeltaTime;
-			this.springForce = this.springStiffness * (this.restLength - this.springLength);
-			this.damperForce = this.damperStiffness * this.springVelocity;
-			Vector3 force = (this.springForce + this.damperForce) * base.transform.up;
-			this.bodyRb.AddForceAtPosition(force, raycastHit.point);
-			this.terrain = raycastHit.collider.gameObject.CompareTag("Terrain");
-			this.hitPos = raycastHit.point;
-			this.hitNormal = raycastHit.normal;
-			this.hitHeight = raycastHit.distance;
-			this.grounded = true;
-			return;
-		}
-		this.grounded = false;
-		this.hitHeight = this.car.suspensionLength + this.car.restHeight;
-	}
-	private void LateUpdate()
-	{
-		if (!this.showFx)
-		{
-			return;
-		}
-		if (this.traction > 0.05f && this.hitPos != Vector3.zero && this.grounded)
-		{
-			this.smokeEmitting.enabled = true;
-			if (Skidmarks.Instance)
-			{
-				this.lastSkid = Skidmarks.Instance.AddSkidMark(this.hitPos + this.bodyRb.linearVelocity * Time.fixedDeltaTime, this.hitNormal, this.traction * 0.9f, this.lastSkid);
-			}
-		}
-		else
-		{
-			this.smokeEmitting.enabled = false;
-			this.lastSkid = -1;
-		}
-		if (this.skidSfx)
-		{
-			float num = 1f;
-			if (this.bodyRb.linearVelocity.magnitude < 2f)
-			{
-				num = 0f;
-			}
-			this.skidSfx.volume = this.traction * num;
-			this.skidSfx.pitch = 0.3f + 0.4f * Mathf.Clamp(this.traction * 0.5f, 0f, 1f);
-		}
-		if (!this.rearWheel)
-		{
-			return;
-		}
-		if (this.traction > 0.15f && this.grounded)
-		{
-			this.spinEmitting.enabled = true;
-			this.spinEmitting.rateOverTime = Mathf.Clamp(this.traction * 60f, 20f, 400f);
-			return;
-		}
-		this.spinEmitting.enabled = false;
-	}
-	private Car car;
-	private Rigidbody bodyRb;
-	public Transform wheelObject;
-	public bool rearWheel;
-	private int lastSkid;
-	[HideInInspector]
-	public bool skidding;
-	[HideInInspector]
-	public float grip;
-	public bool showFx = true;
-	public AudioSource skidSfx;
-	public ParticleSystem smokeFx;
-	public ParticleSystem spinFx;
-	private ParticleSystem.EmissionModule smokeEmitting;
-	private ParticleSystem.EmissionModule spinEmitting;
-	private float wheelAngleVelocity;
-	public float steeringAngle;
-	public float traction;
-	private float steerTime = 15f;
-	public bool spinning;
-	public LayerMask whatIsGround;
-	private MeshRenderer mesh;
-	public Vector3 hitPos;
-	public Vector3 hitNormal;
-	public float hitHeight;
-	public bool grounded;
-	public float lastCompression;
-	private float raycastOffset;
-	private float maxEmission;
-	public float restLength;
-	public float springTravel;
-	public float springStiffness;
-	public float damperStiffness;
-	private float minLength;
-	private float maxLength;
-	private float lastLength;
-	private float springLength;
-	private float springVelocity;
-	private float springForce;
-	private float damperForce;
+﻿using UnityEngine;
+
+public class Suspension : MonoBehaviour {
+    public Transform wheelObject;
+    public bool rearWheel;
+
+    [HideInInspector] public bool skidding;
+
+    [HideInInspector] public float grip;
+
+    public bool showFx = true;
+    public AudioSource skidSfx;
+    public ParticleSystem smokeFx;
+    public ParticleSystem spinFx;
+    public float steeringAngle;
+    public float traction;
+    public bool spinning;
+    public LayerMask whatIsGround;
+    public Vector3 hitPos;
+    public Vector3 hitNormal;
+    public float hitHeight;
+    public bool grounded;
+    public float lastCompression;
+    public float restLength;
+    public float springTravel;
+    public float springStiffness;
+    public float damperStiffness;
+    readonly float steerTime = 15f;
+    Rigidbody bodyRb;
+
+    Car car;
+    float damperForce;
+    float lastLength;
+    int lastSkid;
+    float maxEmission;
+    float maxLength;
+    MeshRenderer mesh;
+    float minLength;
+    float raycastOffset;
+    ParticleSystem.EmissionModule smokeEmitting;
+    ParticleSystem.EmissionModule spinEmitting;
+    float springForce;
+    float springLength;
+    float springVelocity;
+    float wheelAngleVelocity;
+    public bool terrain { get; set; }
+
+    void Start() {
+        car = transform.parent.GetComponent<Car>();
+        bodyRb = car.GetComponent<Rigidbody>();
+        raycastOffset = car.suspensionLength * 0.5f;
+        smokeEmitting = smokeFx.emission;
+        spinEmitting = spinFx.emission;
+    }
+
+    void Update() {
+        DebugTraction();
+        if (rearWheel) {
+            return;
+        }
+
+        wheelAngleVelocity = Mathf.Lerp(wheelAngleVelocity, steeringAngle, steerTime * Time.deltaTime);
+        transform.localRotation = Quaternion.Euler(Vector3.up * wheelAngleVelocity);
+    }
+
+    void FixedUpdate() {
+        NewSuspension();
+    }
+
+    void LateUpdate() {
+        if (!showFx) {
+            return;
+        }
+
+        if (traction > 0.05f && hitPos != Vector3.zero && grounded) {
+            smokeEmitting.enabled = true;
+            if (Skidmarks.Instance) {
+                lastSkid = Skidmarks.Instance.AddSkidMark(hitPos + bodyRb.linearVelocity * Time.fixedDeltaTime,
+                    hitNormal, traction * 0.9f, lastSkid);
+            }
+        }
+        else {
+            smokeEmitting.enabled = false;
+            lastSkid = -1;
+        }
+
+        if (skidSfx) {
+            var num = 1f;
+            if (bodyRb.linearVelocity.magnitude < 2f) {
+                num = 0f;
+            }
+
+            skidSfx.volume = traction * num;
+            skidSfx.pitch = 0.3f + 0.4f * Mathf.Clamp(traction * 0.5f, 0f, 1f);
+        }
+
+        if (!rearWheel) {
+            return;
+        }
+
+        if (traction > 0.15f && grounded) {
+            spinEmitting.enabled = true;
+            spinEmitting.rateOverTime = Mathf.Clamp(traction * 60f, 20f, 400f);
+            return;
+        }
+
+        spinEmitting.enabled = false;
+    }
+
+    void DebugTraction() {
+    }
+
+    void NewSuspension() {
+        minLength = restLength - springTravel;
+        maxLength = restLength + springTravel;
+        var suspensionLength = car.suspensionLength;
+        RaycastHit raycastHit;
+        if (Physics.Raycast(transform.position, -transform.up, out raycastHit, maxLength + suspensionLength)) {
+            lastLength = springLength;
+            springLength = raycastHit.distance - suspensionLength;
+            springLength = Mathf.Clamp(springLength, minLength, maxLength);
+            springVelocity = (lastLength - springLength) / Time.fixedDeltaTime;
+            springForce = springStiffness * (restLength - springLength);
+            damperForce = damperStiffness * springVelocity;
+            var force = (springForce + damperForce) * transform.up;
+            bodyRb.AddForceAtPosition(force, raycastHit.point);
+            terrain = raycastHit.collider.gameObject.CompareTag("Terrain");
+            hitPos = raycastHit.point;
+            hitNormal = raycastHit.normal;
+            hitHeight = raycastHit.distance;
+            grounded = true;
+            return;
+        }
+
+        grounded = false;
+        hitHeight = car.suspensionLength + car.restHeight;
+    }
 }

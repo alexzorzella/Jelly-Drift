@@ -1,13 +1,12 @@
-﻿using System;
-using UnityEngine;
-public class CinematicCamera : MonoBehaviour
-{
-	private void Update()
-	{
-		base.transform.RotateAround(this.target.position, Vector3.up, this.rotationSpeed * Time.deltaTime);
-		base.transform.LookAt(this.target.position + this.offset);
-	}
-	public float rotationSpeed;
-	public Transform target;
-	public Vector3 offset;
+﻿using UnityEngine;
+
+public class CinematicCamera : MonoBehaviour {
+    public float rotationSpeed;
+    public Transform target;
+    public Vector3 offset;
+
+    void Update() {
+        transform.RotateAround(target.position, Vector3.up, rotationSpeed * Time.deltaTime);
+        transform.LookAt(target.position + offset);
+    }
 }
