@@ -227,7 +227,7 @@ public class CarData {
     public const float yawGripMultiplier = 0.15f;
     public const float yawGripThreshold = 0.6f;
     
-    public string GetName() { return name; }
+    public string GetCarName() { return name; }
     
     public float GetMass() { return mass; }
     public float GetLinearDamping() { return linearDamping; }

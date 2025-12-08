@@ -46,7 +46,7 @@ public class Suspension : MonoBehaviour {
     public bool terrain { get; set; }
 
     void Start() {
-        car = transform.parent.GetComponent<Car>();
+        car = transform.root.GetComponent<Car>();
         bodyRb = car.GetComponent<Rigidbody>();
         raycastOffset = car.GetCarData().GetSuspensionLength() * 0.5f;
         smokeEmitting = smokeFx.emission;

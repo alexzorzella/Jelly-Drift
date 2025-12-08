@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class Car : MonoBehaviour {
-    [Header("Misc")] public Transform centerOfMass;
+    Transform centerOfMass;
     
     public Suspension[] wheelPositions;
     public GameObject wheel;
@@ -42,11 +42,13 @@ public class Car : MonoBehaviour {
     public void Initialize(CarData carData) {
         this.carData = carData;
 
-        gameObject.name = carData.GetName();
+        gameObject.name = carData.GetCarName();
 
         GameObject carModel = Instantiate(carData.GetModel(), Vector3.zero, Quaternion.identity, transform);
         
         // Materials are set here
+
+        centerOfMass = carModel.transform.Find("CenterOfMass");
         
         rb = GetComponent<Rigidbody>();
 
