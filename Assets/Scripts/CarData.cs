@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 public class CarData {
     readonly string name;
     
@@ -29,6 +32,10 @@ public class CarData {
     readonly string accelerateSoundName;
     readonly string decelerateSoundName;
     
+    // Materials
+
+    readonly List<Material> materials = new();
+    
     CarData(
         string name,
         float mass,
@@ -45,7 +52,8 @@ public class CarData {
         float driftMultiplier,
         float driftThreshold,
         string accelerateSoundName,
-        string decelerateSoundName) {
+        string decelerateSoundName,
+        List<Material> materials) {
         this.name = name;
         
         this.mass = mass;
@@ -67,6 +75,8 @@ public class CarData {
         
         this.accelerateSoundName = accelerateSoundName;
         this.decelerateSoundName = decelerateSoundName;
+        
+        this.materials = materials;
     }
 
     public class Builder {
@@ -100,6 +110,10 @@ public class CarData {
         string accelerateSoundName;
         string decelerateSoundName;
         
+        // Materials
+        
+        List<Material> materials = new();
+        
         public Builder(string name) {
             this.name = name;
         }
@@ -111,6 +125,7 @@ public class CarData {
             this.mass = mass;
             this.linearDamping = linearDamping;
             this.angularDamping = angularDamping;
+            
             return this;
         }
         
@@ -157,6 +172,14 @@ public class CarData {
 
             return this;
         }
+
+        public Builder WithMaterials(params string[] materialNames) {
+            foreach (var materialName in materialNames) {
+                materials.Add(Resources.Load<Material>(materialName));
+            }
+            
+            return this;
+        }
         
         public CarData Build() {
             return new CarData(
@@ -174,7 +197,8 @@ public class CarData {
                 driftMultiplier, 
                 driftThreshold,
                 accelerateSoundName,
-                decelerateSoundName);
+                decelerateSoundName,
+                materials);
         }
     }
     
