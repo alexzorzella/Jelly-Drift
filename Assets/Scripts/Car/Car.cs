@@ -6,7 +6,7 @@ using UnityEngine;
 public class Car : MonoBehaviour {
     Transform centerOfMass;
     
-    readonly List<Suspension> wheelPositions;
+    readonly List<Suspension> wheelPositions = new();
     public TextMeshProUGUI text;
 
     bool autoValues;

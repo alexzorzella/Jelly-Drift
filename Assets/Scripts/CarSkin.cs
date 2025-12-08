@@ -12,7 +12,7 @@ public class CarSkin : MonoBehaviour {
     }
 
     public void SetSkin(int n) {
-        if (skinsToChange.Length == 0 || true) {
+        if (skinsToChange.Length == 0) {
             return;
         }
 
