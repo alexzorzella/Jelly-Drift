@@ -18,9 +18,11 @@ public class Car : MonoBehaviour {
     
     Collider c;
     Vector3 CG;
+    
     float cgHeight;
     float cgToFrontAxle;
     float cgToRearAxle;
+    
     float dir;
     bool grounded;
     Vector3 lastVelocity;
@@ -37,7 +39,15 @@ public class Car : MonoBehaviour {
     public float steerAngle { get; set; }
     public Vector3 acceleration { get; private set; }
 
-    void Awake() {
+    void Initialize(CarData carData) {
+        this.carData = carData;
+
+        gameObject.name = carData.GetName();
+
+        Instantiate(carData.GetModel(), Vector3.zero, Quaternion.identity, transform);
+        
+        // Materials are set here
+        
         rb = GetComponent<Rigidbody>();
 
         rb.mass = carData.GetMass();
@@ -72,10 +82,15 @@ public class Car : MonoBehaviour {
                 wheelPositions[2].transform.position +
                 (wheelPositions[3].transform.position - wheelPositions[2].transform.position) * 0.5f, CG);
         wheelRadius = carData.GetSuspensionLength() / 2f;
+        
         InitWheels();
     }
 
     void Update() {
+        if (carData == null) {
+            return;
+        }
+        
         MoveWheels();
         Audio();
         CheckGrounded();
@@ -83,6 +98,10 @@ public class Car : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        if (carData == null) {
+            return;
+        }
+        
         Movement();
     }
 
