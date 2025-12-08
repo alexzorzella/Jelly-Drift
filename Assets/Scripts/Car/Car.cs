@@ -60,7 +60,7 @@ public class Car : MonoBehaviour {
         Suspension frontLeft = carModel.transform.Find("FrontLeft").GetComponent<Suspension>();
         Suspension frontRight = carModel.transform.Find("FrontRight").GetComponent<Suspension>();
         Suspension rearLeft = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
-        Suspension rearRight = carModel.transform.Find("RearLeft").GetComponent<Suspension>();
+        Suspension rearRight = carModel.transform.Find("RearRight").GetComponent<Suspension>();
 
         wheelPositions.Add(frontLeft);
         wheelPositions.Add(frontRight);
