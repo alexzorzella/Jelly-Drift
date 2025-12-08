@@ -20,6 +20,9 @@ public class GameController : MonoBehaviour {
         Invoke("StartRace", startTime);
         currentCar = Instantiate(PrefabManager.Instance.cars[GameState.Instance.car], startPos.position,
             startPos.rotation);
+
+        currentCar.GetComponent<Car>().Initialize(CarCatalogue.GetSelectedCarData());
+        
         currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
     }
 

@@ -1,6 +1,12 @@
 using System.Collections.Generic;
 
 public static class CarCatalogue {
+    static int selectedCar = 0;
+    
+    public static CarData GetSelectedCarData() {
+        return cars[selectedCar];
+    }
+    
     public static readonly List<CarData> cars = new() {
         new CarData.Builder("VF120", "180sx").
             WithMaterials("Gray", "Yellow", "Purple", "Blue", "Shadow").Build(),

@@ -39,7 +39,7 @@ public class Car : MonoBehaviour {
     public float steerAngle { get; set; }
     public Vector3 acceleration { get; private set; }
 
-    void Initialize(CarData carData) {
+    public void Initialize(CarData carData) {
         this.carData = carData;
 
         gameObject.name = carData.GetName();
@@ -53,17 +53,24 @@ public class Car : MonoBehaviour {
         rb.mass = carData.GetMass();
         rb.linearDamping = carData.GetLinearDamping();
         rb.angularDamping = carData.GetAngularDamping();
+
+        Suspension frontLeft = null;
+        Suspension frontRight = null;
+        Suspension rearLeft = null;
+        Suspension rearRight = null;
+        
+        gameObject.AddComponent<AntiRoll>().Initialize(
+            carData.GetAntiRoll(), 
+            frontLeft, 
+            frontRight, 
+            rearLeft, 
+            rearRight);
         
         // if (autoValues) {
         //     suspensionLength = 0.3f;
         //     suspensionForce = 10f * rb.mass;
         //     suspensionDamping = 4f * rb.mass;
         // }
-
-        var componentsInChildren = gameObject.GetComponentsInChildren<AntiRoll>();
-        for (var i = 0; i < componentsInChildren.Length; i++) {
-            componentsInChildren[i].antiRoll = carData.GetAntiRoll();
-        }
 
         if (centerOfMass) {
             rb.centerOfMass = centerOfMass.localPosition;

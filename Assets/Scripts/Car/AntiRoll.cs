@@ -1,43 +1,60 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class AntiRoll : MonoBehaviour {
-    public Suspension right;
-    public Suspension left;
-    public float antiRoll = 5000f;
+    float antiRoll = 5000f;
     Rigidbody bodyRb;
+    
+    List<Tuple<Suspension, Suspension>> suspensionPairs;
 
-    void Awake() {
+    public void Initialize(float antiRoll, params Suspension[] suspensions) {
         bodyRb = GetComponent<Rigidbody>();
-    }
 
+        this.antiRoll = antiRoll;
+        
+        for (int i = 0; i < suspensions.Length; i) {
+            if (i > suspensions.Length - 1) {
+                break;
+            }
+            
+            suspensionPairs.Add(new Tuple<Suspension, Suspension>(suspensions[i], suspensions[i + 1]));
+        }
+    }
+    
     void FixedUpdate() {
+        if (bodyRb == null) {
+            return;
+        }
+        
         StabilizerBars();
     }
 
     void StabilizerBars() {
-        float num;
-        if (right.grounded) {
-            num = right.lastCompression;
-        }
-        else {
-            num = 1f;
-        }
-
-        float num2;
-        if (left.grounded) {
-            num2 = left.lastCompression;
-        }
-        else {
-            num2 = 1f;
-        }
-
-        var num3 = (num2 - num) * antiRoll;
-        if (right.grounded) {
-            bodyRb.AddForceAtPosition(right.transform.up * -num3, right.transform.position);
-        }
-
-        if (left.grounded) {
-            bodyRb.AddForceAtPosition(left.transform.up * num3, left.transform.position);
+        foreach (var suspensionPair in suspensionPairs) {
+            Suspension left = suspensionPair.Item1;
+            Suspension right = suspensionPair.Item2;
+            
+            float lastRightCompression = 1F;
+        
+            if (right.grounded) {
+                lastRightCompression = right.lastCompression;
+            }
+        
+            float lastLeftCompression = 1F;
+        
+            if (left.grounded) {
+                lastLeftCompression = left.lastCompression;
+            }
+        
+            var compressionDiff = (lastLeftCompression - lastRightCompression) * antiRoll;
+            if (right.grounded) {
+                bodyRb.AddForceAtPosition(right.transform.up * -compressionDiff, right.transform.position);
+            }
+        
+            if (left.grounded) {
+                bodyRb.AddForceAtPosition(left.transform.up * compressionDiff, left.transform.position);
+            }
         }
     }
 }
