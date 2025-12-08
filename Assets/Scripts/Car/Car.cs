@@ -66,7 +66,7 @@ public class Car : MonoBehaviour {
         wheelPositions.Add(frontRight);
         wheelPositions.Add(rearLeft);
         wheelPositions.Add(rearRight);
-
+        
         foreach (var suspension in wheelPositions) {
             suspension.Initialize(this);
         }
@@ -101,8 +101,6 @@ public class Car : MonoBehaviour {
                 wheelPositions[2].transform.position +
                 (wheelPositions[3].transform.position - wheelPositions[2].transform.position) * 0.5f, CG);
         wheelRadius = carData.GetSuspensionLength() / 2f;
-        
-        InitWheels();
     }
 
     void Update() {
@@ -254,16 +252,6 @@ public class Car : MonoBehaviour {
 
     Vector3 XZVector(Vector3 v) {
         return new Vector3(v.x, 0f, v.z);
-    }
-
-    void InitWheels() {
-        foreach (var suspension in wheelPositions) {
-            suspension.wheelObject = ResourceLoader.InstantiateObject("Wheel").transform;
-            suspension.wheelObject.parent = suspension.transform;
-            suspension.wheelObject.transform.localPosition = Vector3.zero;
-            suspension.wheelObject.transform.localRotation = Quaternion.identity;
-            suspension.wheelObject.localScale = Vector3.one * carData.GetSuspensionLength() * 2f;
-        }
     }
 
     void MoveWheels() {

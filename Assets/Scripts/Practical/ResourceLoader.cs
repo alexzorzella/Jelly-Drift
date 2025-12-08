@@ -43,6 +43,7 @@ public class ResourceLoader : MonoBehaviour {
 		GameObject loadedObject = LoadObject(objectName);
 
 		if (loadedObject == null) {
+			Debug.LogError($"Couldn't find object in Resources named '{objectName}'.");
 			return null;
 		}
 

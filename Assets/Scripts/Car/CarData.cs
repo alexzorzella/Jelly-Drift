@@ -128,7 +128,7 @@ public class CarData {
             GameObject loadedModel = Resources.Load<GameObject>(modelName);
 
             if (loadedModel == null) {
-                Debug.LogError($"Couldn't find model named {modelName} in Resources.");
+                Debug.LogError($"Couldn't find model in Resources named {modelName}.");
             } else {
                 model = loadedModel;
             }
