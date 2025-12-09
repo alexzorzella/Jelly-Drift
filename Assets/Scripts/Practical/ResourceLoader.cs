@@ -46,8 +46,6 @@ public class ResourceLoader : MonoBehaviour {
 			Debug.LogError($"Couldn't find object in Resources named '{objectName}'.");
 			return null;
 		}
-
-		Debug.Log($"Instantiating {loadedObject.name} at {position} and {rotation.eulerAngles} degrees");
 		
 		return Instantiate(loadedObject, position, rotation);
 	}
