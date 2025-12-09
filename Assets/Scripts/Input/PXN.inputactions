@@ -1,0 +1,226 @@
+{
+    "version": 1,
+    "name": "PXN",
+    "maps": [
+        {
+            "name": "Car",
+            "id": "58648cf4-c8a5-43d5-8223-d2e889d05b9e",
+            "actions": [
+                {
+                    "name": "Throttle",
+                    "type": "Value",
+                    "id": "ed48766f-3b25-47a4-91ab-4f8be1254da4",
+                    "expectedControlType": "",
+                    "processors": "Invert",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Wheel",
+                    "type": "Value",
+                    "id": "caf0c04f-f532-49ff-a46b-a97a9a4447fe",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Brake",
+                    "type": "Value",
+                    "id": "925287ea-2a45-4775-ac01-64335ae36ad1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Reverse",
+                    "type": "Button",
+                    "id": "a1c3eec4-8d8b-41b1-8f40-1812bc345b8d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "First",
+                    "type": "Button",
+                    "id": "89c0b267-2b62-4141-ad4b-10a38bb54dac",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Second",
+                    "type": "Button",
+                    "id": "126bc2bd-14ab-4339-9df0-1f77a83b90e8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Third",
+                    "type": "Button",
+                    "id": "8e9b84ff-cc81-4e99-9df9-166c14a2116b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fourth",
+                    "type": "Button",
+                    "id": "3eea519a-f946-4297-955f-db608bc3b81c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fifth",
+                    "type": "Button",
+                    "id": "eb9cce1a-96fe-4fdc-83e0-e79ffea82e37",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "ee6713bd-509a-42aa-ad3b-b4363cbfa825",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e72e1e9b-caba-4acc-a990-137a32b42a78",
+                    "path": "<HID::PXN PXN-V10 Wheel>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Throttle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8aa30e0-c3c6-41a7-baef-acbf2b1f0e27",
+                    "path": "<HID::PXN PXN-V10 Wheel>/stick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Wheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d72256dc-3ff4-4630-ad10-aeea52a692e0",
+                    "path": "<HID::PXN PXN-V10 Wheel>/stick/right",
+                    "interactions": "",
+                    "processors": "Invert",
+                    "groups": "",
+                    "action": "Wheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7025997b-269c-4345-93ba-418a7c7105ab",
+                    "path": "<HID::PXN PXN-V10 Wheel>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e51c124d-3a8f-4915-9222-f9d4a5f30f0e",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button22",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce4669d8-647b-4ebd-a0e8-cd1a66d43181",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "First",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1716b639-339f-4743-b2a1-0635cf255766",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button18",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Second",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f575978-9c31-4ac2-9776-fc81e107e3f3",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button19",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Third",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82df4c38-510b-4a34-9053-f93cfa9161cf",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button20",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fourth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89a1a60a-1ba1-4040-938e-9c53e6c5814a",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button21",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fifth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a56aea20-a153-469c-9ec6-cf449a67025d",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button11",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

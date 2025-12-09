@@ -82,4 +82,7 @@ public static class CarCatalogue {
             WithCarSpecs(0.37F, 1, 6000, 0).
             WithMaterials("Scuffed", "Blue", "Shadow", "Sakura", "The Original").Build()
     };
+    
+    public static readonly float[] gearEngineForceMultipliers = { 0.6F, 0.75F, 0.9F, 1, 1.15F, -1F };
+    public static readonly float[] gearEngineDriftThresholdMultipliers = { 1.2F, 1.1F, 1F, 0.9F, 0.85F, 1F };
 }
