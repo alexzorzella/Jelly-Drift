@@ -45,7 +45,8 @@ public class Car : MonoBehaviour {
 
         gameObject.name = carData.GetCarName();
 
-        GameObject carModel = Instantiate(carData.GetModel(), Vector3.zero, Quaternion.identity, transform);
+        GameObject carModel = Instantiate(carData.GetModel(), transform);
+        carModel.transform.localPosition = Vector3.zero;
         
         // Materials are set here
 

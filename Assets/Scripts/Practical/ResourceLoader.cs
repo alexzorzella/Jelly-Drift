@@ -47,6 +47,8 @@ public class ResourceLoader : MonoBehaviour {
 			return null;
 		}
 
+		Debug.Log($"Instantiating {loadedObject.name} at {position} and {rotation.eulerAngles} degrees");
+		
 		return Instantiate(loadedObject, position, rotation);
 	}
 }
