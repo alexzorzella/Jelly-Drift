@@ -5,7 +5,9 @@ public class CarAi : MonoBehaviour {
 
     public Transform[] nodes;
     public int respawnHeight;
-    public int[] difficultyConfig;
+    
+    static readonly float[] difficultyConfig = { 0.8F, 1.13F, 1.53F };
+    
     public float xOffset;
     public float speedSteerMultiplier = 1f;
     public float steerMultiplier = 1f;
@@ -168,8 +170,8 @@ public class CarAi : MonoBehaviour {
             num3 *= slowdownM;
         }
 
-        var num4 = difficultyConfig[difficulty] - Mathf.Clamp(num3 * 1000f * speedAdjustMultiplier, -8000f, 4000f);
-        num4 = Mathf.Clamp(num4, 1000f, 8000f);
+        // var num4 = difficultyConfig[difficulty] - Mathf.Clamp(num3 * 1000f * speedAdjustMultiplier, -8000f, 4000f);
+        // num4 = Mathf.Clamp(num4, 1000f, 8000f);
         // car.GetCarData().GetEngineForce() = num4; TODO: Fix
     }
 

@@ -14,12 +14,13 @@ public class Race : MonoBehaviour {
         gameController = gameObject.GetComponent<GameController>();
         var startPos = gameController.startPos;
         
-        enemyCarObject = Instantiate(enemyCarPrefab, startPos.position + startPos.forward * 10f, startPos.rotation);
+        enemyCarObject = ResourceLoader.InstantiateObject("Car", startPos.position + startPos.forward * 10f, startPos.rotation);
 
         Car enemyCar = enemyCarObject.GetComponent<Car>();
-        enemyCar.Initialize(CarCatalogue.GetSelectedCarData());
         
-        CarAi carAi = enemyCarObject.GetComponent<CarAi>();
+        enemyCar.Initialize(CarCatalogue.GetSelectedOpponentCarData(), true);
+        
+        CarAi carAi = enemyCarObject.AddComponent<CarAi>();
         carAi.Initialize(enemyCar);
         carAi.SetPath(gameController.path);
     }

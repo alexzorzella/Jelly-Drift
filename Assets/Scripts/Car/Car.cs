@@ -31,15 +31,17 @@ public class Car : MonoBehaviour {
     public float steerAngle { get; set; }
     public Vector3 acceleration { get; private set; }
 
-    public void Initialize(CarData carData) {
+    public void Initialize(CarData carData, bool isCpu = false) {
         this.carData = carData;
 
         gameObject.name = carData.GetCarName();
 
         GameObject carModel = Instantiate(carData.GetModel(), transform);
         carModel.transform.localPosition = Vector3.zero;
-        
-        gameObject.AddComponent<PlayerInput>().Initialize(this);
+
+        if (!isCpu) {
+            gameObject.AddComponent<PlayerInput>().Initialize(this);
+        }
         
         // Materials are set here
 
