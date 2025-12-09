@@ -43,19 +43,19 @@ public class CarDisplay : MonoBehaviour {
         currentCar = ResourceLoader.InstantiateObject("Car", transform.position, transform.rotation);
         currentCar.GetComponent<Car>().Initialize(CarCatalogue.GetSelectedCarData());
         
-        skin = currentCar.GetComponent<CarSkin>();
+        // skin = currentCar.GetComponent<CarSkin>();
         Destroy(currentCar.GetComponent<PlayerInput>());
         Destroy(currentCar.GetComponent<CheckpointUser>());
         
-        if (!SaveManager.Instance.state.carsUnlocked[n]) {
-            foreach (var renderer in currentCar.GetComponentsInChildren<Renderer>()) {
-                var array = new Material[renderer.materials.Length];
-                for (var j = 0; j < array.Length; j++) {
-                    array[j] = black;
-                }
-
-                renderer.materials = array;
-            }
-        }
+        // if (!SaveManager.Instance.state.carsUnlocked[n]) {
+        //     foreach (var renderer in currentCar.GetComponentsInChildren<Renderer>()) {
+        //         var array = new Material[renderer.materials.Length];
+        //         for (var j = 0; j < array.Length; j++) {
+        //             array[j] = black;
+        //         }
+        //
+        //         renderer.materials = array;
+        //     }
+        // }
     }
 }

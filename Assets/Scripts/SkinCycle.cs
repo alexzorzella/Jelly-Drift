@@ -13,8 +13,8 @@ public class SkinCycle : ItemCycle {
     }
 
     public void SetCarToCycle(int n) {
-        selected = SaveManager.Instance.state.lastSkin[n];
-        max = SaveManager.Instance.state.skins[n].Length;
+        // selected = SaveManager.Instance.state.lastSkin[n];
+        // max = SaveManager.Instance.state.skins[n].Length;
     }
 
     public override void Cycle(int n) {
@@ -23,20 +23,21 @@ public class SkinCycle : ItemCycle {
     }
 
     public void UpdateColor() {
-        if (!SaveManager.Instance.state.carsUnlocked[carCycle.selected]) {
-            return;
-        }
+        // if (!SaveManager.Instance.state.carsUnlocked[carCycle.selected]) {
+        //     return;
+        // }
 
         CarDisplay.Instance.SetSkin(selected);
-        var num = 0;
-        if (SaveManager.Instance.state.skins[carCycle.selected][selected]) {
-            num = selected;
-            SaveManager.Instance.state.lastSkin[carCycle.selected] = num;
-            SaveManager.Instance.Save();
-        }
+        
+        // var num = 0;
+        // if (SaveManager.Instance.state.skins[carCycle.selected][selected]) {
+        //     num = selected;
+        //     SaveManager.Instance.state.lastSkin[carCycle.selected] = num;
+        //     SaveManager.Instance.Save();
+        // }
 
-        GameState.Instance.skin = num;
-        UpdateText(num == selected);
+        // GameState.Instance.skin = num;
+        // UpdateText(num == selected);
     }
 
     public void UpdateText(bool unlocked) {
