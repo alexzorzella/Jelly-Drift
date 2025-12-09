@@ -9,7 +9,13 @@ public class Car : MonoBehaviour {
     public void SetGear(int gear) {
         this.gear = gear;
     }
+    
+    float overrideEngineForce = 0;
 
+    public void SetOverrideEngineForce(float newOverrideEngineForce) {
+        overrideEngineForce = newOverrideEngineForce;
+    }
+    
     Transform centerOfMass;
     
     readonly List<Suspension> wheelPositions = new();
@@ -19,6 +25,8 @@ public class Car : MonoBehaviour {
     public CarData GetCarData() {
         return carData;
     }
+    
+    bool isCpu;
     
     Collider carCollider;
     Vector3 centerOfGravity;
@@ -39,6 +47,7 @@ public class Car : MonoBehaviour {
 
     public void Initialize(CarData carData, bool isCpu = false) {
         this.carData = carData;
+        this.isCpu = isCpu;
 
         gameObject.name = carData.GetCarName();
 
@@ -185,7 +194,7 @@ public class Car : MonoBehaviour {
                 Vector3 forceAtPosition = 
                     suspension.transform.forward * 
                     throttle * 
-                    carData.GetEngineForce() *
+                    GetEngineForce() *
                     CarCatalogue.gearEngineForceMultipliers[gear] *
                     d2 * 
                     d;
@@ -210,6 +219,11 @@ public class Car : MonoBehaviour {
 
         StandStill();
         lastVelocity = inverseTransformDir;
+    }
+
+    float GetEngineForce() {
+        float result = isCpu ? overrideEngineForce : carData.GetEngineForce();
+        return result;
     }
 
     void StandStill() {
