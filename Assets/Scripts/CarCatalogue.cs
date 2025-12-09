@@ -2,6 +2,10 @@ using System.Collections.Generic;
 
 public static class CarCatalogue {
     static int selectedCar = 0;
+
+    public static void CycleSelectedCar(int amount) {
+        IncrementWithOverflow.Run(selectedCar, cars.Count, amount, out selectedCar);
+    }
     
     public static CarData GetSelectedCarData() {
         return cars[selectedCar];
