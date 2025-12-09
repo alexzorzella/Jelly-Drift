@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CarAI : MonoBehaviour {
+public class CarAi : MonoBehaviour {
     public Transform path;
 
     public Transform[] nodes;
@@ -28,18 +28,22 @@ public class CarAI : MonoBehaviour {
     float roadWidth = 0.4f;
     int turnDir;
 
-    void Start() {
+    public void Initialize(Car car) {
+        this.car = car;
         difficulty = (int)GameState.Instance.difficulty;
-        print(string.Concat("d: ", GameState.Instance.difficulty, ", a: ", difficulty));
-        // car.GetCarData().GetEngineForce() = difficultyConfig[difficulty]; // TODO: Fix
-        InvokeRepeating("AdjustSpeed", 0.5f, 0.5f);
+        
+        // print(string.Concat("d: ", GameState.Instance.difficulty, ", a: ", difficulty));
+        // car.GetCarData().GetEngineForce() = difficultyConfig[difficulty];
+        
+        InvokeRepeating(nameof(AdjustSpeed), 0.5f, 0.5f);
+        
         if (GameController.Instance.finalCheckpoint != 0) {
             GetComponent<CheckpointUser>().ForceCheckpoint(0);
         }
     }
 
     void Update() {
-        if (!GameController.Instance.playing || !path) {
+        if (!GameController.Instance.playing || !path || car == null) {
             return;
         }
 
@@ -48,6 +52,10 @@ public class CarAI : MonoBehaviour {
     }
 
     public void Recover() {
+        if (car == null) {
+            return;
+        }
+        
         car.rb.linearVelocity = Vector3.zero;
         transform.position = nodes[FindClosestNode(3, transform)].position;
         var num = currentNode % nodes.Length;

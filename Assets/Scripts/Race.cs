@@ -3,7 +3,7 @@
 public class Race : MonoBehaviour {
     public GameObject enemyCarPrefab;
     GameController gameController;
-    public GameObject enemyCar { get; set; }
+    public GameObject enemyCarObject { get; set; }
 
     void Awake() {
         if (GameState.Instance.gamemode != Gamemode.Race) {
@@ -13,12 +13,19 @@ public class Race : MonoBehaviour {
 
         gameController = gameObject.GetComponent<GameController>();
         var startPos = gameController.startPos;
-        enemyCar = Instantiate(enemyCarPrefab, startPos.position + startPos.forward * 10f, startPos.rotation);
-        enemyCar.GetComponent<CarAI>().SetPath(gameController.path);
+        
+        enemyCarObject = Instantiate(enemyCarPrefab, startPos.position + startPos.forward * 10f, startPos.rotation);
+
+        Car enemyCar = enemyCarObject.GetComponent<Car>();
+        enemyCar.Initialize(CarCatalogue.GetSelectedCarData());
+        
+        CarAi carAi = enemyCarObject.GetComponent<CarAi>();
+        carAi.Initialize(enemyCar);
+        carAi.SetPath(gameController.path);
     }
 
     void Start() {
-        enemyCar.AddComponent<CheckpointUser>().player = false;
+        enemyCarObject.AddComponent<CheckpointUser>().player = false;
         GameController.Instance.currentCar.AddComponent<CheckpointUser>();
     }
 }
