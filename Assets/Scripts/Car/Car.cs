@@ -64,6 +64,11 @@ public class Car : MonoBehaviour {
         if (!isCpu) {
             gameObject.AddComponent<PlayerInput>().Initialize(this);
         }
+        else {
+            Camera.main.gameObject.SetActive(false);
+            Destroy(transform.Find("XR Interaction Manager"));
+            Destroy(transform.Find("XR Origin (VR)"));
+        }
         
         // Materials are set here
 
