@@ -62,7 +62,7 @@ public class MapCycle : ItemCycle {
             raceDetails.UpdateStars(selected);
         }
 
-        if (SaveManager.Instance.state.mapsUnlocked[n]) {
+        // if (SaveManager.Instance.state.mapsUnlocked[n]) {
             lockUi.SetActive(false);
             mapImg.sprite = MapManager.Instance.maps[n].image;
             name.text = "| " + MapManager.Instance.maps[n].name;
@@ -84,16 +84,16 @@ public class MapCycle : ItemCycle {
             nextButton.GetComponent<ItemCycle>().activeCycle = true;
             SaveManager.Instance.state.lastMap = selected;
             SaveManager.Instance.Save();
-            return;
-        }
-
-        lockUi.SetActive(true);
-        mapImg.sprite = MapManager.Instance.maps[n].image;
-        name.text = "| <size=60%>Complete " + MapManager.Instance.maps[n - 1].name + " on easy difficulty";
-        time.text = "";
-        ghostText.text = "| ";
-        nextButton.enabled = false;
-        nextButton.GetComponent<ItemCycle>().activeCycle = false;
+            // return;
+        // }
+        //
+        // lockUi.SetActive(true);
+        // mapImg.sprite = MapManager.Instance.maps[n].image;
+        // name.text = "| <size=60%>Complete " + MapManager.Instance.maps[n - 1].name + " on easy difficulty";
+        // time.text = "";
+        // ghostText.text = "| ";
+        // nextButton.enabled = false;
+        // nextButton.GetComponent<ItemCycle>().activeCycle = false;
     }
 
     void UpdateStars() {
