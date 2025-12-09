@@ -62,38 +62,27 @@ public class MapCycle : ItemCycle {
             raceDetails.UpdateStars(selected);
         }
 
-        if (SaveManager.Instance.state.mapsUnlocked[n]) {
-            lockUi.SetActive(false);
-            mapImg.sprite = MapManager.Instance.maps[n].image;
-            name.text = "| " + MapManager.Instance.maps[n].name;
-            time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
-            if (ghostCycle) {
-                ghostCycle.UpdateText();
-            }
-
-            if (difficultyCycle) {
-                difficultyCycle.UpdateTextOnly();
-            }
-
-            if (starsDetails) {
-                UpdateStars();
-            }
-
-            GameState.Instance.map = selected;
-            nextButton.enabled = true;
-            nextButton.GetComponent<ItemCycle>().activeCycle = true;
-            SaveManager.Instance.state.lastMap = selected;
-            SaveManager.Instance.Save();
-            return;
-        }
-
-        lockUi.SetActive(true);
+        lockUi.SetActive(false);
         mapImg.sprite = MapManager.Instance.maps[n].image;
-        name.text = "| <size=60%>Complete " + MapManager.Instance.maps[n - 1].name + " on easy difficulty";
-        time.text = "";
-        ghostText.text = "| ";
-        nextButton.enabled = false;
-        nextButton.GetComponent<ItemCycle>().activeCycle = false;
+        name.text = "| " + MapManager.Instance.maps[n].name;
+        time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
+        if (ghostCycle) {
+            ghostCycle.UpdateText();
+        }
+        
+        if (difficultyCycle) {
+            difficultyCycle.UpdateTextOnly();
+        }
+        
+        if (starsDetails) {
+            UpdateStars();
+        }
+        
+        GameState.Instance.map = selected;
+        nextButton.enabled = true;
+        nextButton.GetComponent<ItemCycle>().activeCycle = true;
+        SaveManager.Instance.state.lastMap = selected;
+        SaveManager.Instance.Save();
     }
 
     void UpdateStars() {

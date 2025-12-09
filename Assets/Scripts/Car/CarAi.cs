@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CarAi : MonoBehaviour {
     public Transform path;
@@ -6,7 +7,8 @@ public class CarAi : MonoBehaviour {
     public Transform[] nodes;
     public int respawnHeight;
     
-    static readonly float[] difficultyConfig = { 0.8F, 1.13F, 1.53F };
+    static readonly float[] engineForceMultipliers = { 0.8F, 1.13F, 1.53F };
+    readonly List<float> engineForcesByDifficulty = new();
     
     public float xOffset;
     public float speedSteerMultiplier = 1f;
@@ -35,7 +37,12 @@ public class CarAi : MonoBehaviour {
         difficulty = (int)GameState.Instance.difficulty;
         
         // print(string.Concat("d: ", GameState.Instance.difficulty, ", a: ", difficulty));
-        // car.GetCarData().GetEngineForce() = difficultyConfig[difficulty];
+
+        float engineForce = car.GetCarData().GetEngineForce();
+        
+        foreach (var multiplier in engineForceMultipliers) {
+            engineForcesByDifficulty.Add(engineForce * multiplier);
+        }
         
         InvokeRepeating(nameof(AdjustSpeed), 0.5f, 0.5f);
         
@@ -159,9 +166,10 @@ public class CarAi : MonoBehaviour {
     }
 
     void AdjustSpeed() {
-        var num = FindClosestNode(nodes.Length, transform) / (float)nodes.Length;
-        var num2 = FindClosestNode(nodes.Length, GameController.Instance.currentCar.transform) / (float)nodes.Length;
-        var num3 = num - num2;
+        float closestNodeToCpu = FindClosestNode(nodes.Length, transform) / (float)nodes.Length;
+        float closestNodeToPlayer = FindClosestNode(nodes.Length, GameController.Instance.currentCar.transform) / (float)nodes.Length;
+        
+        var num3 = closestNodeToCpu - closestNodeToPlayer;
         if (num3 < 0f) {
             num3 *= speedupM;
         }
@@ -170,19 +178,20 @@ public class CarAi : MonoBehaviour {
             num3 *= slowdownM;
         }
 
-        // var num4 = difficultyConfig[difficulty] - Mathf.Clamp(num3 * 1000f * speedAdjustMultiplier, -8000f, 4000f);
-        // num4 = Mathf.Clamp(num4, 1000f, 8000f);
-        // car.GetCarData().GetEngineForce() = num4; TODO: Fix
+        var finalSpeed = engineForcesByDifficulty[difficulty] - Mathf.Clamp(num3 * 1000f * speedAdjustMultiplier, -8000f, 4000f);
+        finalSpeed = Mathf.Clamp(finalSpeed, 1000f, 8000f);
+        car.SetOverrideEngineForce(finalSpeed);
     }
 
     int FindClosestNode(int maxLook, Transform target) {
-        var num = float.PositiveInfinity;
+        var currentClosestDistance = float.PositiveInfinity;
+        
         var result = 0;
         for (var i = 0; i < maxLook; i++) {
             var num2 = (currentNode + i) % nodes.Length;
             var num3 = Vector3.Distance(target.position, nodes[num2].position);
-            if (num3 < num) {
-                num = num3;
+            if (num3 < currentClosestDistance) {
+                currentClosestDistance = num3;
                 result = num2;
             }
         }

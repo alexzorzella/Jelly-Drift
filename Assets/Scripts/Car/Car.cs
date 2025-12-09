@@ -4,6 +4,18 @@ using TMPro;
 using UnityEngine;
 
 public class Car : MonoBehaviour {
+    int gear = 3;
+
+    public void SetGear(int gear) {
+        this.gear = gear;
+    }
+    
+    float overrideEngineForce = 0;
+
+    public void SetOverrideEngineForce(float newOverrideEngineForce) {
+        overrideEngineForce = newOverrideEngineForce;
+    }
+    
     Transform centerOfMass;
     
     readonly List<Suspension> wheelPositions = new();
@@ -13,6 +25,8 @@ public class Car : MonoBehaviour {
     public CarData GetCarData() {
         return carData;
     }
+    
+    bool isCpu;
     
     Collider carCollider;
     Vector3 centerOfGravity;
@@ -33,6 +47,7 @@ public class Car : MonoBehaviour {
 
     public void Initialize(CarData carData, bool isCpu = false) {
         this.carData = carData;
+        this.isCpu = isCpu;
 
         gameObject.name = carData.GetCarName();
 
@@ -143,14 +158,15 @@ public class Car : MonoBehaviour {
                     num2 -= 0.6f;
                 }
 
-                var num3 = carData.GetDriftThreshold();
+                var currentThreshold = carData.GetDriftThreshold() * CarCatalogue.gearEngineDriftThresholdMultipliers[gear];
+                
                 if (absYVel > 1f) {
-                    num3 -= 0.2f;
+                    currentThreshold -= 0.2f;
                 }
 
                 var flag = false;
-                if (Mathf.Abs(f) > num3) {
-                    var num4 = Mathf.Clamp(Mathf.Abs(f) * 2.4f - num3, 0f, 1f);
+                if (Mathf.Abs(f) > currentThreshold) {
+                    var num4 = Mathf.Clamp(Mathf.Abs(f) * 2.4f - currentThreshold, 0f, 1f);
                     num2 = Mathf.Clamp(1f - num4, 0.05f, 1f);
                     var magnitude = rb.linearVelocity.magnitude;
                     flag = true;
@@ -175,13 +191,16 @@ public class Car : MonoBehaviour {
                     d2 = carData.GetDriftMultiplier();
                 }
 
-                if (braking) {
-                    rb.AddForceAtPosition(suspension.transform.forward * CarData.brakeForce * Mathf.Sign(-speed) * d,
-                        suspension.hitPos);
-                }
+                Vector3 forceAtPosition = 
+                    suspension.transform.forward * 
+                    throttle * 
+                    GetEngineForce() *
+                    CarCatalogue.gearEngineForceMultipliers[gear] *
+                    d2 * 
+                    d;
+                
+                rb.AddForceAtPosition(forceAtPosition, suspension.hitPos);
 
-                rb.AddForceAtPosition(suspension.transform.forward * throttle * carData.GetEngineForce() * d2 * d,
-                    suspension.hitPos);
                 var a2 = a * rb.mass * d * num2;
                 rb.AddForceAtPosition(-a2, suspension.hitPos);
                 rb.AddForceAtPosition(suspension.transform.forward * a2.magnitude * 0.25f, suspension.hitPos);
@@ -200,6 +219,11 @@ public class Car : MonoBehaviour {
 
         StandStill();
         lastVelocity = inverseTransformDir;
+    }
+
+    float GetEngineForce() {
+        float result = isCpu ? overrideEngineForce : carData.GetEngineForce();
+        return result;
     }
 
     void StandStill() {
