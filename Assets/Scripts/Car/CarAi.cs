@@ -50,7 +50,7 @@ public class CarAi : MonoBehaviour {
         }
 
         NewAI();
-        CheckRecover();
+        // CheckRecover();
     }
 
     public void Recover() {
