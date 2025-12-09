@@ -1,24 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-// Token: 0x02000039 RID: 57
-public class RoadObstacle : MonoBehaviour
-{
-	// Token: 0x06000124 RID: 292 RVA: 0x00007324 File Offset: 0x00005524
-	private void OnTriggerEnter(Collider other)
-	{
-		if (!this.ready)
-		{
-			return;
-		}
-		UnityEngine.Object.Instantiate<GameObject>(this.particles, base.transform.position, this.particles.transform.rotation);
-		UnityEngine.Object.Destroy(base.gameObject);
-		this.ready = false;
-	}
+public class RoadObstacle : MonoBehaviour {
+    public GameObject particles;
+    bool ready = true;
 
-	// Token: 0x0400013C RID: 316
-	public GameObject particles;
+    void OnTriggerEnter(Collider other) {
+        if (!ready) {
+            return;
+        }
 
-	// Token: 0x0400013D RID: 317
-	private bool ready = true;
+        Instantiate(particles, transform.position, particles.transform.rotation);
+        Destroy(gameObject);
+        ready = false;
+    }
 }
