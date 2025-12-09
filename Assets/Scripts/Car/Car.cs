@@ -26,7 +26,7 @@ public class Car : MonoBehaviour {
     public Rigidbody rb { get; set; }
     public float steering { get; set; }
     public float throttle { get; set; }
-    public bool breaking { get; set; }
+    public bool braking { get; set; }
     public float speed { get; private set; }
     public float steerAngle { get; set; }
     public Vector3 acceleration { get; private set; }
@@ -44,6 +44,7 @@ public class Car : MonoBehaviour {
         // Materials are set here
 
         centerOfMass = carModel.transform.Find("CenterOfMass");
+        centerOfMass.transform.SetParent(transform);
         
         rb = GetComponent<Rigidbody>();
 
@@ -63,6 +64,7 @@ public class Car : MonoBehaviour {
         
         foreach (var suspension in wheelPositions) {
             suspension.Initialize(this);
+            suspension.gameObject.transform.SetParent(transform);
         }
         
         gameObject.AddComponent<AntiRoll>().Initialize(
@@ -112,12 +114,15 @@ public class Car : MonoBehaviour {
     }
 
     void Movement() {
-        var vector = XZVector(rb.linearVelocity);
-        var vector2 = transform.InverseTransformDirection(XZVector(rb.linearVelocity));
-        acceleration = (lastVelocity - vector2) / Time.fixedDeltaTime;
-        dir = Mathf.Sign(transform.InverseTransformDirection(vector).z);
-        speed = vector.magnitude * 3.6f * dir;
-        var num = Mathf.Abs(rb.angularVelocity.y);
+        var linearVelocity = XZVector(rb.linearVelocity);
+        var inverseTransformDir = transform.InverseTransformDirection(XZVector(rb.linearVelocity));
+        
+        acceleration = (lastVelocity - inverseTransformDir) / Time.fixedDeltaTime;
+        dir = Mathf.Sign(transform.InverseTransformDirection(linearVelocity).z);
+        speed = linearVelocity.magnitude * 3.6f * dir;
+        
+        var absYVel = Mathf.Abs(rb.angularVelocity.y);
+        
         foreach (var suspension in wheelPositions) {
             if (suspension.grounded) {
                 var vector3 = XZVector(rb.GetPointVelocity(suspension.hitPos));
@@ -125,18 +130,19 @@ public class Car : MonoBehaviour {
                 var a = Vector3.Project(vector3, suspension.transform.right);
                 var d = 1f;
                 var num2 = 1f;
+                
                 if (suspension.terrain) {
                     num2 = 0.6f;
                     d = 0.75f;
                 }
 
-                var f = Mathf.Atan2(vector2.x, vector2.z);
-                if (breaking) {
+                var f = Mathf.Atan2(inverseTransformDir.x, inverseTransformDir.z);
+                if (braking) {
                     num2 -= 0.6f;
                 }
 
                 var num3 = carData.GetDriftThreshold();
-                if (num > 1f) {
+                if (absYVel > 1f) {
                     num3 -= 0.2f;
                 }
 
@@ -150,8 +156,8 @@ public class Car : MonoBehaviour {
                         num2 += (8f - magnitude) / 8f;
                     }
 
-                    if (num < CarData.yawGripThreshold) {
-                        var num5 = (CarData.yawGripThreshold - num) / CarData.yawGripThreshold;
+                    if (absYVel < CarData.yawGripThreshold) {
+                        var num5 = (CarData.yawGripThreshold - absYVel) / CarData.yawGripThreshold;
                         num2 += num5 * CarData.yawGripMultiplier;
                     }
 
@@ -167,7 +173,7 @@ public class Car : MonoBehaviour {
                     d2 = carData.GetDriftMultiplier();
                 }
 
-                if (breaking) {
+                if (braking) {
                     rb.AddForceAtPosition(suspension.transform.forward * CarData.brakeForce * Mathf.Sign(-speed) * d,
                         suspension.hitPos);
                 }
@@ -183,15 +189,15 @@ public class Car : MonoBehaviour {
                 }
 
                 suspension.traction = num6;
-                var force = -CarData.dragForce * vector;
+                var force = -CarData.dragForce * linearVelocity;
                 rb.AddForce(force);
-                var force2 = -CarData.rollFriction * vector;
+                var force2 = -CarData.rollFriction * linearVelocity;
                 rb.AddForce(force2);
             }
         }
 
         StandStill();
-        lastVelocity = vector2;
+        lastVelocity = inverseTransformDir;
     }
 
     void StandStill() {

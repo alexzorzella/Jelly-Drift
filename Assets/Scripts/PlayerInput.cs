@@ -18,6 +18,6 @@ public class PlayerInput : MonoBehaviour {
     void GetPlayerInput() {
         car.steering = Input.GetAxisRaw("Horizontal");
         car.throttle = Input.GetAxis("Vertical");
-        car.breaking = Input.GetButton("Breaking");
+        car.braking = Input.GetButton("Breaking");
     }
 }
