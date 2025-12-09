@@ -7,9 +7,6 @@ public class Car : MonoBehaviour {
     Transform centerOfMass;
     
     readonly List<Suspension> wheelPositions = new();
-    public TextMeshProUGUI text;
-
-    bool autoValues;
 
     CarData carData;
     
@@ -17,19 +14,13 @@ public class Car : MonoBehaviour {
         return carData;
     }
     
-    Collider c;
-    Vector3 CG;
-    
-    float cgHeight;
-    float cgToFrontAxle;
-    float cgToRearAxle;
+    Collider carCollider;
+    Vector3 centerOfGravity;
     
     float dir;
     bool grounded;
     Vector3 lastVelocity;
-
-    float wheelBase;
-    float wheelRadius;
+    
     float yawRate;
     
     public Rigidbody rb { get; set; }
@@ -47,6 +38,8 @@ public class Car : MonoBehaviour {
 
         GameObject carModel = Instantiate(carData.GetModel(), transform);
         carModel.transform.localPosition = Vector3.zero;
+        
+        gameObject.AddComponent<PlayerInput>().Initialize(this);
         
         // Materials are set here
 
@@ -78,30 +71,12 @@ public class Car : MonoBehaviour {
             frontRight, 
             rearLeft, 
             rearRight);
-        
-        // if (autoValues) {
-        //     suspensionLength = 0.3f;
-        //     suspensionForce = 10f * rb.mass;
-        //     suspensionDamping = 4f * rb.mass;
-        // }
 
         if (centerOfMass) {
             rb.centerOfMass = centerOfMass.localPosition;
         }
 
-        c = GetComponentInChildren<Collider>();
-        wheelBase = Vector3.Distance(wheelPositions[0].transform.position, wheelPositions[2].transform.position);
-        CG = c.bounds.center;
-        cgHeight = c.bounds.extents.y + carData.GetSuspensionLength();
-        cgToFrontAxle =
-            Vector3.Distance(
-                wheelPositions[0].transform.position +
-                (wheelPositions[1].transform.position - wheelPositions[0].transform.position) * 0.5f, CG);
-        cgToRearAxle =
-            Vector3.Distance(
-                wheelPositions[2].transform.position +
-                (wheelPositions[3].transform.position - wheelPositions[2].transform.position) * 0.5f, CG);
-        wheelRadius = carData.GetSuspensionLength() / 2f;
+        carCollider = GetComponentInChildren<Collider>();
     }
 
     void Update() {
@@ -257,19 +232,12 @@ public class Car : MonoBehaviour {
 
     void MoveWheels() {
         foreach (var suspension in wheelPositions) {
-            var num = carData.GetSuspensionLength();
+            var suspensionLength = carData.GetSuspensionLength();
             var hitHeight = suspension.hitHeight;
-            var y = Mathf.Lerp(suspension.wheelObject.transform.localPosition.y, -hitHeight + num,
-                Time.deltaTime * 20f);
-            var num2 = 0.2f * carData.GetSuspensionLength() * 2f;
-            if (suspension.transform.localPosition.x < 0f) {
-                num2 = -num2;
-            }
-
-            num2 = 0f;
-            suspension.wheelObject.transform.localPosition = new Vector3(num2, y, 0f);
+            var y = Mathf.Lerp(suspension.wheelObject.transform.localPosition.y, -hitHeight + suspensionLength, Time.deltaTime * 20f);
+            suspension.wheelObject.transform.localPosition = new Vector3(0f, y, 0f);
             suspension.wheelObject.Rotate(Vector3.right, XZVector(rb.linearVelocity).magnitude * 1f * dir);
-            suspension.wheelObject.localScale = Vector3.one * (carData.GetSuspensionLength() * 2f);
+            suspension.wheelObject.localScale = Vector3.one * (suspensionLength * 2f);
             suspension.transform.localScale = Vector3.one / transform.localScale.x;
         }
     }

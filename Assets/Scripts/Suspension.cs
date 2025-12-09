@@ -56,8 +56,8 @@ public class Suspension : MonoBehaviour {
         wheelObject = ResourceLoader.InstantiateObject("Wheel").transform;
             
         wheelObject.SetParent(transform);
-        wheelObject.transform.localPosition = Vector3.zero;
-        wheelObject.transform.localRotation = Quaternion.identity;
+        wheelObject.localPosition = Vector3.zero;
+        wheelObject.localRotation = Quaternion.identity;
         wheelObject.localScale = Vector3.one * car.GetCarData().GetSuspensionLength() * 2f;
     }
 

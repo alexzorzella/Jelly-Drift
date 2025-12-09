@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 
 public class PlayerInput : MonoBehaviour {
-    public Car car;
+    Car car;
 
+    public void Initialize(Car car) {
+        this.car = car;
+    }
+    
     void Update() {
-        if (GameController.Instance && !GameController.Instance.playing) {
+        if (car == null || (GameController.Instance && !GameController.Instance.playing)) {
             return;
         }
 

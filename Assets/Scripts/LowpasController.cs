@@ -7,7 +7,7 @@ public class LowpasController : MonoBehaviour {
 
     void Awake() {
         lowpass = GetComponent<AudioLowPassFilter>();
-        print("got lowpass: " + lowpass);
+        // print("got lowpass: " + lowpass);
     }
 
     void Update() {

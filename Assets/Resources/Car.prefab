@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4185518144428569}
-  - component: {fileID: 114203786117370525}
   - component: {fileID: 54948587504178017}
-  - component: {fileID: 114346090269800326}
+  - component: {fileID: 114203786117370525}
   m_Layer: 10
   m_Name: Car
   m_TagString: Untagged
@@ -34,19 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114203786117370525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995085249843820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f53b154d5c290db439ebfbf14de9079e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 0}
 --- !u!54 &54948587504178017
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74,7 +60,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114346090269800326
+--- !u!114 &114203786117370525
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,7 +69,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1995085249843820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0481a2e3288f3347b9e1e8f24ea136e, type: 3}
+  m_Script: {fileID: 11500000, guid: f53b154d5c290db439ebfbf14de9079e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  car: {fileID: 114203786117370525}
+  text: {fileID: 0}
