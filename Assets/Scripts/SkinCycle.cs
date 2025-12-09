@@ -64,7 +64,7 @@ public class SkinCycle : ItemCycle {
             }
         }
         else {
-            text = CarDisplay.Instance.currentCar.GetComponent<CarSkin>().GetSkinName(this.selected);
+            // text = CarDisplay.Instance.currentCar.GetComponent<CarSkin>().GetSkinName(this.selected);
         }
 
         this.text.text = "| " + text;

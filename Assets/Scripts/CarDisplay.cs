@@ -20,8 +20,8 @@ public class CarDisplay : MonoBehaviour {
     }
 
     public void SetSkin(int n) {
-        skin.SetSkin(n);
-        print("setting skin to: " + n);
+        // skin.SetSkin(n);
+        // print("setting skin to: " + n);
     }
 
     public void Hide() {

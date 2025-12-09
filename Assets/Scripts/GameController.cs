@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour {
         currentCar = ResourceLoader.InstantiateObject("Car", startPos.position, startPos.rotation);
         currentCar.GetComponent<Car>().Initialize(CarCatalogue.GetSelectedCarData());
         
-        currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
+        // currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
     }
 
     void Start() {
