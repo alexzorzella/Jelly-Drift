@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour {
     }
 
     public void AssignTarget(Transform target) {
-        print("assinging target");
+        // print("assinging target");
         this.target = target;
         targetRb = target.GetComponent<Rigidbody>();
         targetCar = target.GetComponent<Car>();
