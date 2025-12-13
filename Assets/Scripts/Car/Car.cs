@@ -135,10 +135,11 @@ public class Car : MonoBehaviour {
     }
     
     void HandleAudio() {
-        accelerationSource.SetVolume(Mathf.Lerp(accelerationSource.GetVolume(), Mathf.Abs(throttle) + Mathf.Abs(speed / 80f),
+        accelerationSource.SetVolume(Mathf.Lerp(accelerationSource.GetVolume(),
+            Mathf.Abs(throttle) + Mathf.Abs(speed / 80f),
             Time.deltaTime * 6f));
         decelerationSource.SetVolume(Mathf.Lerp(decelerationSource.GetVolume(), speed / 40f - throttle * 0.5f, Time.deltaTime * 4f));
-        accelerationSource.SetPitch(Mathf.Lerp(accelerationSource.GetPitch(), 0.65f + Mathf.Clamp(Mathf.Abs(speed / 160f), 0f, 1f),
+        accelerationSource.SetPitch(Mathf.Lerp(accelerationSource.GetPitch(), 0.65f + Mathf.Clamp(Mathf.Abs(speed / 160f) * (1 + (Mathf.Abs((float)gear) / 5)), 0f, 1f),
             Time.deltaTime * 5f));
         if (!grounded) {
             accelerationSource.SetPitch(Mathf.Lerp(accelerationSource.GetPitch(), 1.5f, Time.deltaTime * 8f));
