@@ -199,6 +199,33 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WheelKeyboard"",
+                    ""type"": ""Value"",
+                    ""id"": ""c6050940-8df9-4da2-b001-4fb07f8393be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ThrottleKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""b1b83a5b-7a64-498e-b30a-0c700132993b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReverseKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5fe17de-6dd0-4278-a78d-0613e680e2d2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -248,6 +275,17 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""a6711c81-44db-45fc-8be5-f887c4fb0247"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e51c124d-3a8f-4915-9222-f9d4a5f30f0e"",
                     ""path"": ""<HID::PXN PXN-V10 Wheel>/button22"",
                     ""interactions"": ""Press(behavior=2)"",
@@ -259,8 +297,30 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d69bfc2a-3992-44a1-9ee5-ce3575bc0cbc"",
+                    ""path"": ""<Keyboard>/numpad3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reverse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ce4669d8-647b-4ebd-a0e8-cd1a66d43181"",
                     ""path"": ""<HID::PXN PXN-V10 Wheel>/button17"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""First"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c474b52-a2bc-41fd-b4a0-14ada4a48a78"",
+                    ""path"": ""<Keyboard>/numpad4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -281,8 +341,30 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""bcf522a1-357a-4363-82e5-15739fde7d98"",
+                    ""path"": ""<Keyboard>/numpad1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Second"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6f575978-9c31-4ac2-9776-fc81e107e3f3"",
                     ""path"": ""<HID::PXN PXN-V10 Wheel>/button19"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Third"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc860322-9abd-4a58-bb77-d74a10358045"",
+                    ""path"": ""<Keyboard>/numpad5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -303,8 +385,30 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9dbea6d3-f68a-4dbf-bab0-256a13fd742c"",
+                    ""path"": ""<Keyboard>/numpad2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fourth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""89a1a60a-1ba1-4040-938e-9c53e6c5814a"",
                     ""path"": ""<HID::PXN PXN-V10 Wheel>/button21"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fifth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7cdede8-d4e5-473f-bcc9-28b59c3db692"",
+                    ""path"": ""<Keyboard>/numpad6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -355,6 +459,61 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""action"": ""Horn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""d4433326-7488-44cb-96c3-cb3e5dab99cc"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WheelKeyboard"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""45af1470-0d3a-48bd-92f9-67b5b4fba8e3"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WheelKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7fe44d49-17b8-4caa-903d-6fc05e65ee84"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WheelKeyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c70310a2-5354-4580-b964-fbcf8a81ba50"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrottleKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29534f54-f991-4ea0-aa58-750098e90540"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReverseKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -375,6 +534,9 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         m_Car_L1 = m_Car.FindAction("L1", throwIfNotFound: true);
         m_Car_R1 = m_Car.FindAction("R1", throwIfNotFound: true);
         m_Car_Horn = m_Car.FindAction("Horn", throwIfNotFound: true);
+        m_Car_WheelKeyboard = m_Car.FindAction("WheelKeyboard", throwIfNotFound: true);
+        m_Car_ThrottleKey = m_Car.FindAction("ThrottleKey", throwIfNotFound: true);
+        m_Car_ReverseKey = m_Car.FindAction("ReverseKey", throwIfNotFound: true);
     }
 
     ~@PXN()
@@ -467,6 +629,9 @@ public partial class @PXN: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_L1;
     private readonly InputAction m_Car_R1;
     private readonly InputAction m_Car_Horn;
+    private readonly InputAction m_Car_WheelKeyboard;
+    private readonly InputAction m_Car_ThrottleKey;
+    private readonly InputAction m_Car_ReverseKey;
     /// <summary>
     /// Provides access to input actions defined in input action map "Car".
     /// </summary>
@@ -526,6 +691,18 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Car/Horn".
         /// </summary>
         public InputAction @Horn => m_Wrapper.m_Car_Horn;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/WheelKeyboard".
+        /// </summary>
+        public InputAction @WheelKeyboard => m_Wrapper.m_Car_WheelKeyboard;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/ThrottleKey".
+        /// </summary>
+        public InputAction @ThrottleKey => m_Wrapper.m_Car_ThrottleKey;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/ReverseKey".
+        /// </summary>
+        public InputAction @ReverseKey => m_Wrapper.m_Car_ReverseKey;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -588,6 +765,15 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @Horn.started += instance.OnHorn;
             @Horn.performed += instance.OnHorn;
             @Horn.canceled += instance.OnHorn;
+            @WheelKeyboard.started += instance.OnWheelKeyboard;
+            @WheelKeyboard.performed += instance.OnWheelKeyboard;
+            @WheelKeyboard.canceled += instance.OnWheelKeyboard;
+            @ThrottleKey.started += instance.OnThrottleKey;
+            @ThrottleKey.performed += instance.OnThrottleKey;
+            @ThrottleKey.canceled += instance.OnThrottleKey;
+            @ReverseKey.started += instance.OnReverseKey;
+            @ReverseKey.performed += instance.OnReverseKey;
+            @ReverseKey.canceled += instance.OnReverseKey;
         }
 
         /// <summary>
@@ -635,6 +821,15 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @Horn.started -= instance.OnHorn;
             @Horn.performed -= instance.OnHorn;
             @Horn.canceled -= instance.OnHorn;
+            @WheelKeyboard.started -= instance.OnWheelKeyboard;
+            @WheelKeyboard.performed -= instance.OnWheelKeyboard;
+            @WheelKeyboard.canceled -= instance.OnWheelKeyboard;
+            @ThrottleKey.started -= instance.OnThrottleKey;
+            @ThrottleKey.performed -= instance.OnThrottleKey;
+            @ThrottleKey.canceled -= instance.OnThrottleKey;
+            @ReverseKey.started -= instance.OnReverseKey;
+            @ReverseKey.performed -= instance.OnReverseKey;
+            @ReverseKey.canceled -= instance.OnReverseKey;
         }
 
         /// <summary>
@@ -759,5 +954,26 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHorn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "WheelKeyboard" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnWheelKeyboard(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ThrottleKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThrottleKey(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ReverseKey" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnReverseKey(InputAction.CallbackContext context);
     }
 }

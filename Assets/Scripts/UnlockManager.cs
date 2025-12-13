@@ -48,42 +48,42 @@ public class UnlockManager : MonoBehaviour {
         var list = unlocks;
         var num = n;
         n = num + 1;
-        DisplayUnlock(list[num]);
+        // DisplayUnlock(list[num]);
         SoundManager.Instance.PlayUnlock();
     }
 
     public void DisplayUnlock(Unlock u) {
-        for (var i = 0; i < maps.childCount; i++) {
-            maps.GetChild(i).gameObject.SetActive(false);
-        }
-
-        transform.localScale = Vector3.zero;
-        desiredSize = defaultSize;
-        var str = "";
-        if (u.type == UnlockType.Car) {
-            SaveManager.Instance.state.carsUnlocked[u.index] = true;
-            SaveManager.Instance.Save();
-            str = "\"" + PrefabManager.Instance.cars[u.index].name + "\"";
-            carDisplay.SpawnCar(u.index);
-            carDisplay.SetSkin(SaveManager.Instance.state.skins[u.index].Length - 1);
-        }
-        else if (u.type == UnlockType.Skin) {
-            SaveManager.Instance.state.skins[u.index][u.subIndex] = true;
-            SaveManager.Instance.Save();
-            carDisplay.SpawnCar(u.index);
-            carDisplay.SetSkin(u.subIndex);
-            str = PrefabManager.Instance.cars[u.index].name + " \"" +
-                  carDisplay.currentCar.GetComponent<CarSkin>().GetSkinName(u.subIndex) + "\"";
-        }
-        else if (u.type == UnlockType.Map) {
-            SaveManager.Instance.state.mapsUnlocked[u.index] = true;
-            SaveManager.Instance.Save();
-            maps.GetChild(u.index).gameObject.SetActive(true);
-            str = "\"" + MapManager.Instance.maps[u.index].name + "\"";
-            carDisplay.Hide();
-        }
-
-        text.text = "<size=100%>unlocked:\n<b><size=80%>" + str;
+        // for (var i = 0; i < maps.childCount; i++) {
+        //     maps.GetChild(i).gameObject.SetActive(false);
+        // }
+        //
+        // transform.localScale = Vector3.zero;
+        // desiredSize = defaultSize;
+        // var str = "";
+        // if (u.type == UnlockType.Car) {
+        //     SaveManager.Instance.state.carsUnlocked[u.index] = true;
+        //     SaveManager.Instance.Save();
+        //     str = "\"" + PrefabManager.Instance.cars[u.index].name + "\"";
+        //     carDisplay.SpawnCar(u.index);
+        //     carDisplay.SetSkin(SaveManager.Instance.state.skins[u.index].Length - 1);
+        // }
+        // else if (u.type == UnlockType.Skin) {
+        //     SaveManager.Instance.state.skins[u.index][u.subIndex] = true;
+        //     SaveManager.Instance.Save();
+        //     carDisplay.SpawnCar(u.index);
+        //     carDisplay.SetSkin(u.subIndex);
+        //     str = PrefabManager.Instance.cars[u.index].name + " \"" +
+        //           carDisplay.currentCar.GetComponent<CarSkin>().GetSkinName(u.subIndex) + "\"";
+        // }
+        // else if (u.type == UnlockType.Map) {
+        //     SaveManager.Instance.state.mapsUnlocked[u.index] = true;
+        //     SaveManager.Instance.Save();
+        //     maps.GetChild(u.index).gameObject.SetActive(true);
+        //     str = "\"" + MapManager.Instance.maps[u.index].name + "\"";
+        //     carDisplay.Hide();
+        // }
+        //
+        // text.text = "<size=100%>unlocked:\n<b><size=80%>" + str;
     }
 
     void SetSkipReady() {

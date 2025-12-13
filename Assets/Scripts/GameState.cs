@@ -22,6 +22,6 @@ public class GameState : MonoBehaviour {
     }
 
     public void LoadMap() {
-        SceneManager.LoadScene(string.Concat(map));
+        SceneManager.LoadScene(MapManager.i.GetSelectedMap().GetNameFormatted());
     }
 }

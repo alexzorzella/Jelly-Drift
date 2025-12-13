@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b9c489d3356f0ba46af96332126511f4
+guid: 3a4a08ee5e00c8240a37b419623290f4
 timeCreated: 1615850258
 licenseType: Free
 TextureImporter:
@@ -88,7 +88,7 @@ TextureImporter:
       - {x: 959.9999, y: -540}
       - {x: 959.9999, y: 540}
     bones: []
-    spriteID: 46a6232169ac426a85528a7346e75ac8
+    spriteID: e2155adcb1974c3f9c1cb4ae27e968d2
     internalID: 0
     vertices: []
     indices:

@@ -113,6 +113,33 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WheelKeyboard",
+                    "type": "Value",
+                    "id": "c6050940-8df9-4da2-b001-4fb07f8393be",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ThrottleKey",
+                    "type": "Button",
+                    "id": "b1b83a5b-7a64-498e-b30a-0c700132993b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReverseKey",
+                    "type": "Button",
+                    "id": "a5fe17de-6dd0-4278-a78d-0613e680e2d2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -162,6 +189,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a6711c81-44db-45fc-8be5-f887c4fb0247",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e51c124d-3a8f-4915-9222-f9d4a5f30f0e",
                     "path": "<HID::PXN PXN-V10 Wheel>/button22",
                     "interactions": "Press(behavior=2)",
@@ -173,8 +211,30 @@
                 },
                 {
                     "name": "",
+                    "id": "d69bfc2a-3992-44a1-9ee5-ce3575bc0cbc",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ce4669d8-647b-4ebd-a0e8-cd1a66d43181",
                     "path": "<HID::PXN PXN-V10 Wheel>/button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "First",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c474b52-a2bc-41fd-b4a0-14ada4a48a78",
+                    "path": "<Keyboard>/numpad4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -195,8 +255,30 @@
                 },
                 {
                     "name": "",
+                    "id": "bcf522a1-357a-4363-82e5-15739fde7d98",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Second",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6f575978-9c31-4ac2-9776-fc81e107e3f3",
                     "path": "<HID::PXN PXN-V10 Wheel>/button19",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Third",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc860322-9abd-4a58-bb77-d74a10358045",
+                    "path": "<Keyboard>/numpad5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -217,8 +299,30 @@
                 },
                 {
                     "name": "",
+                    "id": "9dbea6d3-f68a-4dbf-bab0-256a13fd742c",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fourth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "89a1a60a-1ba1-4040-938e-9c53e6c5814a",
                     "path": "<HID::PXN PXN-V10 Wheel>/button21",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fifth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7cdede8-d4e5-473f-bcc9-28b59c3db692",
+                    "path": "<Keyboard>/numpad6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -267,6 +371,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Horn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "d4433326-7488-44cb-96c3-cb3e5dab99cc",
+                    "path": "1DAxis",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelKeyboard",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "45af1470-0d3a-48bd-92f9-67b5b4fba8e3",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7fe44d49-17b8-4caa-903d-6fc05e65ee84",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WheelKeyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c70310a2-5354-4580-b964-fbcf8a81ba50",
+                    "path": "<Keyboard>/w",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ThrottleKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "29534f54-f991-4ea0-aa58-750098e90540",
+                    "path": "<Keyboard>/s",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReverseKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

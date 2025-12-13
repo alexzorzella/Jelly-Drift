@@ -48,10 +48,10 @@ public class SkinCycle : ItemCycle {
         if (!SaveManager.Instance.state.skins[selected][selected2]) {
             if (selected < 5) {
                 if (selected2 == 1) {
-                    text = text + "Complete " + MapManager.Instance.maps[selected].name + " on hard difficulty";
+                    // text = text + "Complete " + MapManager.i.GetSelectedMap().GetName() + " on hard difficulty";
                 }
                 else if (selected2 == 2) {
-                    text = text + "Complete " + MapManager.Instance.maps[selected].name + " 3-star time";
+                    // text = text + "Complete " + MapManager.GetSelectedMa.name + " 3-star time";
                 }
                 else {
                     carBtn.SetState(CarButton.ButtonState.BuySkin);
@@ -59,7 +59,7 @@ public class SkinCycle : ItemCycle {
                     text = string.Concat(text, "<size=80%><font=\"Ubuntu-Bold SDF\">Buy (", skinPrice, "$)");
                 }
             }
-
+        
             if (selected == 5) {
                 text += "Beat the ghost of Dani on all maps..";
             }
