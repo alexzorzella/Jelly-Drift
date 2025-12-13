@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour {
         pxn.Car.Fourth.performed += Fourth;
         pxn.Car.Fifth.performed += Fifth;
 
-        pxn.Car.Restart.performed += Restart_BucketBrigade;
+        // pxn.Car.Restart.performed += Restart_BucketBrigade;
 
         pxn.Enable();
     }
@@ -76,9 +76,9 @@ public class PlayerInput : MonoBehaviour {
 
     Pause pause;
     
-    void Restart_BucketBrigade(InputAction.CallbackContext context) {
-        pause.RestartGame();
-    }
+    // void Restart_BucketBrigade(InputAction.CallbackContext context) {
+    //     pause.RestartGame();
+    // }
 
     private void OnEnable() {
         if (pxn != null) {

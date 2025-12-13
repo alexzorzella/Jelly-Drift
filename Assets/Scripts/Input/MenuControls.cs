@@ -127,6 +127,24 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Recover"",
+                    ""type"": ""Button"",
+                    ""id"": ""867f15a7-b121-423c-865c-83e95fce320e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""f4250738-9e96-4329-af30-31e49bcb5a2e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -239,6 +257,28 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                     ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b9339fe-a411-4f76-a29b-4d5ce8225659"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Recover"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be41f0fc-e6db-4d2d-aafb-99e471b6eb1a"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -251,6 +291,8 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
         m_User_ScrollDown = m_User.FindAction("ScrollDown", throwIfNotFound: true);
         m_User_Select = m_User.FindAction("Select", throwIfNotFound: true);
         m_User_Menu = m_User.FindAction("Menu", throwIfNotFound: true);
+        m_User_Recover = m_User.FindAction("Recover", throwIfNotFound: true);
+        m_User_Restart = m_User.FindAction("Restart", throwIfNotFound: true);
     }
 
     ~@MenuControls()
@@ -335,6 +377,8 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_User_ScrollDown;
     private readonly InputAction m_User_Select;
     private readonly InputAction m_User_Menu;
+    private readonly InputAction m_User_Recover;
+    private readonly InputAction m_User_Restart;
     /// <summary>
     /// Provides access to input actions defined in input action map "User".
     /// </summary>
@@ -362,6 +406,14 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "User/Menu".
         /// </summary>
         public InputAction @Menu => m_Wrapper.m_User_Menu;
+        /// <summary>
+        /// Provides access to the underlying input action "User/Recover".
+        /// </summary>
+        public InputAction @Recover => m_Wrapper.m_User_Recover;
+        /// <summary>
+        /// Provides access to the underlying input action "User/Restart".
+        /// </summary>
+        public InputAction @Restart => m_Wrapper.m_User_Restart;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -400,6 +452,12 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
             @Menu.started += instance.OnMenu;
             @Menu.performed += instance.OnMenu;
             @Menu.canceled += instance.OnMenu;
+            @Recover.started += instance.OnRecover;
+            @Recover.performed += instance.OnRecover;
+            @Recover.canceled += instance.OnRecover;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         /// <summary>
@@ -423,6 +481,12 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
             @Menu.started -= instance.OnMenu;
             @Menu.performed -= instance.OnMenu;
             @Menu.canceled -= instance.OnMenu;
+            @Recover.started -= instance.OnRecover;
+            @Recover.performed -= instance.OnRecover;
+            @Recover.canceled -= instance.OnRecover;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         /// <summary>
@@ -491,5 +555,19 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Recover" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRecover(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Restart" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRestart(InputAction.CallbackContext context);
     }
 }
