@@ -181,6 +181,51 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""L1"",
+                    ""type"": ""Button"",
+                    ""id"": ""078b3fcd-b5fe-4579-bfd2-925ab05f3e7c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""R1"",
+                    ""type"": ""Button"",
+                    ""id"": ""8dd2c65d-0eed-449e-82f6-774aeab6d996"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""A"",
+                    ""type"": ""Button"",
+                    ""id"": ""f3619006-68ba-46f6-9c26-511ee77bd5ff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""B"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff191b28-a1b9-4e2c-8373-987d0092f3f2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""02e0da88-f5df-4c44-84de-14a0f0dc3624"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -304,6 +349,61 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""823bb232-ac9f-47ba-8cde-7266e0c42ce5"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""L1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c9e33ee-1e0b-4c64-8c7b-ca0f14b56497"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""R1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbdff3a2-0424-4327-b4b8-52abeec3574f"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""A"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61e9d309-5268-45c3-bbb0-2cd8e4c8dccd"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""B"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48b7e6dc-d7a5-4388-a8bf-58feb706ffbe"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -322,6 +422,11 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         m_Car_Fourth = m_Car.FindAction("Fourth", throwIfNotFound: true);
         m_Car_Fifth = m_Car.FindAction("Fifth", throwIfNotFound: true);
         m_Car_Restart = m_Car.FindAction("Restart", throwIfNotFound: true);
+        m_Car_L1 = m_Car.FindAction("L1", throwIfNotFound: true);
+        m_Car_R1 = m_Car.FindAction("R1", throwIfNotFound: true);
+        m_Car_A = m_Car.FindAction("A", throwIfNotFound: true);
+        m_Car_B = m_Car.FindAction("B", throwIfNotFound: true);
+        m_Car_Menu = m_Car.FindAction("Menu", throwIfNotFound: true);
     }
 
     ~@PXN()
@@ -412,6 +517,11 @@ public partial class @PXN: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Fourth;
     private readonly InputAction m_Car_Fifth;
     private readonly InputAction m_Car_Restart;
+    private readonly InputAction m_Car_L1;
+    private readonly InputAction m_Car_R1;
+    private readonly InputAction m_Car_A;
+    private readonly InputAction m_Car_B;
+    private readonly InputAction m_Car_Menu;
     /// <summary>
     /// Provides access to input actions defined in input action map "Car".
     /// </summary>
@@ -463,6 +573,26 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Car/Restart".
         /// </summary>
         public InputAction @Restart => m_Wrapper.m_Car_Restart;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/L1".
+        /// </summary>
+        public InputAction @L1 => m_Wrapper.m_Car_L1;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/R1".
+        /// </summary>
+        public InputAction @R1 => m_Wrapper.m_Car_R1;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/A".
+        /// </summary>
+        public InputAction @A => m_Wrapper.m_Car_A;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/B".
+        /// </summary>
+        public InputAction @B => m_Wrapper.m_Car_B;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/Menu".
+        /// </summary>
+        public InputAction @Menu => m_Wrapper.m_Car_Menu;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -519,6 +649,21 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @L1.started += instance.OnL1;
+            @L1.performed += instance.OnL1;
+            @L1.canceled += instance.OnL1;
+            @R1.started += instance.OnR1;
+            @R1.performed += instance.OnR1;
+            @R1.canceled += instance.OnR1;
+            @A.started += instance.OnA;
+            @A.performed += instance.OnA;
+            @A.canceled += instance.OnA;
+            @B.started += instance.OnB;
+            @B.performed += instance.OnB;
+            @B.canceled += instance.OnB;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         /// <summary>
@@ -560,6 +705,21 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @L1.started -= instance.OnL1;
+            @L1.performed -= instance.OnL1;
+            @L1.canceled -= instance.OnL1;
+            @R1.started -= instance.OnR1;
+            @R1.performed -= instance.OnR1;
+            @R1.canceled -= instance.OnR1;
+            @A.started -= instance.OnA;
+            @A.performed -= instance.OnA;
+            @A.canceled -= instance.OnA;
+            @B.started -= instance.OnB;
+            @B.performed -= instance.OnB;
+            @B.canceled -= instance.OnB;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         /// <summary>
@@ -670,5 +830,40 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRestart(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "L1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnL1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "R1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnR1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "A" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnA(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "B" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnB(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenu(InputAction.CallbackContext context);
     }
 }

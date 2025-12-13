@@ -25,8 +25,25 @@ public class PlayerInput : MonoBehaviour {
         pxn.Car.Fifth.performed += Fifth;
 
         pxn.Car.Restart.performed += Restart_BucketBrigade;
+
+        pxn.Car.A.performed += Select;
+        pxn.Car.B.performed += Back;
         
+        pxn.Car.Menu.performed += Menu;
+
         pxn.Enable();
+    }
+
+    void Select(InputAction.CallbackContext context) {
+        Debug.Log("Select");
+    }
+    
+    void Back(InputAction.CallbackContext context) {
+        Debug.Log("Back");
+    }
+
+    void Menu(InputAction.CallbackContext context) {
+        Debug.Log("Menu");
     }
 
     void Throttle(InputAction.CallbackContext context) {
