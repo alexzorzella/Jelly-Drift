@@ -24,9 +24,21 @@ public class PlayerInput : MonoBehaviour {
         pxn.Car.Fourth.performed += Fourth;
         pxn.Car.Fifth.performed += Fifth;
 
-        pxn.Car.Restart.performed += Restart_BucketBrigade;
-        
+        pxn.Car.Horn.performed += Horn;
+
         pxn.Enable();
+    }
+
+    void Select(InputAction.CallbackContext context) {
+        Debug.Log("Select");
+    }
+    
+    void Back(InputAction.CallbackContext context) {
+        Debug.Log("Back");
+    }
+
+    void Menu(InputAction.CallbackContext context) {
+        Debug.Log("Menu");
     }
 
     void Throttle(InputAction.CallbackContext context) {
@@ -55,6 +67,14 @@ public class PlayerInput : MonoBehaviour {
         car.braking = context.ReadValue<float>() > 0.02F;
     }
 
+    void Horn(InputAction.CallbackContext context) {
+        if (context.action.IsPressed()) {
+            car.PlayHorn();
+        } else {
+            car.StopHorn();
+        }
+    }
+
     void First(InputAction.CallbackContext context) { car.SetGear(0); }
     void Second(InputAction.CallbackContext context) { car.SetGear(1); }
     void Third(InputAction.CallbackContext context) { car.SetGear(2); }
@@ -64,9 +84,9 @@ public class PlayerInput : MonoBehaviour {
 
     Pause pause;
     
-    void Restart_BucketBrigade(InputAction.CallbackContext context) {
-        pause.RestartGame();
-    }
+    // void Restart_BucketBrigade(InputAction.CallbackContext context) {
+    //     pause.RestartGame();
+    // }
 
     private void OnEnable() {
         if (pxn != null) {

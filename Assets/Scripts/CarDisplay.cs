@@ -33,7 +33,7 @@ public class CarDisplay : MonoBehaviour {
         }
         
         currentCar = ResourceLoader.InstantiateObject("Car", transform.position, transform.rotation);
-        currentCar.GetComponent<Car>().Initialize(CarCatalogue.GetSelectedCarData());
+        currentCar.GetComponent<Car>().Initialize(CarCatalogue.GetSelectedCarData(), isDisplayCar: true);
         
         Destroy(currentCar.GetComponent<PlayerInput>());
         Destroy(currentCar.GetComponent<CheckpointUser>());

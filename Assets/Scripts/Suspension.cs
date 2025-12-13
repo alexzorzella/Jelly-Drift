@@ -50,8 +50,14 @@ public class Suspension : MonoBehaviour {
         this.car = car;
         bodyRb = car.GetComponent<Rigidbody>();
         raycastOffset = car.GetCarData().GetSuspensionLength() * 0.5f;
-        smokeEmitting = smokeFx.emission;
-        spinEmitting = spinFx.emission;
+
+        if (smokeFx != null) {
+            smokeEmitting = smokeFx.emission;
+        }
+
+        if (spinFx != null) {
+            spinEmitting = spinFx.emission;
+        }
         
         wheelObject = ResourceLoader.InstantiateObject("Wheel").transform;
             

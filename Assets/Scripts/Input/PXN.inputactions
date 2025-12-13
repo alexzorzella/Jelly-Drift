@@ -88,12 +88,30 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Restart",
+                    "name": "L1",
                     "type": "Button",
-                    "id": "ee6713bd-509a-42aa-ad3b-b4363cbfa825",
+                    "id": "078b3fcd-b5fe-4579-bfd2-925ab05f3e7c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "R1",
+                    "type": "Button",
+                    "id": "8dd2c65d-0eed-449e-82f6-774aeab6d996",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Horn",
+                    "type": "Button",
+                    "id": "35143b12-8d1e-4783-a863-83ede525c613",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 }
             ],
@@ -210,12 +228,45 @@
                 },
                 {
                     "name": "",
-                    "id": "a56aea20-a153-469c-9ec6-cf449a67025d",
-                    "path": "<HID::PXN PXN-V10 Wheel>/button11",
+                    "id": "823bb232-ac9f-47ba-8cde-7266e0c42ce5",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Restart",
+                    "action": "L1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c9e33ee-1e0b-4c64-8c7b-ca0f14b56497",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "R1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1039152f-2edd-4a8f-81c7-d1a7897cfad3",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5238cdba-f996-4b07-9672-1a8d4e5191e3",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

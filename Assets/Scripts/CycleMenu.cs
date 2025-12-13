@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CycleMenu : MonoBehaviour {
     public TextMeshProUGUI[] correspondingText;
@@ -12,6 +14,8 @@ public class CycleMenu : MonoBehaviour {
     bool horizontalDone;
     int selected;
     bool verticalDone;
+
+    MenuControls menuControls;
 
     void Awake() {
         selected = startSelect;
@@ -28,14 +32,21 @@ public class CycleMenu : MonoBehaviour {
         }
 
         cycleText[selected].color = Color.black;
+
+        InitializeInput();
+    }
+
+    void InitializeInput() {
+        menuControls = new();
+
+        menuControls.User.ScrollUp.performed += ScrollUp;
+        menuControls.User.ScrollDown.performed += ScrollDown;
+
+        menuControls.User.Select.performed += Select;
     }
 
     void Start() {
         SaveManager.Instance.state.skins[5][1] = true;
-    }
-
-    void Update() {
-        PlayerInput();
     }
 
     void OnEnable() {
@@ -43,6 +54,12 @@ public class CycleMenu : MonoBehaviour {
         horizontalDone = true;
         verticalDone = true;
         UpdateSelected();
+
+        menuControls.Enable();
+    }
+
+    void OnDisable() {
+        menuControls.Disable();
     }
 
     void UpdateSelected() {
@@ -59,53 +76,50 @@ public class CycleMenu : MonoBehaviour {
         }
     }
 
-    void PlayerInput() {
-        if (UnlockManager.Instance && UnlockManager.Instance.gameObject.activeInHierarchy) {
-            return;
-        }
+    void ScrollUp(InputAction.CallbackContext context) {
+        Navigate(new Vector2(0, 1));
+    }
 
-        var num = (int)Input.GetAxisRaw("HorizontalMenu");
-        var num2 = -(int)Input.GetAxisRaw("VerticalMenu");
-        var buttonDown = Input.GetButtonDown("Submit");
-        var buttonDown2 = Input.GetButtonDown("Cancel");
-        if ((num != 0 && !horizontalDone) || buttonDown) {
-            if (cycles[selected].activeCycle) {
-                cycles[selected].Cycle(num);
-                SoundManager.Instance.PlayCycle();
-            }
-            else {
-                SoundManager.Instance.PlayError();
-            }
-        }
+    void ScrollDown(InputAction.CallbackContext context) {
+        Navigate(new Vector2(0, -1));
+    }
 
-        if (num2 != 0 && !verticalDone) {
-            cycleText[selected].color = Color.white;
-            if (correspondingText.Length != 0 && !correspondingText[selected].gameObject.CompareTag("Ignore")) {
-                correspondingText[selected].color = Color.white;
-            }
-
-            selected += num2;
-            if (selected >= cycles.Count) {
-                selected = 0;
-            }
-            else if (selected < 0) {
-                selected = cycles.Count - 1;
-            }
-
-            cycleText[selected].color = Color.black;
-            if (correspondingText.Length != 0 && !correspondingText[selected].gameObject.CompareTag("Ignore")) {
-                correspondingText[selected].color = Color.black;
-            }
-
-            SoundManager.Instance.PlayMenuNavigate();
-        }
-
-        if (buttonDown2) {
-            cycles[backBtn].Cycle(1);
+    void Select(InputAction.CallbackContext context) {
+        if (cycles[selected].activeCycle) {
+            cycles[selected].Cycle(1);
             SoundManager.Instance.PlayCycle();
         }
+        else {
+            SoundManager.Instance.PlayError();
+        }
+    }
 
-        horizontalDone = num != 0;
-        verticalDone = num2 != 0;
+    void Cancel(InputAction.CallbackContext context) {
+        // cycles[backBtn].Cycle(1);
+        // SoundManager.Instance.PlayCycle();
+    }
+
+    void Navigate(Vector2 input) {
+        int verticalInput = -(int)input.y;
+
+        cycleText[selected].color = Color.white;
+        if (correspondingText.Length != 0 && !correspondingText[selected].gameObject.CompareTag("Ignore")) {
+            correspondingText[selected].color = Color.white;
+        }
+
+        selected += verticalInput;
+        if (selected >= cycles.Count) {
+            selected = 0;
+        }
+        else if (selected < 0) {
+            selected = cycles.Count - 1;
+        }
+
+        cycleText[selected].color = Color.black;
+        if (correspondingText.Length != 0 && !correspondingText[selected].gameObject.CompareTag("Ignore")) {
+            correspondingText[selected].color = Color.black;
+        }
+
+        SoundManager.Instance.PlayMenuNavigate();
     }
 }

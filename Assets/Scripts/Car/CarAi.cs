@@ -46,7 +46,7 @@ public class CarAi : MonoBehaviour {
         
         InvokeRepeating(nameof(AdjustSpeed), 0.5f, 0.5f);
         
-        if (GameController.Instance.finalCheckpoint != 0) {
+        if (GameController.Instance.finalCheckpoint != 0 && GetComponent<CheckpointUser>() != null) {
             GetComponent<CheckpointUser>().ForceCheckpoint(0);
         }
     }
