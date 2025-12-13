@@ -43,7 +43,6 @@ public class CycleMenu : MonoBehaviour {
         menuControls.User.ScrollDown.performed += ScrollDown;
 
         menuControls.User.Select.performed += Select;
-        menuControls.User.Cancel.performed += Cancel;
     }
 
     void Start() {

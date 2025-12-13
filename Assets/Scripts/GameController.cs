@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
@@ -13,6 +15,8 @@ public class GameController : MonoBehaviour {
     public GameObject currentCar { get; set; }
     public bool playing { get; set; }
 
+    MenuControls menuControls;
+    
     void Awake() {
         Instance = this;
         Time.timeScale = 1f;
@@ -23,6 +27,23 @@ public class GameController : MonoBehaviour {
         currentCar.GetComponent<Car>().Initialize(CarCatalogue.GetSelectedCarData());
         
         // currentCar.GetComponent<CarSkin>().SetSkin(GameState.Instance.skin);
+
+        InitializeMenuInput();
+    }
+
+    void InitializeMenuInput() {
+        menuControls = new();
+        menuControls.User.Menu.performed += TryPause;
+        
+        menuControls.Enable();
+    }
+
+    void OnEnable() {
+        menuControls.Enable();
+    }
+
+    void OnDisable() {
+        menuControls.Disable();
     }
 
     void Start() {
@@ -50,12 +71,15 @@ public class GameController : MonoBehaviour {
 
             return;
         }
+    }
 
-        if (Input.GetButtonDown("Cancel") && !Pause.Instance.paused) {
+    void TryPause(InputAction.CallbackContext context) {
+        // if (Input.GetButtonDown("Cancel") && !Pause.Instance.paused) {
+        if (!Pause.Instance.paused) {
             Pause.Instance.TogglePause();
         }
     }
-
+    
     public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

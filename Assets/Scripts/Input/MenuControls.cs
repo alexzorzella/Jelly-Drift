@@ -120,12 +120,12 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Cancel"",
+                    ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""eafcc03e-a384-4b07-9c97-3b2bd96288c4"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -225,7 +225,7 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cancel"",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -236,7 +236,7 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cancel"",
+                    ""action"": ""Menu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -250,7 +250,7 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
         m_User_ScrollUp = m_User.FindAction("ScrollUp", throwIfNotFound: true);
         m_User_ScrollDown = m_User.FindAction("ScrollDown", throwIfNotFound: true);
         m_User_Select = m_User.FindAction("Select", throwIfNotFound: true);
-        m_User_Cancel = m_User.FindAction("Cancel", throwIfNotFound: true);
+        m_User_Menu = m_User.FindAction("Menu", throwIfNotFound: true);
     }
 
     ~@MenuControls()
@@ -334,7 +334,7 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_User_ScrollUp;
     private readonly InputAction m_User_ScrollDown;
     private readonly InputAction m_User_Select;
-    private readonly InputAction m_User_Cancel;
+    private readonly InputAction m_User_Menu;
     /// <summary>
     /// Provides access to input actions defined in input action map "User".
     /// </summary>
@@ -359,9 +359,9 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Select => m_Wrapper.m_User_Select;
         /// <summary>
-        /// Provides access to the underlying input action "User/Cancel".
+        /// Provides access to the underlying input action "User/Menu".
         /// </summary>
-        public InputAction @Cancel => m_Wrapper.m_User_Cancel;
+        public InputAction @Menu => m_Wrapper.m_User_Menu;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -397,9 +397,9 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
-            @Cancel.started += instance.OnCancel;
-            @Cancel.performed += instance.OnCancel;
-            @Cancel.canceled += instance.OnCancel;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
         }
 
         /// <summary>
@@ -420,9 +420,9 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
-            @Cancel.started -= instance.OnCancel;
-            @Cancel.performed -= instance.OnCancel;
-            @Cancel.canceled -= instance.OnCancel;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
         }
 
         /// <summary>
@@ -485,11 +485,11 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelect(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCancel(InputAction.CallbackContext context);
+        void OnMenu(InputAction.CallbackContext context);
     }
 }
