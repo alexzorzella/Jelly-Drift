@@ -344,6 +344,17 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""action"": ""Horn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5238cdba-f996-4b07-9672-1a8d4e5191e3"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
