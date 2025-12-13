@@ -211,8 +211,30 @@
                 },
                 {
                     "name": "",
+                    "id": "d69bfc2a-3992-44a1-9ee5-ce3575bc0cbc",
+                    "path": "<Keyboard>/numpad3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reverse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ce4669d8-647b-4ebd-a0e8-cd1a66d43181",
                     "path": "<HID::PXN PXN-V10 Wheel>/button17",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "First",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7c474b52-a2bc-41fd-b4a0-14ada4a48a78",
+                    "path": "<Keyboard>/numpad4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -233,8 +255,30 @@
                 },
                 {
                     "name": "",
+                    "id": "bcf522a1-357a-4363-82e5-15739fde7d98",
+                    "path": "<Keyboard>/numpad1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Second",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6f575978-9c31-4ac2-9776-fc81e107e3f3",
                     "path": "<HID::PXN PXN-V10 Wheel>/button19",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Third",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bc860322-9abd-4a58-bb77-d74a10358045",
+                    "path": "<Keyboard>/numpad5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -255,8 +299,30 @@
                 },
                 {
                     "name": "",
+                    "id": "9dbea6d3-f68a-4dbf-bab0-256a13fd742c",
+                    "path": "<Keyboard>/numpad2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fourth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "89a1a60a-1ba1-4040-938e-9c53e6c5814a",
                     "path": "<HID::PXN PXN-V10 Wheel>/button21",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fifth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7cdede8-d4e5-473f-bcc9-28b59c3db692",
+                    "path": "<Keyboard>/numpad6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
