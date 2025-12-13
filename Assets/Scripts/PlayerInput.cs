@@ -26,11 +26,6 @@ public class PlayerInput : MonoBehaviour {
 
         pxn.Car.Restart.performed += Restart_BucketBrigade;
 
-        pxn.Car.A.performed += Select;
-        pxn.Car.B.performed += Back;
-        
-        pxn.Car.Menu.performed += Menu;
-
         pxn.Enable();
     }
 

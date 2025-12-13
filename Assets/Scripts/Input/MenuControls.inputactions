@@ -68,6 +68,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e9d3ad60-f1e1-4e9a-b96f-77fff8ad7e4a",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a930fa7d-c737-468d-93fb-eafdb3e386b2",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -90,6 +101,17 @@
                 },
                 {
                     "name": "",
+                    "id": "8a8c09a3-171e-487d-83c6-4ddf42820751",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a4b3689f-8ba1-4a09-b4b8-d7e4e84e67e7",
                     "path": "<Keyboard>/enter",
                     "interactions": "",
@@ -101,8 +123,30 @@
                 },
                 {
                     "name": "",
+                    "id": "c0948d46-c212-442d-993d-abf92b1c7905",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "730a7e14-c9ff-4bc9-b589-1c09a8fc354b",
                     "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d901fa53-ba87-451a-8841-efbb3e8a7f62",
+                    "path": "<HID::PXN PXN-V10 Wheel>/button2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

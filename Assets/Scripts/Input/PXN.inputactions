@@ -113,33 +113,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "A",
-                    "type": "Button",
-                    "id": "f3619006-68ba-46f6-9c26-511ee77bd5ff",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "B",
-                    "type": "Button",
-                    "id": "ff191b28-a1b9-4e2c-8373-987d0092f3f2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Menu",
-                    "type": "Button",
-                    "id": "02e0da88-f5df-4c44-84de-14a0f0dc3624",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -283,39 +256,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "R1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bbdff3a2-0424-4327-b4b8-52abeec3574f",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "61e9d309-5268-45c3-bbb0-2cd8e4c8dccd",
-                    "path": "<HID::PXN PXN-V10 Wheel>/button2",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "B",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "48b7e6dc-d7a5-4388-a8bf-58feb706ffbe",
-                    "path": "<HID::PXN PXN-V10 Wheel>/button10",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
