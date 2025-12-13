@@ -54,13 +54,7 @@ public static class CarCatalogue {
             WithSuspensionSpecs(0.55F).
             WithCarSpecs(3000, 1, 5000, 0).
             WithDriftSpecs(1.2F, 0.4F).
-            WithMaterials("Banana").Build(),
-        new CarData.Builder("O", "ae86").
-            WithPhysicsSpecs(1450, 0, 1.5F).
-            WithSuspensionSpecs(restHeight: 0.2F).
-            WithCarSpecs(3200, antiRoll: 7000, stability: 0).
-            WithDriftSpecs(1.4F, 1).
-            WithMaterials("4th Stage").Build()
+            WithMaterials("Banana").Build()
     };
 
     static readonly List<CarData> opponentCars = new() {
