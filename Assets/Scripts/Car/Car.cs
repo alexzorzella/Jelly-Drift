@@ -44,6 +44,9 @@ public class Car : MonoBehaviour {
     public float speed { get; private set; }
     public float steerAngle { get; set; }
     public Vector3 acceleration { get; private set; }
+    
+    MultiAudioSource accelerationSource;
+    MultiAudioSource decelerationSource;
 
     public void Initialize(CarData carData, bool isCpu = false) {
         this.carData = carData;
@@ -96,6 +99,9 @@ public class Car : MonoBehaviour {
         }
 
         carCollider = GetComponentInChildren<Collider>();
+
+        accelerationSource = MultiAudioSource.FromResource(gameObject, "180xs_accel");
+        decelerationSource = MultiAudioSource.FromResource(gameObject, "decelerate");
     }
 
     void Update() {
@@ -104,7 +110,7 @@ public class Car : MonoBehaviour {
         }
         
         MoveWheels();
-        Audio();
+        HandleAudio();
         CheckGrounded();
         Steering();
     }
@@ -116,18 +122,18 @@ public class Car : MonoBehaviour {
         
         Movement();
     }
-
-    void Audio() {
-        // accelerate.volume = Mathf.Lerp(accelerate.volume, Mathf.Abs(throttle) + Mathf.Abs(speed / 80f),
-        //     Time.deltaTime * 6f);
-        // deaccelerate.volume = Mathf.Lerp(deaccelerate.volume, speed / 40f - throttle * 0.5f, Time.deltaTime * 4f);
-        // accelerate.pitch = Mathf.Lerp(accelerate.pitch, 0.65f + Mathf.Clamp(Mathf.Abs(speed / 160f), 0f, 1f),
-        //     Time.deltaTime * 5f);
-        // if (!grounded) {
-        //     accelerate.pitch = Mathf.Lerp(accelerate.pitch, 1.5f, Time.deltaTime * 8f);
-        // }
-        //
-        // deaccelerate.pitch = Mathf.Lerp(deaccelerate.pitch, 0.5f + speed / 40f, Time.deltaTime * 2f);
+    
+    void HandleAudio() {
+        accelerationSource.SetVolume(Mathf.Lerp(accelerationSource.GetVolume(), Mathf.Abs(throttle) + Mathf.Abs(speed / 80f),
+            Time.deltaTime * 6f));
+        decelerationSource.SetVolume(Mathf.Lerp(decelerationSource.GetVolume(), speed / 40f - throttle * 0.5f, Time.deltaTime * 4f));
+        accelerationSource.SetPitch(Mathf.Lerp(accelerationSource.GetPitch(), 0.65f + Mathf.Clamp(Mathf.Abs(speed / 160f), 0f, 1f),
+            Time.deltaTime * 5f));
+        if (!grounded) {
+            accelerationSource.SetPitch(Mathf.Lerp(accelerationSource.GetPitch(), 1.5f, Time.deltaTime * 8f));
+        }
+        
+        decelerationSource.SetPitch(Mathf.Lerp(decelerationSource.GetPitch(), 0.5f + speed / 40f, Time.deltaTime * 2f));
     }
 
     void Movement() {
@@ -280,6 +286,7 @@ public class Car : MonoBehaviour {
         for (var i = 0; i < array.Count; i++) {
             if (array[i].grounded) {
                 grounded = true;
+                break;
             }
         }
     }

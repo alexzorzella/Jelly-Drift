@@ -22,7 +22,15 @@ public class MultiAudioSource {
 		this.sources = sources;
 		next = random.Next(0, sources.Length);
 	}
-
+	
+	public float GetVolume() {
+		return sources[0].volume;
+	}
+	
+	public float GetPitch() {
+		return sources[0].pitch;
+	}
+	
 	public void PlayRandom() {
 		this.sources[next].Play();
 		this.next = random.Next(0, sources.Length);
