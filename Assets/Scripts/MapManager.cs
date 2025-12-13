@@ -70,12 +70,12 @@ public class MapManager {
             this.name = name;
             this.themeColor = themeColor;
 
-            string imageName = name.Replace(" ", "_").ToLower();
-            string path = $"Sprites/{imageName}";
+            string nameFormatted = GetNameFormatted();
+            string path = $"Sprites/{nameFormatted}";
             sprite = Resources.Load<Sprite>(path);
 
             if (sprite == null) {
-                Debug.LogError($"No image called {imageName} found in Resources/Sprites.");
+                Debug.LogError($"No image called {nameFormatted} found in Resources/Sprites.");
             }
         }
 
@@ -89,6 +89,11 @@ public class MapManager {
 
         public Sprite GetSprite() {
             return sprite;
+        }
+
+        public string GetNameFormatted() {
+            string result = name.Replace(" ", "_").ToLower();
+            return result;
         }
     }
 }

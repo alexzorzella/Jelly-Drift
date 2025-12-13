@@ -27,7 +27,7 @@ public class MapCycle : ItemCycle {
             starTimes = starsDetails.GetComponentsInChildren<TextMeshProUGUI>();
         }
 
-        SetMap(selected);
+        UpdateUI();
         max = MapManager.i.MapCount();
         CarDisplay.Instance.Hide();
     }
@@ -48,27 +48,27 @@ public class MapCycle : ItemCycle {
 
         CarDisplay.Instance.Hide();
         selected = SaveManager.Instance.state.lastMap;
-        SetMap(selected);
+        UpdateUI();
     }
 
     public override void Cycle(int n) {
         base.Cycle(n);
-        SetMap(selected);
-        GameState.Instance.map = selected;
+        MapManager.i.CycleSelectedMap(n);
+        UpdateUI();
     }
 
-    void SetMap(int n) {
+    void UpdateUI() {
         if (raceDetails) {
             raceDetails.UpdateStars(selected);
         }
 
         lockUi.SetActive(false);
 
-        MapManager.MapData mapData = MapManager.i.GetMapAtIndex(n);
+        MapManager.MapData mapData = MapManager.i.GetSelectedMap();
         
         mapImg.sprite = mapData.GetSprite();
         name.text = "| " + mapData.GetName();
-        time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
+        // time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
         if (ghostCycle) {
             ghostCycle.UpdateText();
         }
