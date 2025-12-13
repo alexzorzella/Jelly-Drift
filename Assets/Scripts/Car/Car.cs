@@ -48,9 +48,12 @@ public class Car : MonoBehaviour {
     MultiAudioSource accelerationSource;
     MultiAudioSource decelerationSource;
 
-    public void Initialize(CarData carData, bool isCpu = false) {
+    bool isDisplayCar = false;
+    
+    public void Initialize(CarData carData, bool isCpu = false, bool isDisplayCar = false) {
         this.carData = carData;
         this.isCpu = isCpu;
+        this.isDisplayCar = isDisplayCar;
 
         gameObject.name = carData.GetCarName();
 
