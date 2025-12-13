@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class ReplayController : MonoBehaviour {
@@ -23,12 +24,9 @@ public class ReplayController : MonoBehaviour {
             Directory.CreateDirectory(path);
         }
 
-        filePath = string.Concat(Application.persistentDataPath, "/replays/pb", GameState.Instance.map, ".txt");
+        filePath = string.Concat(Application.persistentDataPath, "/replays/", GameState.Instance.map, ".txt");
         replay = new List<ReplayFrame>();
         startTime = Time.time;
-    }
-
-    void Update() {
     }
 
     void FixedUpdate() {
@@ -58,6 +56,62 @@ public class ReplayController : MonoBehaviour {
         }
     }
 
+    [Serializable]
+    public class Replay {
+        readonly string player;
+        readonly string message;
+        readonly DateTime dateTime;
+        readonly ReplayFrame[] frames;
+        
+        static string Path(string specificPath) {
+            var path = Application.persistentDataPath + $"/replays/{specificPath}.txt";
+            return path;
+        }
+        
+        public void Save() {
+            BinaryFormatter formatter = new();
+
+            FileStream stream = new FileStream(Path(GetDateAndTimeFormatted()), FileMode.Create);
+
+            formatter.Serialize(stream, this);
+
+            stream.Close();
+        }
+        
+        public static void DeleteSave(string name) {
+            if (File.Exists(Path(name)))
+                File.Delete(Path(name));
+            else
+                Debug.LogError($"Tried to delete file in {Path(name)}.");
+        }
+
+        public static bool FileExists(string specificFile) {
+            return File.Exists(Path(specificFile));
+        }
+
+        public static Replay LoadPlayer(string path) {
+            if (File.Exists(Path(path))) {
+                var formatter = new BinaryFormatter();
+                var stream = new FileStream(Path(path), FileMode.Open);
+
+                var data = formatter.Deserialize(stream) as Replay;
+                stream.Close();
+
+                return data;
+            }
+
+            Debug.LogWarning($"Save file not found in {Path(path)}.");
+            return null;
+        }
+        
+        public static string GetDateAndTimeFormatted() {
+            DateTime today = DateTime.Now;
+            string result = $"{today.Year}-{today.Month}-{today.Day}_{today.Hour}-{today.Minute}-{today.Second}";
+
+            return result;
+        }
+    }
+    
     [Serializable]
     public class ReplayFrame {
         public Vector3 pos;
