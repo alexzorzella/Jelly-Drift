@@ -88,15 +88,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Restart",
-                    "type": "Button",
-                    "id": "ee6713bd-509a-42aa-ad3b-b4363cbfa825",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "L1",
                     "type": "Button",
                     "id": "078b3fcd-b5fe-4579-bfd2-925ab05f3e7c",
@@ -223,17 +214,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fifth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a56aea20-a153-469c-9ec6-cf449a67025d",
-                    "path": "<HID::PXN PXN-V10 Wheel>/button11",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -174,15 +174,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Restart"",
-                    ""type"": ""Button"",
-                    ""id"": ""ee6713bd-509a-42aa-ad3b-b4363cbfa825"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""L1"",
                     ""type"": ""Button"",
                     ""id"": ""078b3fcd-b5fe-4579-bfd2-925ab05f3e7c"",
@@ -314,17 +305,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a56aea20-a153-469c-9ec6-cf449a67025d"",
-                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button11"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Restart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""823bb232-ac9f-47ba-8cde-7266e0c42ce5"",
                     ""path"": ""<HID::PXN PXN-V10 Wheel>/button5"",
                     ""interactions"": """",
@@ -361,7 +341,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         m_Car_Third = m_Car.FindAction("Third", throwIfNotFound: true);
         m_Car_Fourth = m_Car.FindAction("Fourth", throwIfNotFound: true);
         m_Car_Fifth = m_Car.FindAction("Fifth", throwIfNotFound: true);
-        m_Car_Restart = m_Car.FindAction("Restart", throwIfNotFound: true);
         m_Car_L1 = m_Car.FindAction("L1", throwIfNotFound: true);
         m_Car_R1 = m_Car.FindAction("R1", throwIfNotFound: true);
     }
@@ -453,7 +432,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Third;
     private readonly InputAction m_Car_Fourth;
     private readonly InputAction m_Car_Fifth;
-    private readonly InputAction m_Car_Restart;
     private readonly InputAction m_Car_L1;
     private readonly InputAction m_Car_R1;
     /// <summary>
@@ -503,10 +481,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Car/Fifth".
         /// </summary>
         public InputAction @Fifth => m_Wrapper.m_Car_Fifth;
-        /// <summary>
-        /// Provides access to the underlying input action "Car/Restart".
-        /// </summary>
-        public InputAction @Restart => m_Wrapper.m_Car_Restart;
         /// <summary>
         /// Provides access to the underlying input action "Car/L1".
         /// </summary>
@@ -568,9 +542,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @Fifth.started += instance.OnFifth;
             @Fifth.performed += instance.OnFifth;
             @Fifth.canceled += instance.OnFifth;
-            @Restart.started += instance.OnRestart;
-            @Restart.performed += instance.OnRestart;
-            @Restart.canceled += instance.OnRestart;
             @L1.started += instance.OnL1;
             @L1.performed += instance.OnL1;
             @L1.canceled += instance.OnL1;
@@ -615,9 +586,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @Fifth.started -= instance.OnFifth;
             @Fifth.performed -= instance.OnFifth;
             @Fifth.canceled -= instance.OnFifth;
-            @Restart.started -= instance.OnRestart;
-            @Restart.performed -= instance.OnRestart;
-            @Restart.canceled -= instance.OnRestart;
             @L1.started -= instance.OnL1;
             @L1.performed -= instance.OnL1;
             @L1.canceled -= instance.OnL1;
@@ -727,13 +695,6 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFifth(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Restart" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRestart(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "L1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

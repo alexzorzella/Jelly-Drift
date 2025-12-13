@@ -250,7 +250,7 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d901fa53-ba87-451a-8841-efbb3e8a7f62"",
-                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button2"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button10"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -271,8 +271,30 @@ public partial class @MenuControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1f7a3ad8-34f4-40c2-b364-78c361d59a9b"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Recover"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""be41f0fc-e6db-4d2d-aafb-99e471b6eb1a"",
                     ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a0aac5f-a764-4fb4-aace-9329394b22f8"",
+                    ""path"": ""<HID::PXN PXN-V10 Wheel>/button11"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
