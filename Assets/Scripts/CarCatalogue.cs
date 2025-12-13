@@ -17,18 +17,18 @@ public static class CarCatalogue {
     }
     
     static readonly List<CarData> cars = new() {
-        new CarData.Builder("Nissaan 2HSX", "180sx").
+        new CarData.Builder("Nissaan 2SX", "180sx").
             WithMaterials("Gray", "Yellow", "Purple", "Blue", "Shadow").Build(),
         new CarData.Builder("Nissaan Silva", "s14").
             WithCarSpecs(3070, stability: 0.5F).
             WithDriftSpecs(1.37F).
             WithMaterials("Gray", "Blue", "Crimson", "Midnight", "Dream").Build(),
-        new CarData.Builder("Denva CTime", "rx7").
+        new CarData.Builder("Denva", "rx7").
             WithSuspensionSpecs(0.37F).
             WithCarSpecs(3150, stability: 0.1F).
             WithDriftSpecs(1.3F).
             WithMaterials("Scuffed", "Blue", "Shadow", "Sakura", "The Original").Build(),
-        new CarData.Builder("", "truck").
+        new CarData.Builder("Off-Roader", "truck").
             WithSuspensionSpecs(0.45F).
             WithCarSpecs(stability: 0).
             WithDriftSpecs(1.2F).
@@ -37,7 +37,7 @@ public static class CarCatalogue {
             WithCarSpecs(3030, stability: 0.7F).
             WithDriftSpecs(1.4F).
             WithMaterials("Gray", "Midnight", "Crimson", "Yellow", "OJ").Build(),
-        new CarData.Builder("Nissaan Highline", "skyline").
+        new CarData.Builder("Nissaan Freshpine", "skyline").
             WithCarSpecs(2850, stability: 0.9F).
             WithDriftSpecs(1, 0.45F).
             WithMaterials("Gray", "Midnight", "Crimson", "Sakura", "Shadow").Build(),
@@ -46,7 +46,7 @@ public static class CarCatalogue {
             WithCarSpecs(antiRoll: 8000, stability: 0).
             WithDriftSpecs(1.2F, 0.8F).
             WithMaterials("Beach").Build(),
-        new CarData.Builder("Fuji TF", "ae86").
+        new CarData.Builder("Fuji TFM", "ae86").
             WithCarSpecs(3050, stability: 0.25F).
             WithDriftSpecs(1.43F).
             WithMaterials("4th Stage", "Tofu", "Tofu_1", "tofu_2", "ToduHidden", "Tofu").Build(),
