@@ -44,8 +44,6 @@ public class CycleMenu : MonoBehaviour {
 
         menuControls.User.Select.performed += Select;
         menuControls.User.Cancel.performed += Cancel;
-
-        Debug.Log($"Input initialized as {menuControls}");
     }
 
     void Start() {
