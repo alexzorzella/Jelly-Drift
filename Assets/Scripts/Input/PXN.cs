@@ -190,6 +190,15 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Horn"",
+                    ""type"": ""Button"",
+                    ""id"": ""35143b12-8d1e-4783-a863-83ede525c613"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -324,6 +333,17 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""action"": ""R1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1039152f-2edd-4a8f-81c7-d1a7897cfad3"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -343,6 +363,7 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         m_Car_Fifth = m_Car.FindAction("Fifth", throwIfNotFound: true);
         m_Car_L1 = m_Car.FindAction("L1", throwIfNotFound: true);
         m_Car_R1 = m_Car.FindAction("R1", throwIfNotFound: true);
+        m_Car_Horn = m_Car.FindAction("Horn", throwIfNotFound: true);
     }
 
     ~@PXN()
@@ -434,6 +455,7 @@ public partial class @PXN: IInputActionCollection2, IDisposable
     private readonly InputAction m_Car_Fifth;
     private readonly InputAction m_Car_L1;
     private readonly InputAction m_Car_R1;
+    private readonly InputAction m_Car_Horn;
     /// <summary>
     /// Provides access to input actions defined in input action map "Car".
     /// </summary>
@@ -489,6 +511,10 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Car/R1".
         /// </summary>
         public InputAction @R1 => m_Wrapper.m_Car_R1;
+        /// <summary>
+        /// Provides access to the underlying input action "Car/Horn".
+        /// </summary>
+        public InputAction @Horn => m_Wrapper.m_Car_Horn;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -548,6 +574,9 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @R1.started += instance.OnR1;
             @R1.performed += instance.OnR1;
             @R1.canceled += instance.OnR1;
+            @Horn.started += instance.OnHorn;
+            @Horn.performed += instance.OnHorn;
+            @Horn.canceled += instance.OnHorn;
         }
 
         /// <summary>
@@ -592,6 +621,9 @@ public partial class @PXN: IInputActionCollection2, IDisposable
             @R1.started -= instance.OnR1;
             @R1.performed -= instance.OnR1;
             @R1.canceled -= instance.OnR1;
+            @Horn.started -= instance.OnHorn;
+            @Horn.performed -= instance.OnHorn;
+            @Horn.canceled -= instance.OnHorn;
         }
 
         /// <summary>
@@ -709,5 +741,12 @@ public partial class @PXN: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnR1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Horn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHorn(InputAction.CallbackContext context);
     }
 }

@@ -24,7 +24,7 @@ public class PlayerInput : MonoBehaviour {
         pxn.Car.Fourth.performed += Fourth;
         pxn.Car.Fifth.performed += Fifth;
 
-        // pxn.Car.Restart.performed += Restart_BucketBrigade;
+        pxn.Car.Horn.performed += Horn;
 
         pxn.Enable();
     }
@@ -65,6 +65,14 @@ public class PlayerInput : MonoBehaviour {
 
     void Brake(InputAction.CallbackContext context) {
         car.braking = context.ReadValue<float>() > 0.02F;
+    }
+
+    void Horn(InputAction.CallbackContext context) {
+        if (context.action.IsPressed()) {
+            car.PlayHorn();
+        } else {
+            car.StopHorn();
+        }
     }
 
     void First(InputAction.CallbackContext context) { car.SetGear(0); }

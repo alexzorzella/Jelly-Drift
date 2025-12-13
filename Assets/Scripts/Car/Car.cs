@@ -47,6 +47,7 @@ public class Car : MonoBehaviour {
     
     MultiAudioSource accelerationSource;
     MultiAudioSource decelerationSource;
+    MultiAudioSource horn;
 
     bool isDisplayCar = false;
     
@@ -105,6 +106,7 @@ public class Car : MonoBehaviour {
 
         accelerationSource = MultiAudioSource.FromResource(gameObject, "180xs_accel");
         decelerationSource = MultiAudioSource.FromResource(gameObject, "decelerate");
+        horn = MultiAudioSource.FromResource(gameObject, "car_horn", loop: true);
     }
 
     void Update() {
@@ -296,5 +298,13 @@ public class Car : MonoBehaviour {
 
     public List<Suspension> GetWheelPositions() {
         return wheelPositions;
+    }
+    
+    public void PlayHorn() {
+        horn.PlayRoundRobin();
+    }
+
+    public void StopHorn() {
+        horn.Stop();
     }
 }
