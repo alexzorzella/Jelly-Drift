@@ -28,7 +28,7 @@ public class MapCycle : ItemCycle {
         }
 
         SetMap(selected);
-        max = MapManager.Instance.maps.Length;
+        max = MapManager.i.MapCount();
         CarDisplay.Instance.Hide();
     }
 
@@ -38,7 +38,7 @@ public class MapCycle : ItemCycle {
             return;
         }
 
-        overlay.color = Color.Lerp(overlay.color, MapManager.Instance.maps[selected].themeColor, Time.deltaTime * 0.9f);
+        overlay.color = Color.Lerp(overlay.color, MapManager.i.GetSelectedMap().GetColor(), Time.deltaTime * 0.9f);
     }
 
     void OnEnable() {
@@ -63,8 +63,11 @@ public class MapCycle : ItemCycle {
         }
 
         lockUi.SetActive(false);
-        mapImg.sprite = MapManager.Instance.maps[n].image;
-        name.text = "| " + MapManager.Instance.maps[n].name;
+
+        MapManager.MapData mapData = MapManager.i.GetMapAtIndex(n);
+        
+        mapImg.sprite = mapData.GetImage();
+        name.text = "| " + mapData.GetName();
         time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
         if (ghostCycle) {
             ghostCycle.UpdateText();
@@ -86,19 +89,19 @@ public class MapCycle : ItemCycle {
     }
 
     void UpdateStars() {
-        for (var i = 0; i < starTimes.Length; i++) {
-            starTimes[i].text = Timer.GetFormattedTime(MapManager.Instance.maps[selected].times[i]);
-        }
-
-        var stars = MapManager.Instance.GetStars(selected, SaveManager.Instance.state.times[selected]);
-        for (var j = 0; j < pbStars.Length; j++) {
-            if (j < stars) {
-                pbStars[j].color = Color.yellow;
-            }
-            else {
-                pbStars[j].color = Color.gray;
-            }
-        }
+        // for (var i = 0; i < starTimes.Length; i++) {
+        //     starTimes[i].text = Timer.GetFormattedTime(MapManager.Instance.maps[selected].times[i]);
+        // }
+        //
+        // var stars = MapManager.Instance.GetStars(selected, SaveManager.Instance.state.times[selected]);
+        // for (var j = 0; j < pbStars.Length; j++) {
+        //     if (j < stars) {
+        //         pbStars[j].color = Color.yellow;
+        //     }
+        //     else {
+        //         pbStars[j].color = Color.gray;
+        //     }
+        // }
     }
 
     public void SaveMap() {

@@ -2932,23 +2932,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!1 &161
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 255}
-  - component: {fileID: 1003}
-  m_Layer: 0
-  m_Name: MapManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &162
 GameObject:
   m_ObjectHideFlags: 0
@@ -4654,21 +4637,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 259}
   m_LocalEulerAnglesHint: {x: 52.92026, y: 0, z: 0}
---- !u!4 &255
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 260}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &256
 Transform:
   m_ObjectHideFlags: 0
@@ -4748,7 +4716,6 @@ Transform:
   - {fileID: 257}
   - {fileID: 248}
   - {fileID: 247}
-  - {fileID: 255}
   - {fileID: 246}
   - {fileID: 251}
   m_Father: {fileID: 0}
@@ -24430,59 +24397,6 @@ MonoBehaviour:
   level: {fileID: 763}
   money: {fileID: 727}
   currentXp: {fileID: 606}
---- !u!114 &1003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5505f4e1eb458dc42aec67f3c04fb6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maps:
-  - index: 0
-    name: Dusty Desert
-    image: {fileID: 21300000, guid: 9c1e6a8327b53dc4a899912f36a05317, type: 3}
-    themeColor: {r: 0.8117647, g: 0.3764706, b: 0.09803922, a: 0.7490196}
-    times:
-    - 70
-    - 60
-    - 50
-  - index: 1
-    name: Funky Forest
-    image: {fileID: 21300000, guid: d59067ec8f636c4479b6f50ac4a7acab, type: 3}
-    themeColor: {r: 0.08235294, g: 0.6431373, b: 0.27058825, a: 0.7490196}
-    times:
-    - 80
-    - 70
-    - 60
-  - index: 2
-    name: Sneaky Snow
-    image: {fileID: 21300000, guid: cc242add3910a0b4aaf59f26aa63ba7c, type: 3}
-    themeColor: {r: 0, g: 0.42745098, b: 1, a: 0.7490196}
-    times:
-    - 110
-    - 100
-    - 90
-  - index: 3
-    name: Pink Plains
-    image: {fileID: 21300000, guid: 3a4a08ee5e00c8240a37b419623290f4, type: 3}
-    themeColor: {r: 1, g: 0.1273585, b: 0.33052608, a: 0.7490196}
-    times:
-    - 130
-    - 120
-    - 110
-  - index: 4
-    name: Akina Downhill
-    image: {fileID: 21300000, guid: 296b18d4b48dc1547a5dadf090063f79, type: 3}
-    themeColor: {r: 1, g: 0.11818841, b: 0, a: 0.7490196}
-    times:
-    - 145
-    - 135
-    - 120
 --- !u!114 &1004
 MonoBehaviour:
   m_ObjectHideFlags: 0
