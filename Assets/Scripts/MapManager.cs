@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class MapManager {
@@ -25,11 +26,11 @@ public class MapManager {
     }
     
     readonly List<MapData> maps = new() {
-        new MapData("Dusty Desert", new Color(207, 96, 25, 191)),
-        new MapData("Sneaky Snow", new Color(0, 109, 255, 191)),
-        new MapData("Pink Plains", new Color(255, 32, 84, 191)),
-        new MapData("Akina Downhill", new Color(255, 30, 0, 191)),
-        new MapData("Flapjack Raceway", new Color(255, 30, 0, 191))
+        new MapData("Dusty Desert", new Color(0.811F, 0.38F, 0.09F, 0.75F)),
+        new MapData("Sneaky Snow", new Color(0, 0.43F, 1, 0.75F)),
+        new MapData("Pink Plains", new Color(1, 0.16F, 0.33F, 0.75F)),
+        new MapData("Akina Downhill", new Color(1, 0.12F, 0, 0.75F)),
+        new MapData("Flapjack Raceway", new Color(1, 0.12F, 0, 0.75F))
     };
 
     public MapData GetMapAtIndex(int index) {
@@ -62,7 +63,7 @@ public class MapManager {
     public class MapData {
         string name;
         Color themeColor;
-        Sprite image;
+        Sprite sprite;
         float[] times;
         
         public MapData(string name, Color themeColor) {
@@ -70,10 +71,11 @@ public class MapManager {
             this.themeColor = themeColor;
 
             string imageName = name.Replace(" ", "_").ToLower();
-            image = Resources.Load<Sprite>(imageName);
+            string path = $"Sprites/{imageName}";
+            sprite = Resources.Load<Sprite>(path);
 
-            if (image == null) {
-                Debug.LogError($"No image called {imageName} found.");
+            if (sprite == null) {
+                Debug.LogError($"No image called {imageName} found in Resources/Sprites.");
             }
         }
 
@@ -85,8 +87,8 @@ public class MapManager {
             return themeColor;
         }
 
-        public Sprite GetImage() {
-            return image;
+        public Sprite GetSprite() {
+            return sprite;
         }
     }
 }

@@ -66,7 +66,7 @@ public class MapCycle : ItemCycle {
 
         MapManager.MapData mapData = MapManager.i.GetMapAtIndex(n);
         
-        mapImg.sprite = mapData.GetImage();
+        mapImg.sprite = mapData.GetSprite();
         name.text = "| " + mapData.GetName();
         time.text = "PB - " + Timer.GetFormattedTime(SaveManager.Instance.state.times[n]);
         if (ghostCycle) {
