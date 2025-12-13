@@ -34,8 +34,8 @@ public class GameController : MonoBehaviour {
     void InitializeMenuInput() {
         menuControls = new();
         menuControls.User.Menu.performed += TryPause;
-        menuControls.User.Recover.performed += Recover;
-        menuControls.User.Restart.performed += RestartGame;
+        menuControls.User.Recover.performed += TryRecover;
+        menuControls.User.Restart.performed += TryRestart;
         
         menuControls.Enable();
     }
@@ -80,12 +80,24 @@ public class GameController : MonoBehaviour {
             Pause.Instance.TogglePause();
         }
     }
+
+    void TryRestart(InputAction.CallbackContext context) {
+        if (!Pause.Instance.paused) {
+            RestartGame();
+        }
+    }
+
+    void TryRecover(InputAction.CallbackContext context) {
+        if (!Pause.Instance.paused) {
+            Recover();
+        }
+    }
     
-    public void RestartGame(InputAction.CallbackContext context) {
+    public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void Recover(InputAction.CallbackContext context) {
+    public void Recover() {
         var component = currentCar.GetComponent<CheckpointUser>();
         if (!component) {
             return;
