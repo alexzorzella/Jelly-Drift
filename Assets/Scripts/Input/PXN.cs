@@ -179,7 +179,7 @@ public partial class @PXN: IInputActionCollection2, IDisposable
                     ""id"": ""ee6713bd-509a-42aa-ad3b-b4363cbfa825"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
