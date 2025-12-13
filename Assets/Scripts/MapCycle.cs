@@ -86,7 +86,6 @@ public class MapCycle : ItemCycle {
     }
 
     void UpdateStars() {
-        print(starTimes.Length);
         for (var i = 0; i < starTimes.Length; i++) {
             starTimes[i].text = Timer.GetFormattedTime(MapManager.Instance.maps[selected].times[i]);
         }
