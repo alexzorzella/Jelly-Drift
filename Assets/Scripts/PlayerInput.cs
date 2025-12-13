@@ -26,17 +26,36 @@ public class PlayerInput : MonoBehaviour {
 
         pxn.Car.Horn.performed += Horn;
 
+        pxn.Car.WheelKeyboard.performed += WheelKeyboard;
+
+        pxn.Car.ThrottleKey.performed += ThrottleKey;
+        pxn.Car.ReverseKey.performed += ReverseKey;
+        
         pxn.Enable();
     }
 
-    void Select(InputAction.CallbackContext context) {
-        Debug.Log("Select");
-    }
-    
-    void Back(InputAction.CallbackContext context) {
-        Debug.Log("Back");
+    void ThrottleKey(InputAction.CallbackContext context) {
+        if (context.action.IsPressed()) {
+            car.throttle = 1;
+        } else {
+            car.throttle = 0;
+        }
     }
 
+    void ReverseKey(InputAction.CallbackContext context) {
+        if (context.action.IsPressed()) {
+            car.SetGear(5);
+            car.throttle = 1;
+        } else {
+            car.SetGear(2);
+            car.throttle = 0;
+        }
+    }
+    
+    void WheelKeyboard(InputAction.CallbackContext context) {
+        car.steering = context.ReadValue<float>();
+    }
+    
     void Menu(InputAction.CallbackContext context) {
         Debug.Log("Menu");
     }
