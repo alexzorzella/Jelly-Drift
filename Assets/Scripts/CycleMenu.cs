@@ -68,6 +68,7 @@ public class CycleMenu : MonoBehaviour {
         var num2 = -(int)Input.GetAxisRaw("VerticalMenu");
         var buttonDown = Input.GetButtonDown("Submit");
         var buttonDown2 = Input.GetButtonDown("Cancel");
+        
         if ((num != 0 && !horizontalDone) || buttonDown) {
             if (cycles[selected].activeCycle) {
                 cycles[selected].Cycle(num);
