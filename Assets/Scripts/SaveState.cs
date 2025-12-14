@@ -30,14 +30,14 @@ public class SaveState : MonoBehaviour {
     }
 
     void LoadSettings() {
-        graphics = SaveManager.Instance.state.graphics;
-        quality = SaveManager.Instance.state.quality;
-        motionBlur = SaveManager.Instance.state.motionBlur;
-        dof = SaveManager.Instance.state.dof;
-        cameraMode = SaveManager.Instance.state.cameraMode;
-        cameraShake = SaveManager.Instance.state.cameraShake;
-        muted = SaveManager.Instance.state.muted;
-        volume = SaveManager.Instance.state.volume;
-        musicVolume = SaveManager.Instance.state.music;
+        graphics = SaveManager.i.state.graphics;
+        quality = SaveManager.i.state.quality;
+        motionBlur = SaveManager.i.state.motionBlur;
+        dof = SaveManager.i.state.dof;
+        cameraMode = SaveManager.i.state.cameraMode;
+        cameraShake = SaveManager.i.state.cameraShake;
+        muted = SaveManager.i.state.muted;
+        volume = SaveManager.i.state.volume;
+        musicVolume = SaveManager.i.state.music;
     }
 }

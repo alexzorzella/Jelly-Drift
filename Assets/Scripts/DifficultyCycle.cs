@@ -12,7 +12,7 @@ public class DifficultyCycle : ItemCycle {
 
     void Awake() {
         max = 3;
-        selected = SaveManager.Instance.state.lastDifficulty;
+        selected = SaveManager.i.state.lastDifficulty;
         // print("loaded selected: " + selected);
     }
 
@@ -34,8 +34,8 @@ public class DifficultyCycle : ItemCycle {
         var selected = (Difficulty)this.selected;
         ghostText.text = "| " + selected;
         GameState.i.difficulty = selected;
-        SaveManager.Instance.state.lastDifficulty = this.selected;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.lastDifficulty = this.selected;
+        SaveManager.i.Save();
         // print("saved last difficulty as:  " + this.selected);
     }
 

@@ -8,7 +8,7 @@ public class SkinCycle : ItemCycle {
     public UnlockManager unlockManager;
 
     void Start() {
-        max = SaveManager.Instance.state.skins[carCycle.selected].Length;
+        max = SaveManager.i.state.skins[carCycle.selected].Length;
         UpdateColor();
     }
 
@@ -45,7 +45,7 @@ public class SkinCycle : ItemCycle {
         var selected2 = this.selected;
         carBtn.SetState(CarButton.ButtonState.Next);
         var text = "<size=60%>";
-        if (!SaveManager.Instance.state.skins[selected][selected2]) {
+        if (!SaveManager.i.state.skins[selected][selected2]) {
             if (selected < 5) {
                 if (selected2 == 1) {
                     // text = text + "Complete " + MapManager.i.GetSelectedMap().GetName() + " on hard difficulty";
@@ -73,10 +73,10 @@ public class SkinCycle : ItemCycle {
 
     public void BuySkin() {
         var skinPrice = PlayerSave.GetSkinPrice(carCycle.selected, selected);
-        if (SaveManager.Instance.state.money >= skinPrice) {
-            SaveManager.Instance.state.money -= skinPrice;
-            SaveManager.Instance.state.skins[carCycle.selected][selected] = true;
-            SaveManager.Instance.Save();
+        if (SaveManager.i.state.money >= skinPrice) {
+            SaveManager.i.state.money -= skinPrice;
+            SaveManager.i.state.skins[carCycle.selected][selected] = true;
+            SaveManager.i.Save();
             UpdateText(true);
             unlockManager.unlocks.Add(new UnlockManager.Unlock(UnlockManager.UnlockType.Skin, carCycle.selected,
                 selected));

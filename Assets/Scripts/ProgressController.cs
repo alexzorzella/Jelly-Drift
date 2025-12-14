@@ -26,13 +26,13 @@ public class ProgressController : MonoBehaviour {
 
         xp = Mathf.Lerp(xp, desiredXp, Time.fixedDeltaTime * 0.5f);
         currentMoney = Mathf.Lerp(currentMoney, desiredMoney, Time.fixedDeltaTime * 0.5f);
-        var num = (float)((int)xp - SaveManager.Instance.state.XpForLevel(currentLevel));
-        var num2 = SaveManager.Instance.state.XpForLevel(currentLevel + 1) -
-                   SaveManager.Instance.state.XpForLevel(currentLevel);
+        var num = (float)((int)xp - SaveManager.i.state.XpForLevel(currentLevel));
+        var num2 = SaveManager.i.state.XpForLevel(currentLevel + 1) -
+                   SaveManager.i.state.XpForLevel(currentLevel);
         var x = num / num2;
         progress.localScale = new Vector3(x, 1f, 1f);
         money.text = "$" + Mathf.CeilToInt(currentMoney);
-        if (SaveManager.Instance.state.GetLevel((int)xp) > currentLevel) {
+        if (SaveManager.i.state.GetLevel((int)xp) > currentLevel) {
             print("levelled up!");
             level.transform.localScale = defaultLevelScale * 1.5f;
             currentLevel++;
@@ -52,9 +52,9 @@ public class ProgressController : MonoBehaviour {
         money.text = "$" + oldMoney;
         xpGained.text = "+ " + (newXp - oldXp) + "xp";
         moneyGained.text = "+ " + (newMoney - oldMoney) + "$";
-        var num = (float)((int)xp - SaveManager.Instance.state.XpForLevel(currentLevel));
-        var num2 = SaveManager.Instance.state.XpForLevel(currentLevel + 1) -
-                   SaveManager.Instance.state.XpForLevel(currentLevel);
+        var num = (float)((int)xp - SaveManager.i.state.XpForLevel(currentLevel));
+        var num2 = SaveManager.i.state.XpForLevel(currentLevel + 1) -
+                   SaveManager.i.state.XpForLevel(currentLevel);
         var x = num / num2;
         progress.localScale = new Vector3(x, 1f, 1f);
         Invoke("GetReady", 0.5f);

@@ -49,29 +49,29 @@ public class SettingsUi : MonoBehaviour {
     }
 
     public void MotionBlur(int n) {
-        SaveManager.Instance.state.motionBlur = n;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.motionBlur = n;
+        SaveManager.i.Save();
         SaveState.Instance.motionBlur = n;
         PPController.Instance.LoadSettings();
     }
 
     public void DoF(int n) {
-        SaveManager.Instance.state.dof = n;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.dof = n;
+        SaveManager.i.Save();
         SaveState.Instance.dof = n;
         PPController.Instance.LoadSettings();
     }
 
     public void Graphics(int n) {
-        SaveManager.Instance.state.graphics = n;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.graphics = n;
+        SaveManager.i.Save();
         SaveState.Instance.graphics = n;
         PPController.Instance.LoadSettings();
     }
 
     public void Quality(int n) {
-        SaveManager.Instance.state.quality = n;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.quality = n;
+        SaveManager.i.Save();
         SaveState.Instance.quality = n;
         QualitySettings.SetQualityLevel(n + Mathf.Clamp(2 * n - 1, 0, 10));
         if (CameraCulling.Instance) {
@@ -80,33 +80,33 @@ public class SettingsUi : MonoBehaviour {
     }
 
     public void CamMode(int n) {
-        SaveManager.Instance.state.cameraMode = n;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.cameraMode = n;
+        SaveManager.i.Save();
         SaveState.Instance.cameraMode = n;
     }
 
     public void CamShake(int n) {
-        SaveManager.Instance.state.cameraShake = n;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.cameraShake = n;
+        SaveManager.i.Save();
         SaveState.Instance.cameraShake = n;
     }
 
     public void Volume() {
-        SaveManager.Instance.state.volume = volume.selected;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.volume = volume.selected;
+        SaveManager.i.Save();
         SaveState.Instance.volume = volume.selected;
         AudioListener.volume = volume.selected / 10f;
     }
 
     public void Music() {
-        SaveManager.Instance.state.music = music.selected;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.music = music.selected;
+        SaveManager.i.Save();
         SaveState.Instance.musicVolume = music.selected;
         MusicController.i.UpdateVolume(music.selected);
     }
 
     public void ResetSave() {
-        SaveManager.Instance.NewSave();
-        SaveManager.Instance.Save();
+        SaveManager.i.NewSave();
+        SaveManager.i.Save();
     }
 }

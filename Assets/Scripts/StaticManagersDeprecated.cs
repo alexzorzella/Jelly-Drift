@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class StaticManagers : MonoBehaviour {
-    public static StaticManagers Instance;
+public class StaticManagersDeprecated : MonoBehaviour {
+    public static StaticManagersDeprecated Instance;
 
     void Awake() {
         if (Instance != null && Instance != this) {

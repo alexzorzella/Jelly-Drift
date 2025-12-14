@@ -19,7 +19,7 @@ public class MapCycle : ItemCycle {
     public RaceDetails raceDetails;
 
     void Awake() {
-        selected = SaveManager.Instance.state.lastMap;
+        selected = SaveManager.i.state.lastMap;
     }
 
     void Start() {
@@ -47,7 +47,7 @@ public class MapCycle : ItemCycle {
         }
 
         CarDisplay.Instance.Hide();
-        selected = SaveManager.Instance.state.lastMap;
+        selected = SaveManager.i.state.lastMap;
         UpdateUI();
     }
 
@@ -84,8 +84,8 @@ public class MapCycle : ItemCycle {
         GameState.i.map = selected;
         nextButton.enabled = true;
         nextButton.GetComponent<ItemCycle>().activeCycle = true;
-        SaveManager.Instance.state.lastMap = selected;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.lastMap = selected;
+        SaveManager.i.Save();
     }
 
     void UpdateStars() {

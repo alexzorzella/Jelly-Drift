@@ -46,7 +46,7 @@ public class CycleMenu : MonoBehaviour {
     }
 
     void Start() {
-        SaveManager.Instance.state.skins[5][1] = true;
+        SaveManager.i.state.skins[5][1] = true;
     }
 
     void OnEnable() {

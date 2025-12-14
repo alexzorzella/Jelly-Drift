@@ -11,18 +11,18 @@ public class MenuStats : MonoBehaviour {
     void Start() {
         Instance = this;
         UpdateStats();
-        currMoney = SaveManager.Instance.state.money;
+        currMoney = SaveManager.i.state.money;
         money.text = "$" + currMoney;
     }
 
     void Update() {
-        currMoney = Mathf.Lerp(currMoney, SaveManager.Instance.state.money, Time.deltaTime * 3f);
+        currMoney = Mathf.Lerp(currMoney, SaveManager.i.state.money, Time.deltaTime * 3f);
         money.text = "$" + Mathf.CeilToInt(currMoney);
     }
 
     public void UpdateStats() {
-        var x = SaveManager.Instance.state.LevelProgress();
+        var x = SaveManager.i.state.LevelProgress();
         currentXp.transform.localScale = new Vector3(x, 1f, 1f);
-        level.text = "Lvl" + SaveManager.Instance.state.GetLevel();
+        level.text = "Lvl" + SaveManager.i.state.GetLevel();
     }
 }

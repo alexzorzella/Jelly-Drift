@@ -16,7 +16,7 @@ public class Stats : MonoBehaviour {
     }
 
     public void DeleteSave() {
-        SaveManager.Instance.NewSave();
-        SaveManager.Instance.Save();
+        SaveManager.i.NewSave();
+        SaveManager.i.Save();
     }
 }

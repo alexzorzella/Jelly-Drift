@@ -13,13 +13,13 @@ public class CarCycle : ItemCycle {
 
     void OnEnable() {
         if (CarDisplay.Instance) {
-            var lastCar = SaveManager.Instance.state.lastCar;
+            var lastCar = SaveManager.i.state.lastCar;
             selected = lastCar;
             CarDisplay.Instance.SpawnCar(lastCar);
             name.text = CarCatalogue.GetSelectedCarData().GetCarName();
-            CarDisplay.Instance.SetSkin(SaveManager.Instance.state.lastSkin[lastCar]);
+            CarDisplay.Instance.SetSkin(SaveManager.i.state.lastSkin[lastCar]);
             carStats.SetStats(selected);
-            skinCycle.selected = SaveManager.Instance.state.lastSkin[lastCar];
+            skinCycle.selected = SaveManager.i.state.lastSkin[lastCar];
         }
     }
 
@@ -39,8 +39,8 @@ public class CarCycle : ItemCycle {
     }
 
     public void SaveCar() {
-        SaveManager.Instance.state.lastCar = selected;
-        SaveManager.Instance.Save();
+        SaveManager.i.state.lastCar = selected;
+        SaveManager.i.Save();
         GameState.i.car = selected;
         GameState.i.LoadMap();
     }

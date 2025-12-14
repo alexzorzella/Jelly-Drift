@@ -54,23 +54,23 @@ public class FinishController : MonoBehaviour {
         }
 
         // CheckUnlocks(victory);
-        SaveManager.Instance.Save();
+        SaveManager.i.Save();
         
         var num4 = 50;
         var num5 = 50;
         if (GameState.i.gamemode == Gamemode.Race) {
-            progressRace.SetProgress(SaveManager.Instance.state.xp, SaveManager.Instance.state.xp + num4,
-                SaveManager.Instance.state.GetLevel(), SaveManager.Instance.state.money,
-                SaveManager.Instance.state.money + num5);
+            progressRace.SetProgress(SaveManager.i.state.xp, SaveManager.i.state.xp + num4,
+                SaveManager.i.state.GetLevel(), SaveManager.i.state.money,
+                SaveManager.i.state.money + num5);
         }
         else {
-            progressTime.SetProgress(SaveManager.Instance.state.xp, SaveManager.Instance.state.xp + num4,
-                SaveManager.Instance.state.GetLevel(), SaveManager.Instance.state.money,
-                SaveManager.Instance.state.money + num5);
+            progressTime.SetProgress(SaveManager.i.state.xp, SaveManager.i.state.xp + num4,
+                SaveManager.i.state.GetLevel(), SaveManager.i.state.money,
+                SaveManager.i.state.money + num5);
         }
 
-        SaveManager.Instance.state.xp += num4;
-        SaveManager.Instance.state.money += num5;
+        SaveManager.i.state.xp += num4;
+        SaveManager.i.state.money += num5;
         if (unlockManager.unlocks.Count > 0) {
             unlockManager.gameObject.SetActive(true);
         }
