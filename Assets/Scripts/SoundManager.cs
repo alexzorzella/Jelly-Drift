@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SoundManager : MonoBehaviour {
     static readonly Dictionary<string, MultiAudioSource> sources = new();
@@ -20,6 +18,7 @@ public class SoundManager : MonoBehaviour {
     }
 
     void Start() {
+        DontDestroyOnLoad(gameObject);
         AddSource("cycle", "menu", "buy", "unlock", "error");
     }
 
