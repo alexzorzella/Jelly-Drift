@@ -9,12 +9,6 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"OpenInspectorPreview.66F56946" = "0"
-	"currentGroup.66F56946" = null
-	"picker_window_position_offset.075BCD15" = "84.66675;484.6667;320;550"
-	"picker_visibility_flags.075BCD15" = "264"
-	"picker_item_size.075BCD15" = "96"
-	"picker_inspector.075BCD15" = "0"
 }
 providers = {
 	asset = {
@@ -71,7 +65,6 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
-	"probuilder"
 ]
 searchItemFavorites = [
 ]
