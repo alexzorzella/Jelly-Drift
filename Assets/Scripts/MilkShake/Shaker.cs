@@ -15,7 +15,7 @@ namespace MilkShake {
         }
 
         void Update() {
-            if (SaveState.Instance.cameraShake == 0) {
+            if (SaveState.i.cameraShake == 0) {
                 return;
             }
 

@@ -9,7 +9,7 @@ public class MusicController : MonoBehaviour {
 
         music = MultiAudioSource.FromResource(gameObject, "synthwave", loop: true);
         
-        UpdateVolume(SaveState.Instance.musicVolume);
+        UpdateVolume(SaveState.i.musicVolume);
         
         music.PlayRoundRobin();
     }

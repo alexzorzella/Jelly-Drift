@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class SaveState : MonoBehaviour {
-    public static SaveState Instance;
     public int quality { get; set; }
     public int dof { get; set; }
     public int motionBlur { get; set; }
@@ -11,21 +10,19 @@ public class SaveState : MonoBehaviour {
     public int volume { get; set; }
     public int musicVolume { get; set; }
     public int graphics { get; set; }
-
-    void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-            return;
+    
+    static SaveState _i;
+	
+    public static SaveState i {
+        get {
+            if (_i == null) {
+                _i = new SaveState();
+            }
+            return _i;
         }
-
-        Instance = this;
     }
 
-    void Start() {
-        if (!Instance) {
-            return;
-        }
-
+    SaveState() {
         LoadSettings();
     }
 

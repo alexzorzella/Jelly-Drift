@@ -17,14 +17,14 @@ public class SettingsUi : MonoBehaviour {
     }
 
     void LoadAllSettings() {
-        LoadSetting(motionBlur, SaveState.Instance.motionBlur);
-        LoadSetting(dof, SaveState.Instance.dof);
-        LoadSetting(graphics, SaveState.Instance.graphics);
-        LoadSetting(quality, SaveState.Instance.quality);
-        LoadSetting(camMode, SaveState.Instance.cameraMode);
-        LoadSetting(camShake, SaveState.Instance.cameraShake);
-        LoadSettingSlider(volume, SaveState.Instance.volume);
-        LoadSettingSlider(music, SaveState.Instance.musicVolume);
+        LoadSetting(motionBlur, SaveState.i.motionBlur);
+        LoadSetting(dof, SaveState.i.dof);
+        LoadSetting(graphics, SaveState.i.graphics);
+        LoadSetting(quality, SaveState.i.quality);
+        LoadSetting(camMode, SaveState.i.cameraMode);
+        LoadSetting(camShake, SaveState.i.cameraShake);
+        LoadSettingSlider(volume, SaveState.i.volume);
+        LoadSettingSlider(music, SaveState.i.musicVolume);
     }
 
     void LoadSetting(SettingCycle s, int n) {
@@ -51,28 +51,28 @@ public class SettingsUi : MonoBehaviour {
     public void MotionBlur(int n) {
         SaveManager.i.state.motionBlur = n;
         SaveManager.i.Save();
-        SaveState.Instance.motionBlur = n;
+        SaveState.i.motionBlur = n;
         PPController.Instance.LoadSettings();
     }
 
     public void DoF(int n) {
         SaveManager.i.state.dof = n;
         SaveManager.i.Save();
-        SaveState.Instance.dof = n;
+        SaveState.i.dof = n;
         PPController.Instance.LoadSettings();
     }
 
     public void Graphics(int n) {
         SaveManager.i.state.graphics = n;
         SaveManager.i.Save();
-        SaveState.Instance.graphics = n;
+        SaveState.i.graphics = n;
         PPController.Instance.LoadSettings();
     }
 
     public void Quality(int n) {
         SaveManager.i.state.quality = n;
         SaveManager.i.Save();
-        SaveState.Instance.quality = n;
+        SaveState.i.quality = n;
         QualitySettings.SetQualityLevel(n + Mathf.Clamp(2 * n - 1, 0, 10));
         if (CameraCulling.Instance) {
             CameraCulling.Instance.UpdateCulling();
@@ -82,26 +82,26 @@ public class SettingsUi : MonoBehaviour {
     public void CamMode(int n) {
         SaveManager.i.state.cameraMode = n;
         SaveManager.i.Save();
-        SaveState.Instance.cameraMode = n;
+        SaveState.i.cameraMode = n;
     }
 
     public void CamShake(int n) {
         SaveManager.i.state.cameraShake = n;
         SaveManager.i.Save();
-        SaveState.Instance.cameraShake = n;
+        SaveState.i.cameraShake = n;
     }
 
     public void Volume() {
         SaveManager.i.state.volume = volume.selected;
         SaveManager.i.Save();
-        SaveState.Instance.volume = volume.selected;
+        SaveState.i.volume = volume.selected;
         AudioListener.volume = volume.selected / 10f;
     }
 
     public void Music() {
         SaveManager.i.state.music = music.selected;
         SaveManager.i.Save();
-        SaveState.Instance.musicVolume = music.selected;
+        SaveState.i.musicVolume = music.selected;
         MusicController.i.UpdateVolume(music.selected);
     }
 
