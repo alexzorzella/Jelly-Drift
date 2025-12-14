@@ -87,10 +87,10 @@ public class CycleMenu : MonoBehaviour {
     void Select(InputAction.CallbackContext context) {
         if (cycles[selected].activeCycle) {
             cycles[selected].Cycle(1);
-            SoundManager.Instance.PlayCycle();
+            SoundManager.i.PlayCycle();
         }
         else {
-            SoundManager.Instance.PlayError();
+            SoundManager.i.PlayError();
         }
     }
 
@@ -120,6 +120,6 @@ public class CycleMenu : MonoBehaviour {
             correspondingText[selected].color = Color.black;
         }
 
-        SoundManager.Instance.PlayMenuNavigate();
+        SoundManager.i.PlayMenuNavigate();
     }
 }

@@ -83,10 +83,10 @@ public class SkinCycle : ItemCycle {
             unlockManager.gameObject.SetActive(true);
             menuStats.UpdateStats();
             UpdateColor();
-            SoundManager.Instance.PlayMoney();
+            SoundManager.i.PlayMoney();
             return;
         }
 
-        SoundManager.Instance.PlayError();
+        SoundManager.i.PlayError();
     }
 }

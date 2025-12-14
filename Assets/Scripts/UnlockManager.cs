@@ -49,7 +49,7 @@ public class UnlockManager : MonoBehaviour {
         var num = n;
         n = num + 1;
         // DisplayUnlock(list[num]);
-        SoundManager.Instance.PlayUnlock();
+        SoundManager.i.PlayUnlock();
     }
 
     public void DisplayUnlock(Unlock u) {
