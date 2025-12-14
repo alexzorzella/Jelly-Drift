@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainMenuAtmosphere : MonoBehaviour {
     MultiAudioSource ocean;
+    MultiAudioSource wind;
     MultiAudioSource gulls;
     
     const float gullsMinDelay = 2F;
@@ -21,6 +22,10 @@ public class MainMenuAtmosphere : MonoBehaviour {
         ocean = MultiAudioSource.FromResource(gameObject, "oceanside", loop: true);
         ocean.SetVolume(0.5F);
         ocean.PlayRoundRobin();
+
+        wind = MultiAudioSource.FromResource(gameObject, "wind", loop: true);
+        wind.SetVolume(0.5F);
+        wind.PlayRoundRobin();
 
         // gulls = MultiAudioSource.FromResources(gameObject, "gulls", 2);
     }
