@@ -19,7 +19,7 @@ public class SoundManager : MonoBehaviour {
 
     void Start() {
         DontDestroyOnLoad(gameObject);
-        AddSource("cycle", "menu", "buy", "unlock", "error");
+        AddSources("cycle", "menu", "buy", "unlock", "error");
     }
 
     public void PlayCycle() {
@@ -43,16 +43,16 @@ public class SoundManager : MonoBehaviour {
     }
     
     public void PlaySound(string name) {
-        if (!sources.ContainsKey(name)) {
-            AddSource(name);
-        }
+        AddSources(name);
         
         sources[name].PlayRoundRobin();
     }
 
-    void AddSource(params string[] soundNames) {
+    void AddSources(params string[] soundNames) {
         foreach (string soundName in soundNames) {
-            sources.Add(soundName, MultiAudioSource.FromResource(gameObject, soundName));
+            if (!sources.ContainsKey(soundName)) {
+                sources.Add(soundName, MultiAudioSource.FromResource(gameObject, soundName));
+            }
         }
     }
 }
