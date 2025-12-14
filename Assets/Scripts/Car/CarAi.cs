@@ -34,7 +34,7 @@ public class CarAi : MonoBehaviour {
 
     public void Initialize(Car car) {
         this.car = car;
-        difficulty = (int)GameState.Instance.difficulty;
+        difficulty = (int)GameState.i.difficulty;
         
         // print(string.Concat("d: ", GameState.Instance.difficulty, ", a: ", difficulty));
 

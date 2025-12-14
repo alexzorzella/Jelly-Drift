@@ -14,16 +14,16 @@ public class Replay : MonoBehaviour {
     float replayDeltaTime;
 
     void Start() {
-        if (GameState.Instance.gamemode != Gamemode.TimeTrial || GameState.Instance.ghost == GhostCycle.Ghost.Off) {
+        if (GameState.i.gamemode != Gamemode.TimeTrial || GameState.i.ghost == GhostCycle.Ghost.Off) {
             Destroy(this);
             return;
         }
 
-        var ghost = GameState.Instance.ghost;
+        var ghost = GameState.i.ghost;
         replay = new List<ReplayController.ReplayFrame>();
         replayDeltaTime = 1f / ReplayController.Instance.hz;
         var text = "pb";
-        text += GameState.Instance.map;
+        text += GameState.i.map;
         if (ghost == GhostCycle.Ghost.PB) {
             filePath = Application.persistentDataPath + "/replays/" + text + ".txt";
             if (!File.Exists(filePath)) {
@@ -33,7 +33,7 @@ public class Replay : MonoBehaviour {
             }
         }
 
-        print("path: " + filePath);
+        // print("path: " + filePath);
         if (ghost == GhostCycle.Ghost.Dani) {
             ReadTextAsset();
             return;
@@ -46,8 +46,15 @@ public class Replay : MonoBehaviour {
             ','
         }), int.Parse);
         print(string.Concat("lna: ", array[0], ", ", array[1]));
-        var gameObject = Instantiate(PrefabManager.Instance.cars[array[0]]);
-        gameObject.GetComponent<CarSkin>().SetSkin(array[1]);
+
+        var ghostCarObject = Instantiate(ResourceLoader.LoadObject("Car"));
+        ghostCarObject.GetComponent<Car>().Initialize(CarCatalogue.GetCarAtIndex(array[0]));
+        
+        CarSkin skin = ghostCarObject.GetComponent<CarSkin>();
+        if (skin != null) {
+            skin.SetSkin(array[1]);
+        }
+        
         while ((text2 = streamReader.ReadLine()) != null) {
             text2 = text2.Replace("(", string.Empty).Replace(")", string.Empty);
             var array2 = Array.ConvertAll(text2.Split(new[] {
@@ -58,26 +65,26 @@ public class Replay : MonoBehaviour {
             replay.Add(item);
         }
 
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = ghostCarObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
-        Destroy(gameObject.GetComponentInChildren<Collider>());
-        Destroy(gameObject.GetComponent<PlayerInput>());
-        var componentsInChildren = gameObject.GetComponentsInChildren<ParticleSystem>();
+        Destroy(ghostCarObject.GetComponentInChildren<Collider>());
+        Destroy(ghostCarObject.GetComponent<PlayerInput>());
+        var componentsInChildren = ghostCarObject.GetComponentsInChildren<ParticleSystem>();
         for (var i = 0; i < componentsInChildren.Length; i++) {
             componentsInChildren[i].gameObject.SetActive(false);
         }
 
-        var componentsInChildren2 = gameObject.GetComponentsInChildren<Suspension>();
+        var componentsInChildren2 = ghostCarObject.GetComponentsInChildren<Suspension>();
         for (var i = 0; i < componentsInChildren2.Length; i++) {
             componentsInChildren2[i].showFx = false;
         }
 
-        var componentsInChildren3 = gameObject.GetComponentsInChildren<AudioSource>();
+        var componentsInChildren3 = ghostCarObject.GetComponentsInChildren<AudioSource>();
         for (var i = 0; i < componentsInChildren3.Length; i++) {
             componentsInChildren3[i].enabled = false;
         }
 
-        gameObject.AddComponent<Ghost>();
+        ghostCarObject.AddComponent<Ghost>();
     }
 
     void FixedUpdate() {
@@ -91,7 +98,7 @@ public class Replay : MonoBehaviour {
     }
 
     void ReadTextAsset() {
-        var textAsset = daniTimes[GameState.Instance.map];
+        var textAsset = daniTimes[GameState.i.map];
         if (!textAsset) {
             Destroy(this);
             return;
@@ -104,8 +111,15 @@ public class Replay : MonoBehaviour {
         var array2 = Array.ConvertAll(array[i++].Replace("(", string.Empty).Replace(")", string.Empty).Split(new[] {
             ','
         }), int.Parse);
-        var gameObject = Instantiate(PrefabManager.Instance.cars[array2[0]]);
-        gameObject.GetComponent<CarSkin>().SetSkin(array2[1]);
+        
+        var ghostCarObject = Instantiate(ResourceLoader.LoadObject("Car"));
+        ghostCarObject.GetComponent<Car>().Initialize(CarCatalogue.GetCarAtIndex(array2[0]));
+
+        CarSkin skin = ghostCarObject.GetComponent<CarSkin>();
+        if (skin != null) {
+            skin.SetSkin(array2[1]);  
+        }
+        
         while (i < array.Length - 1) {
             var array3 = Array.ConvertAll(array[i++].Replace("(", string.Empty).Replace(")", string.Empty).Split(new[] {
                 ','
@@ -115,25 +129,25 @@ public class Replay : MonoBehaviour {
             replay.Add(item);
         }
 
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = ghostCarObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
-        Destroy(gameObject.GetComponentInChildren<Collider>());
-        Destroy(gameObject.GetComponent<PlayerInput>());
-        var componentsInChildren = gameObject.GetComponentsInChildren<ParticleSystem>();
+        Destroy(ghostCarObject.GetComponentInChildren<Collider>());
+        Destroy(ghostCarObject.GetComponent<PlayerInput>());
+        var componentsInChildren = ghostCarObject.GetComponentsInChildren<ParticleSystem>();
         for (var j = 0; j < componentsInChildren.Length; j++) {
             componentsInChildren[j].gameObject.SetActive(false);
         }
 
-        var componentsInChildren2 = gameObject.GetComponentsInChildren<Suspension>();
+        var componentsInChildren2 = ghostCarObject.GetComponentsInChildren<Suspension>();
         for (var j = 0; j < componentsInChildren2.Length; j++) {
             componentsInChildren2[j].showFx = false;
         }
 
-        var componentsInChildren3 = gameObject.GetComponentsInChildren<AudioSource>();
+        var componentsInChildren3 = ghostCarObject.GetComponentsInChildren<AudioSource>();
         for (var j = 0; j < componentsInChildren3.Length; j++) {
             componentsInChildren3[j].enabled = false;
         }
 
-        gameObject.AddComponent<Ghost>();
+        ghostCarObject.AddComponent<Ghost>();
     }
 }

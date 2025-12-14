@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour {
 
         var normalized = new Vector3(target.forward.x, 0f, target.forward.z).normalized;
         var a = new Vector3(targetRb.linearVelocity.x, 0f, targetRb.linearVelocity.z).normalized;
-        if ((targetCar.speed < 5f && targetCar.speed > -15f) || SaveState.Instance.cameraMode == 1) {
+        if ((targetCar.speed < 5f && targetCar.speed > -15f) || SaveState.i.cameraMode == 1) {
             a = Vector3.zero;
         }
 

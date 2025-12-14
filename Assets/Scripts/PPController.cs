@@ -22,20 +22,20 @@ public class PPController : MonoBehaviour {
     }
 
     public void LoadSettings() {
-        if (SaveState.Instance.graphics != 1) {
+        if (SaveState.i.graphics != 1) {
             volume.enabled = false;
             return;
         }
 
         volume.enabled = true;
-        if (SaveState.Instance.motionBlur == 1) {
+        if (SaveState.i.motionBlur == 1) {
             motionBlur.enabled.value = true;
         }
         else {
             motionBlur.enabled.value = false;
         }
 
-        if (SaveState.Instance.dof == 1) {
+        if (SaveState.i.dof == 1) {
             dof.enabled.value = true;
             return;
         }

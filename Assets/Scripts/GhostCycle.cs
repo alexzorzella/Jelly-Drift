@@ -36,13 +36,13 @@ public class GhostCycle : ItemCycle {
         var str = " (" + selected + ")";
         var str2 = "| ";
         if (selected == Ghost.Dani) {
-            str2 += Timer.GetFormattedTime(SaveManager.Instance.state.daniTimes[mapCycle.selected]);
+            str2 += Timer.GetFormattedTime(SaveManager.i.state.daniTimes[mapCycle.selected]);
         }
         else if (selected == Ghost.PB) {
-            str2 += Timer.GetFormattedTime(SaveManager.Instance.state.times[mapCycle.selected]);
+            str2 += Timer.GetFormattedTime(SaveManager.i.state.times[mapCycle.selected]);
         }
 
         ghostText.text = str2 + str;
-        GameState.Instance.ghost = ghost;
+        GameState.i.ghost = ghost;
     }
 }

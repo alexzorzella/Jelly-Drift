@@ -6,7 +6,7 @@ public class Ghost : MonoBehaviour {
     Renderer[] renderers;
 
     void Start() {
-        ghost = PrefabManager.Instance.ghostMat;
+        ghost = Resources.Load<Material>("Ghost 1");
         Renderer[] componentsInChildren = GetComponentsInChildren<MeshRenderer>();
         renderers = componentsInChildren;
         foreach (var renderer in renderers) {

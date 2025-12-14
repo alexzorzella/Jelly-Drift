@@ -12,6 +12,14 @@ public static class CarCatalogue {
         return cars[_selectedCar];
     }
     
+    public static CarData GetCarAtIndex(int i) {
+        return cars[i];
+    }
+
+    public static int TotalCars() {
+        return cars.Count;
+    }
+    
     public static CarData GetSelectedOpponentCarData() {
         return opponentCars[_selectedOpponent];
     }

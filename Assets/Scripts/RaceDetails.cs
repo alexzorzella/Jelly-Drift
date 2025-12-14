@@ -7,7 +7,7 @@ public class RaceDetails : MonoBehaviour {
     public TextMeshProUGUI text;
 
     public void UpdateStars(int map) {
-        var num = SaveManager.Instance.state.races[map] + 1;
+        var num = SaveManager.i.state.races[map] + 1;
         if (num <= 0) {
             text.text = "None";
         }

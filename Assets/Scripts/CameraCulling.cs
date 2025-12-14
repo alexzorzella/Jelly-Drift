@@ -12,7 +12,7 @@ public class CameraCulling : MonoBehaviour {
 
     public void UpdateCulling() {
         var array = new float[32];
-        var quality = SaveState.Instance.quality;
+        var quality = SaveState.i.quality;
         if (quality == 0) {
             array[12] = 120f;
         }

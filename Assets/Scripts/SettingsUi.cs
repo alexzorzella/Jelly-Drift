@@ -17,14 +17,14 @@ public class SettingsUi : MonoBehaviour {
     }
 
     void LoadAllSettings() {
-        LoadSetting(motionBlur, SaveState.Instance.motionBlur);
-        LoadSetting(dof, SaveState.Instance.dof);
-        LoadSetting(graphics, SaveState.Instance.graphics);
-        LoadSetting(quality, SaveState.Instance.quality);
-        LoadSetting(camMode, SaveState.Instance.cameraMode);
-        LoadSetting(camShake, SaveState.Instance.cameraShake);
-        LoadSettingSlider(volume, SaveState.Instance.volume);
-        LoadSettingSlider(music, SaveState.Instance.music);
+        LoadSetting(motionBlur, SaveState.i.motionBlur);
+        LoadSetting(dof, SaveState.i.dof);
+        LoadSetting(graphics, SaveState.i.graphics);
+        LoadSetting(quality, SaveState.i.quality);
+        LoadSetting(camMode, SaveState.i.cameraMode);
+        LoadSetting(camShake, SaveState.i.cameraShake);
+        LoadSettingSlider(volume, SaveState.i.volume);
+        LoadSettingSlider(music, SaveState.i.musicVolume);
     }
 
     void LoadSetting(SettingCycle s, int n) {
@@ -49,30 +49,30 @@ public class SettingsUi : MonoBehaviour {
     }
 
     public void MotionBlur(int n) {
-        SaveManager.Instance.state.motionBlur = n;
-        SaveManager.Instance.Save();
-        SaveState.Instance.motionBlur = n;
+        SaveManager.i.state.motionBlur = n;
+        SaveManager.i.Save();
+        SaveState.i.motionBlur = n;
         PPController.Instance.LoadSettings();
     }
 
     public void DoF(int n) {
-        SaveManager.Instance.state.dof = n;
-        SaveManager.Instance.Save();
-        SaveState.Instance.dof = n;
+        SaveManager.i.state.dof = n;
+        SaveManager.i.Save();
+        SaveState.i.dof = n;
         PPController.Instance.LoadSettings();
     }
 
     public void Graphics(int n) {
-        SaveManager.Instance.state.graphics = n;
-        SaveManager.Instance.Save();
-        SaveState.Instance.graphics = n;
+        SaveManager.i.state.graphics = n;
+        SaveManager.i.Save();
+        SaveState.i.graphics = n;
         PPController.Instance.LoadSettings();
     }
 
     public void Quality(int n) {
-        SaveManager.Instance.state.quality = n;
-        SaveManager.Instance.Save();
-        SaveState.Instance.quality = n;
+        SaveManager.i.state.quality = n;
+        SaveManager.i.Save();
+        SaveState.i.quality = n;
         QualitySettings.SetQualityLevel(n + Mathf.Clamp(2 * n - 1, 0, 10));
         if (CameraCulling.Instance) {
             CameraCulling.Instance.UpdateCulling();
@@ -80,33 +80,33 @@ public class SettingsUi : MonoBehaviour {
     }
 
     public void CamMode(int n) {
-        SaveManager.Instance.state.cameraMode = n;
-        SaveManager.Instance.Save();
-        SaveState.Instance.cameraMode = n;
+        SaveManager.i.state.cameraMode = n;
+        SaveManager.i.Save();
+        SaveState.i.cameraMode = n;
     }
 
     public void CamShake(int n) {
-        SaveManager.Instance.state.cameraShake = n;
-        SaveManager.Instance.Save();
-        SaveState.Instance.cameraShake = n;
+        SaveManager.i.state.cameraShake = n;
+        SaveManager.i.Save();
+        SaveState.i.cameraShake = n;
     }
 
     public void Volume() {
-        SaveManager.Instance.state.volume = volume.selected;
-        SaveManager.Instance.Save();
-        SaveState.Instance.volume = volume.selected;
+        SaveManager.i.state.volume = volume.selected;
+        SaveManager.i.Save();
+        SaveState.i.volume = volume.selected;
         AudioListener.volume = volume.selected / 10f;
     }
 
     public void Music() {
-        SaveManager.Instance.state.music = music.selected;
-        SaveManager.Instance.Save();
-        SaveState.Instance.music = music.selected;
-        MusicController.Instance.UpdateMusic(music.selected);
+        SaveManager.i.state.music = music.selected;
+        SaveManager.i.Save();
+        SaveState.i.musicVolume = music.selected;
+        MusicController.i.UpdateVolume(music.selected);
     }
 
     public void ResetSave() {
-        SaveManager.Instance.NewSave();
-        SaveManager.Instance.Save();
+        SaveManager.i.NewSave();
+        SaveManager.i.Save();
     }
 }

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
 public class SaveState : MonoBehaviour {
-    public static SaveState Instance;
     public int quality { get; set; }
     public int dof { get; set; }
     public int motionBlur { get; set; }
@@ -9,35 +8,33 @@ public class SaveState : MonoBehaviour {
     public int cameraShake { get; set; }
     public int muted { get; set; }
     public int volume { get; set; }
-    public int music { get; set; }
+    public int musicVolume { get; set; }
     public int graphics { get; set; }
-
-    void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-            return;
+    
+    static SaveState _i;
+	
+    public static SaveState i {
+        get {
+            if (_i == null) {
+                _i = new SaveState();
+            }
+            return _i;
         }
-
-        Instance = this;
     }
 
-    void Start() {
-        if (!Instance) {
-            return;
-        }
-
+    SaveState() {
         LoadSettings();
     }
 
     void LoadSettings() {
-        graphics = SaveManager.Instance.state.graphics;
-        quality = SaveManager.Instance.state.quality;
-        motionBlur = SaveManager.Instance.state.motionBlur;
-        dof = SaveManager.Instance.state.dof;
-        cameraMode = SaveManager.Instance.state.cameraMode;
-        cameraShake = SaveManager.Instance.state.cameraShake;
-        muted = SaveManager.Instance.state.muted;
-        volume = SaveManager.Instance.state.volume;
-        music = SaveManager.Instance.state.music;
+        graphics = SaveManager.i.state.graphics;
+        quality = SaveManager.i.state.quality;
+        motionBlur = SaveManager.i.state.motionBlur;
+        dof = SaveManager.i.state.dof;
+        cameraMode = SaveManager.i.state.cameraMode;
+        cameraShake = SaveManager.i.state.cameraShake;
+        muted = SaveManager.i.state.muted;
+        volume = SaveManager.i.state.volume;
+        musicVolume = SaveManager.i.state.music;
     }
 }

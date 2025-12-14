@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour {
     public PlayerSave state;
-    public static SaveManager Instance { get; set; }
+    
+    static SaveManager _i;
+	
+    public static SaveManager i {
+        get {
+            if (_i == null) {
+                SaveManager x = Resources.Load<SaveManager>("SaveManager");
 
+                _i = Instantiate(x);
+            }
+            return _i;
+        }
+    }
+    
     void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-        }
-        else {
-            Instance = this;
-        }
-
         Load();
     }
 

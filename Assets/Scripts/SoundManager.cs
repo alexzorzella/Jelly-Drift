@@ -1,50 +1,58 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
-    public static SoundManager Instance;
-    public AudioClip cycle;
-    public AudioClip menu;
-    public AudioClip buy;
-    public AudioClip unlock;
-    public AudioClip error;
-    public AudioSource audio;
+    static readonly Dictionary<string, MultiAudioSource> sources = new();
+    
+    static SoundManager _i;
+	
+    public static SoundManager i {
+        get {
+            if (_i == null) {
+                SoundManager x = Resources.Load<SoundManager>("SoundManager");
 
-    void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-            return;
+                _i = Instantiate(x);
+            }
+            return _i;
         }
+    }
 
-        Instance = this;
+    void Start() {
+        DontDestroyOnLoad(gameObject);
+        AddSources("cycle", "menu", "buy", "unlock", "error");
     }
 
     public void PlayCycle() {
-        PlaySound(cycle);
+        PlaySound("cycle");
     }
 
     public void PlayUnlock() {
-        PlaySoundDelayed(unlock, 0.1f);
+        PlaySound("unlock"); // Used to have a delay of 0.1f
     }
 
     public void PlayError() {
-        PlaySound(error);
+        PlaySound("error");
     }
 
     public void PlayMoney() {
-        PlaySound(buy);
+        PlaySound("buy");
     }
 
     public void PlayMenuNavigate() {
-        PlaySound(menu);
+        PlaySound("menu");
+    }
+    
+    public void PlaySound(string name) {
+        AddSources(name);
+        
+        sources[name].PlayRoundRobin();
     }
 
-    public void PlaySound(AudioClip c) {
-        audio.clip = c;
-        audio.Play();
-    }
-
-    public void PlaySoundDelayed(AudioClip c, float d) {
-        audio.clip = c;
-        audio.PlayDelayed(d);
+    void AddSources(params string[] soundNames) {
+        foreach (string soundName in soundNames) {
+            if (!sources.ContainsKey(soundName)) {
+                sources.Add(soundName, MultiAudioSource.FromResource(gameObject, soundName));
+            }
+        }
     }
 }
