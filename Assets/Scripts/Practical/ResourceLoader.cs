@@ -1,22 +1,7 @@
 ﻿using UnityEngine;
 
 public class ResourceLoader : MonoBehaviour {
-	static ResourceLoader _i;
-
-	void Start() {
-		DontDestroyOnLoad(gameObject);
-	}
 	
-	public static ResourceLoader i {
-		get {
-			if (_i == null) {
-				ResourceLoader x = Resources.Load<ResourceLoader>("ResourceLoader");
-
-				_i = Instantiate(x);
-			}
-			return _i;
-		}
-	}
 
 	public RuntimeAnimatorController LoadAnimatorController(string animatorName) {
 		RuntimeAnimatorController result = Resources.Load<RuntimeAnimatorController>(animatorName);

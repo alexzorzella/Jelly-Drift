@@ -1,34 +1,31 @@
 ﻿using UnityEngine;
 
 public class MusicController : MonoBehaviour {
-    public static MusicController Instance;
-
-    AudioSource music;
-
-    void Awake() {
-        if (Instance != null && Instance != this) {
-            Destroy(gameObject);
-        }
-        else {
-            Instance = this;
-        }
-
-        music = GetComponent<AudioSource>();
-    }
-
+    static MusicController _i;
+    MultiAudioSource music;
+    
     void Start() {
-        if (!Instance) {
-            return;
+        DontDestroyOnLoad(gameObject);
+
+        music = MultiAudioSource.FromResource(gameObject, "synthwave", loop: true);
+        
+        UpdateVolume(SaveState.Instance.musicVolume);
+        
+        music.PlayRoundRobin();
+    }
+	
+    public static MusicController i {
+        get {
+            if (_i == null) {
+                MusicController x = Resources.Load<MusicController>("MusicController");
+
+                _i = Instantiate(x);
+            }
+            return _i;
         }
-
-        UpdateMusic(SaveState.Instance.music);
-        AudioListener.volume = SaveState.Instance.volume / 10f;
     }
 
-    void Update() {
-    }
-
-    public void UpdateMusic(float f) {
-        music.volume = f / 10f;
+    public void UpdateVolume(float newVolume) {
+        music.SetVolume(newVolume / 10f);
     }
 }

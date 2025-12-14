@@ -16,6 +16,8 @@ public class MainMenuAtmosphere : MonoBehaviour {
     }
 
     void InitializeAudio() {
+        _ = MusicController.i;
+        
         ocean = MultiAudioSource.FromResource(gameObject, "oceanside", loop: true);
         ocean.SetVolume(0.5F);
         ocean.PlayRoundRobin();

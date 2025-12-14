@@ -24,7 +24,7 @@ public class SettingsUi : MonoBehaviour {
         LoadSetting(camMode, SaveState.Instance.cameraMode);
         LoadSetting(camShake, SaveState.Instance.cameraShake);
         LoadSettingSlider(volume, SaveState.Instance.volume);
-        LoadSettingSlider(music, SaveState.Instance.music);
+        LoadSettingSlider(music, SaveState.Instance.musicVolume);
     }
 
     void LoadSetting(SettingCycle s, int n) {
@@ -101,8 +101,8 @@ public class SettingsUi : MonoBehaviour {
     public void Music() {
         SaveManager.Instance.state.music = music.selected;
         SaveManager.Instance.Save();
-        SaveState.Instance.music = music.selected;
-        MusicController.Instance.UpdateMusic(music.selected);
+        SaveState.Instance.musicVolume = music.selected;
+        MusicController.i.UpdateVolume(music.selected);
     }
 
     public void ResetSave() {

@@ -9,7 +9,7 @@ public class SaveState : MonoBehaviour {
     public int cameraShake { get; set; }
     public int muted { get; set; }
     public int volume { get; set; }
-    public int music { get; set; }
+    public int musicVolume { get; set; }
     public int graphics { get; set; }
 
     void Awake() {
@@ -38,6 +38,6 @@ public class SaveState : MonoBehaviour {
         cameraShake = SaveManager.Instance.state.cameraShake;
         muted = SaveManager.Instance.state.muted;
         volume = SaveManager.Instance.state.volume;
-        music = SaveManager.Instance.state.music;
+        musicVolume = SaveManager.Instance.state.music;
     }
 }
