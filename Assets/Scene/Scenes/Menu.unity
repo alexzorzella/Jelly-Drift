@@ -678,23 +678,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &39
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 247}
-  - component: {fileID: 806}
-  m_Layer: 0
-  m_Name: PrefabManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &40
 GameObject:
   m_ObjectHideFlags: 0
@@ -4463,21 +4446,6 @@ Transform:
   - {fileID: 253}
   m_Father: {fileID: 260}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &247
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 260}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &249
 Transform:
   m_ObjectHideFlags: 0
@@ -4614,7 +4582,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 261}
-  - {fileID: 247}
   - {fileID: 246}
   - {fileID: 251}
   m_Father: {fileID: 0}
@@ -18536,31 +18503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37831dd64cd326d4f9849ba05d503620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 39}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3b23e88575910242adb79ed1a12e601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cars:
-  - {fileID: 1995085249843820, guid: 9d5abc9a1a2b8ad43902b0cf12ed1a05, type: 3}
-  - {fileID: 1600937122192003, guid: 0089d66ed200da04c9bf75a072b0df1f, type: 3}
-  - {fileID: 1907469187489348, guid: 87832a44a3dffbd4481b4405e1329e5c, type: 3}
-  - {fileID: 1884561730929258, guid: 32fca1fddf6473145933d46ed3be10a3, type: 3}
-  - {fileID: 1570011116653300, guid: b594051f8932dfc48b3f076c3f56e6c2, type: 3}
-  - {fileID: 1763291310010154, guid: fd20c9c9542baee4f90ec82cf06f6351, type: 3}
-  - {fileID: 1204102606129460, guid: 4681095e10c4461499a7d43325b2e04d, type: 3}
-  - {fileID: 1635713960553598, guid: 59f559aa55e48674ab4f57e4ebfe5f94, type: 3}
-  splitUi: {fileID: 1199187172531834, guid: dfc94d575b60f8f46b044fd64e3464fd, type: 3}
-  crashParticles: {fileID: 1261216216341662, guid: 444f56a3bea5eb0429a9dcf7284bbaf3,
-    type: 3}
-  ghostMat: {fileID: 2100000, guid: 8d70f985baac6eb4687c9f21eb61da41, type: 2}
 --- !u!114 &807
 MonoBehaviour:
   m_ObjectHideFlags: 0

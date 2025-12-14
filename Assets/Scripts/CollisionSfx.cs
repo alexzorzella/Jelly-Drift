@@ -15,7 +15,7 @@ public class CollisionSfx : MonoBehaviour {
 
         if (other.contacts.Length != 0) {
             var rotation = Quaternion.LookRotation(other.contacts[0].normal);
-            var gameObject = Instantiate(PrefabManager.Instance.crashParticles, other.contacts[0].point, rotation);
+            var gameObject = ResourceLoader.InstantiateObject("CrashParticles", other.contacts[0].point, rotation);
             var component = other.gameObject.GetComponent<Renderer>();
             if (component) {
                 var material = component.materials[0];

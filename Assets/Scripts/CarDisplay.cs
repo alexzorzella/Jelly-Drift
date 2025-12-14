@@ -11,7 +11,7 @@ public class CarDisplay : MonoBehaviour {
             Instance = this;
         }
 
-        nCars = PrefabManager.Instance.cars.Length;
+        nCars = CarCatalogue.TotalCars();
         SpawnCar(0);
     }
 
