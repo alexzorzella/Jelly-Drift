@@ -43,6 +43,6 @@ public class GhostCycle : ItemCycle {
         }
 
         ghostText.text = str2 + str;
-        GameState.Instance.ghost = ghost;
+        GameState.i.ghost = ghost;
     }
 }

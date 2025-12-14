@@ -24,7 +24,7 @@ public class ReplayController : MonoBehaviour {
             Directory.CreateDirectory(path);
         }
 
-        filePath = string.Concat(Application.persistentDataPath, "/replays/", GameState.Instance.map, ".txt");
+        filePath = string.Concat(Application.persistentDataPath, "/replays/", GameState.i.map, ".txt");
         replay = new List<ReplayFrame>();
         startTime = Time.time;
     }
@@ -42,7 +42,7 @@ public class ReplayController : MonoBehaviour {
         var streamWriter = StreamWriter.Null;
         try {
             streamWriter = new StreamWriter(filePath, false);
-            streamWriter.WriteLine(GameState.Instance.car + ", " + GameState.Instance.skin);
+            streamWriter.WriteLine(GameState.i.car + ", " + GameState.i.skin);
             foreach (var replayFrame in replay) {
                 streamWriter.WriteLine(string.Concat(replayFrame.pos, ", ", replayFrame.rot, ", ",
                     replayFrame.steerAngle, ",", replayFrame.time));

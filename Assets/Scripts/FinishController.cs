@@ -22,7 +22,7 @@ public class FinishController : MonoBehaviour {
     }
 
     public void Open(bool victory) {
-        if (GameState.Instance.gamemode == Gamemode.TimeTrial) {
+        if (GameState.i.gamemode == Gamemode.TimeTrial) {
             timePanel.SetActive(true);
             mapName.text = MapManager.i.GetSelectedMap().GetName();
             var num = Timer.Instance.GetTimer();
@@ -43,7 +43,7 @@ public class FinishController : MonoBehaviour {
             timer.text = Timer.GetFormattedTime(num);
             // pbTimer.text = "Best | " + Timer.GetFormattedTime(SaveManager.Instance.state.times[map]);
         }
-        else if (GameState.Instance.gamemode == Gamemode.Race) {
+        else if (GameState.i.gamemode == Gamemode.Race) {
             racePanel.SetActive(true);
             if (victory) {
                 victoryText.text = "Victory";
@@ -58,7 +58,7 @@ public class FinishController : MonoBehaviour {
         
         var num4 = 50;
         var num5 = 50;
-        if (GameState.Instance.gamemode == Gamemode.Race) {
+        if (GameState.i.gamemode == Gamemode.Race) {
             progressRace.SetProgress(SaveManager.Instance.state.xp, SaveManager.Instance.state.xp + num4,
                 SaveManager.Instance.state.GetLevel(), SaveManager.Instance.state.money,
                 SaveManager.Instance.state.money + num5);

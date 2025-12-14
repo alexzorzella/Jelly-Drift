@@ -14,16 +14,16 @@ public class Replay : MonoBehaviour {
     float replayDeltaTime;
 
     void Start() {
-        if (GameState.Instance.gamemode != Gamemode.TimeTrial || GameState.Instance.ghost == GhostCycle.Ghost.Off) {
+        if (GameState.i.gamemode != Gamemode.TimeTrial || GameState.i.ghost == GhostCycle.Ghost.Off) {
             Destroy(this);
             return;
         }
 
-        var ghost = GameState.Instance.ghost;
+        var ghost = GameState.i.ghost;
         replay = new List<ReplayController.ReplayFrame>();
         replayDeltaTime = 1f / ReplayController.Instance.hz;
         var text = "pb";
-        text += GameState.Instance.map;
+        text += GameState.i.map;
         if (ghost == GhostCycle.Ghost.PB) {
             filePath = Application.persistentDataPath + "/replays/" + text + ".txt";
             if (!File.Exists(filePath)) {
@@ -91,7 +91,7 @@ public class Replay : MonoBehaviour {
     }
 
     void ReadTextAsset() {
-        var textAsset = daniTimes[GameState.Instance.map];
+        var textAsset = daniTimes[GameState.i.map];
         if (!textAsset) {
             Destroy(this);
             return;

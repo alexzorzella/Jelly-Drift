@@ -81,7 +81,7 @@ public class MapCycle : ItemCycle {
             UpdateStars();
         }
         
-        GameState.Instance.map = selected;
+        GameState.i.map = selected;
         nextButton.enabled = true;
         nextButton.GetComponent<ItemCycle>().activeCycle = true;
         SaveManager.Instance.state.lastMap = selected;
@@ -105,7 +105,7 @@ public class MapCycle : ItemCycle {
     }
 
     public void SaveMap() {
-        GameState.Instance.map = selected;
-        GameState.Instance.gamemode = gamemode;
+        GameState.i.map = selected;
+        GameState.i.gamemode = gamemode;
     }
 }

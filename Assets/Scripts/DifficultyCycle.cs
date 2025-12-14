@@ -33,7 +33,7 @@ public class DifficultyCycle : ItemCycle {
     public void UpdateText() {
         var selected = (Difficulty)this.selected;
         ghostText.text = "| " + selected;
-        GameState.Instance.difficulty = selected;
+        GameState.i.difficulty = selected;
         SaveManager.Instance.state.lastDifficulty = this.selected;
         SaveManager.Instance.Save();
         // print("saved last difficulty as:  " + this.selected);

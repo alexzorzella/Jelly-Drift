@@ -41,7 +41,7 @@ public class CarCycle : ItemCycle {
     public void SaveCar() {
         SaveManager.Instance.state.lastCar = selected;
         SaveManager.Instance.Save();
-        GameState.Instance.car = selected;
-        GameState.Instance.LoadMap();
+        GameState.i.car = selected;
+        GameState.i.LoadMap();
     }
 }
