@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.unity.2d.sprite": "1.0.0",
     "com.unity.ads": "4.4.2",
     "com.unity.ai.navigation": "2.0.9",
     "com.unity.collab-proxy": "2.9.3",
@@ -8,6 +9,7 @@
     "com.unity.multiplayer.center": "1.0.0",
     "com.unity.postprocessing": "3.5.0",
     "com.unity.probuilder": "6.0.8",
+    "com.unity.render-pipelines.universal": "17.0.4",
     "com.unity.test-framework": "1.5.1",
     "com.unity.timeline": "1.8.9",
     "com.unity.ugui": "2.0.0",
