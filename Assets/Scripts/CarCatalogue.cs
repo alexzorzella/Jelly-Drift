@@ -30,12 +30,14 @@ public static class CarCatalogue {
         new CarData.Builder("Nissaan Silva", "s14").
             WithCarSpecs(3070, stability: 0.5F).
             WithDriftSpecs(1.37F).
-            WithMaterials("Gray", "Blue", "Crimson", "Midnight", "Dream").Build(),
+            WithMaterials("Gray", "Blue", "Crimson", "Midnight", "Dream").
+            WithAudio("s14_accel").Build(),
         new CarData.Builder("Denva", "rx7").
             WithSuspensionSpecs(0.37F).
             WithCarSpecs(3150, stability: 0.1F).
             WithDriftSpecs(1.3F).
-            WithMaterials("Scuffed", "Blue", "Shadow", "Sakura", "The Original").Build(),
+            WithMaterials("Scuffed", "Blue", "Shadow", "Sakura", "The Original").
+            WithAudio("rx7_accel").Build(),
         new CarData.Builder("Off-Roader", "truck").
             WithSuspensionSpecs(0.45F).
             WithCarSpecs(stability: 0).
@@ -44,16 +46,19 @@ public static class CarCatalogue {
         new CarData.Builder("Accurate Integral", "integra").
             WithCarSpecs(3030, stability: 0.7F).
             WithDriftSpecs(1.4F).
-            WithMaterials("Gray", "Midnight", "Crimson", "Yellow", "OJ").Build(),
+            WithMaterials("Gray", "Midnight", "Crimson", "Yellow", "OJ").
+            WithAudio("db8_accel").Build(),
         new CarData.Builder("Nissaan Freshpine", "skyline").
             WithCarSpecs(2850, stability: 0.9F).
             WithDriftSpecs(1, 0.45F).
-            WithMaterials("Gray", "Midnight", "Crimson", "Sakura", "Shadow").Build(),
+            WithMaterials("Gray", "Midnight", "Crimson", "Sakura", "Shadow").
+            WithAudio("r32_accel").Build(),
         new CarData.Builder("Nissaan Silva HQR", "s14").
             WithPhysicsSpecs(1350, 0, 0.4F).
             WithCarSpecs(antiRoll: 8000, stability: 0).
             WithDriftSpecs(1.2F, 0.8F).
-            WithMaterials("Beach").Build(),
+            WithMaterials("Beach").
+            WithAudio("s14_accel").Build(),
         new CarData.Builder("Fuji TFM", "ae86").
             WithCarSpecs(3050, stability: 0.25F).
             WithDriftSpecs(1.43F).
