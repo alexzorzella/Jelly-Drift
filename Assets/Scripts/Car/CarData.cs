@@ -110,8 +110,8 @@ public class CarData {
 
         // Audio
 
-        string accelerateSoundName;
-        string decelerateSoundName;
+        string accelerateSoundName = "180xs_accel";
+        string decelerateSoundName = "decelerate";
         
         // Model and Materials
 
@@ -181,8 +181,8 @@ public class CarData {
         }
 
         public Builder WithAudio(
-            string accelerateSoundName,
-            string decelerateSoundName) {
+            string accelerateSoundName = "180xs_accel",
+            string decelerateSoundName = "decelerate") {
             this.accelerateSoundName = accelerateSoundName;
             this.decelerateSoundName = decelerateSoundName;
 
