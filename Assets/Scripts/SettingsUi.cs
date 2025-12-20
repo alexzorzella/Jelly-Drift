@@ -52,21 +52,21 @@ public class SettingsUi : MonoBehaviour {
         SaveManager.i.state.motionBlur = n;
         SaveManager.i.Save();
         SaveState.i.motionBlur = n;
-        PPController.Instance.LoadSettings();
+        // PPController.Instance.LoadSettings();
     }
 
     public void DoF(int n) {
         SaveManager.i.state.dof = n;
         SaveManager.i.Save();
         SaveState.i.dof = n;
-        PPController.Instance.LoadSettings();
+        // PPController.Instance.LoadSettings();
     }
 
     public void Graphics(int n) {
         SaveManager.i.state.graphics = n;
         SaveManager.i.Save();
         SaveState.i.graphics = n;
-        PPController.Instance.LoadSettings();
+        // PPController.Instance.LoadSettings();
     }
 
     public void Quality(int n) {
